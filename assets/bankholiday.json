@@ -1,0 +1,276 @@
+{
+  "BankHoliDay": [
+    {
+      "ShortDate": "1",
+      "FulltDate": "1 Jan 2022",
+      "Month": "1",
+      "Year": "2022",
+      "Day": "Saturday",
+      "HoliDayName": "New Year’s Day"
+    },
+    {
+      "ShortDate": "14",
+      "FulltDate": "14 Jan 2022",
+      "Month": "1",
+      "Year": "2022",
+      "Day": "Friday",
+      "HoliDayName": "Makar Sankranti"
+    },
+    {
+      "ShortDate": "26",
+      "FulltDate": "26 Jan 2022",
+      "Month": "1",
+      "Year": "2022",
+      "Day": "Saturday",
+      "HoliDayName": "Republic Day"
+    },
+    {
+      "ShortDate": "05",
+      "FulltDate": "05 Feb 2022",
+      "Month": "2",
+      "Year": "2022",
+      "Day": "Saturday",
+      "HoliDayName": "Vasant Panchami"
+    },
+    {
+      "ShortDate": "1",
+      "FulltDate": "1 Mar 2022",
+      "Month": "3",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Maha Shivaratri/Shivaratri"
+    },
+    {
+      "ShortDate": "19",
+      "FulltDate": "19 Mar 2022",
+      "Month": "3",
+      "Year": "2022",
+      "Day": "Saturday",
+      "HoliDayName": "Holi"
+    },
+    {
+      "ShortDate": "10",
+      "FulltDate": "10 Apr 2022",
+      "Month": "4",
+      "Year": "2022",
+      "Day": "Sunday",
+      "HoliDayName": "Rama Navami"
+    },
+    {
+      "ShortDate": "13",
+      "FulltDate": "13 Apr 2022",
+      "Month": "4",
+      "Year": "2022",
+      "Day": "Wednesday",
+      "HoliDayName": "Ugadi"
+    },
+    {
+      "ShortDate": "14",
+      "FulltDate": "14 Apr 2022",
+      "Month": "4",
+      "Year": "2022",
+      "Day": "Thursday",
+      "HoliDayName": "Dr Ambedkar Jayanti"
+    },
+    {
+      "ShortDate": "15",
+      "FulltDate": "15 Apr 2022",
+      "Month": "4",
+      "Year": "2022",
+      "Day": "Friday",
+      "HoliDayName": "Good Friday"
+    },
+    {
+      "ShortDate": "1",
+      "FulltDate": "1 May 2022",
+      "Month": "5",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "May Day"
+    },
+    {
+      "ShortDate": "2",
+      "FulltDate": "2 May 2022",
+      "Month": "5",
+      "Year": "2022",
+      "Day": "Monday",
+      "HoliDayName": "Maharshi Parasuram Jayanti"
+    },
+    {
+      "ShortDate": "3",
+      "FulltDate": "3 May 2022",
+      "Month": "5",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Idul Fitr"
+    },
+    {
+      "ShortDate": "16",
+      "FulltDate": "16 May 2022",
+      "Month": "5",
+      "Year": "2022",
+      "Day": "Monday",
+      "HoliDayName": "Buddha Purnima"
+    },
+    {
+      "ShortDate": "14",
+      "FulltDate": "14 June 2022",
+      "Month": "6",
+      "Year": "2022",
+      "Day": "Thursday",
+      "HoliDayName": "Sant Guru Kabir Jayanti"
+    },
+    {
+      "ShortDate": "10",
+      "FulltDate": "10 Jul 2022",
+      "Month": "7",
+      "Year": "2022",
+      "Day": "Sunday",
+      "HoliDayName": "Eid ul-Adha"
+    },
+    {
+      "ShortDate": "9",
+      "FulltDate": "9 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Muharram)"
+    },
+    {
+      "ShortDate": "12",
+      "FulltDate": "12 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Friday",
+      "HoliDayName": "Raksha Bandhan"
+    },
+    {
+      "ShortDate": "15",
+      "FulltDate": "15 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Monday",
+      "HoliDayName": "Independence Day"
+    },
+    {
+      "ShortDate": "16",
+      "FulltDate": "16 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Parsi New Year"
+    },
+    {
+      "ShortDate": "19 ",
+      "FulltDate": "19 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Friday",
+      "HoliDayName": "Janmashtami"
+    },
+    {
+      "ShortDate": "31",
+      "FulltDate": "31 Aug 2022",
+      "Month": "8",
+      "Year": "2022",
+      "Day": "Wednesday",
+      "HoliDayName": "Ganesh Chaturthi"
+    },
+    {
+      "ShortDate": "2",
+      "FulltDate": "2 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Sunday",
+      "HoliDayName": "Mahatma Gandhi Jayanti"
+    },
+    {
+      "ShortDate": "3",
+      "FulltDate": "3 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Monday",
+      "HoliDayName": "Maha Saptami"
+    },
+    {
+      "ShortDate": "4",
+      "FulltDate": "4 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Maha Ashtami"
+    },
+    {
+      "ShortDate": "5",
+      "FulltDate": "5 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Wednesday",
+      "HoliDayName": "Maha Navami"
+    },
+    {
+      "ShortDate": "6",
+      "FulltDate": "6 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Thursday",
+      "HoliDayName": "Dussehra"
+    },
+    {
+      "ShortDate": "9",
+      "FulltDate": "9 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Sunday",
+      "HoliDayName": "Eid Milad"
+    },
+    {
+      "ShortDate": "24",
+      "FulltDate": "24 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Monday",
+      "HoliDayName": "Diwali"
+    },
+    {
+      "ShortDate": "25",
+      "FulltDate": "25 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Diwali"
+    },
+    {
+      "ShortDate": "26",
+      "FulltDate": "26 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Wednesday",
+      "HoliDayName": "Diwali"
+    },
+    {
+      "ShortDate": "27",
+      "FulltDate": "27 Oct 2022",
+      "Month": "10",
+      "Year": "2022",
+      "Day": "Thursday",
+      "HoliDayName": "Bhai Duj"
+    },
+    {
+      "ShortDate": "8",
+      "FulltDate": "8 Nov 2022",
+      "Month": "11",
+      "Year": "2022",
+      "Day": "Tuesday",
+      "HoliDayName": "Guru Nanak Jayanti"
+    },
+    {
+      "ShortDate": "25",
+      "FulltDate": "25 Dec 2022",
+      "Month": "12",
+      "Year": "2022",
+      "Day": "Sunday",
+      "HoliDayName": "Christmas"
+    }
+  ]
+}

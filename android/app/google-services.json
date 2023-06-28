@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "76904581925",
+    "project_id": "all-bank-balance-check-3d1d7",
+    "storage_bucket": "all-bank-balance-check-3d1d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76904581925:android:b001b4b3707ca36773e8cc",
+        "android_client_info": {
+          "package_name": "com.example.all_bank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76904581925-0hkq5n5a7q4io69h7l0c25818n2ln6uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLRttbqFQQ4-Mo_grn-bgstQDY2lYXKr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76904581925-0hkq5n5a7q4io69h7l0c25818n2ln6uq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76904581925:android:41be5bb0348c78c173e8cc",
+        "android_client_info": {
+          "package_name": "com.example.all_bank_balance_check"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76904581925-0hkq5n5a7q4io69h7l0c25818n2ln6uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLRttbqFQQ4-Mo_grn-bgstQDY2lYXKr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76904581925-0hkq5n5a7q4io69h7l0c25818n2ln6uq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
