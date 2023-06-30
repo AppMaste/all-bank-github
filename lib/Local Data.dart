@@ -824,7 +824,7 @@ SMSBankbalance2(BuildContext context, var name, var hint) {
         padding: EdgeInsets.only(left: ScreenSize.fSize_10()),
         child: TextFormField(
           controller: name,
-          decoration:  InputDecoration(border: InputBorder.none,hintText: hint),
+          decoration: InputDecoration(border: InputBorder.none, hintText: hint),
           style: GoogleFonts.ibmPlexSansThaiLooped(
               fontWeight: FontWeight.w600,
               fontSize: ScreenSize.fSize_15(),
@@ -2315,14 +2315,19 @@ emiAdvanceCalculation2(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                SizedBox(width: ScreenSize.fSize_10()),
                 Column(
                   children: [
                     SizedBox(height: ScreenSize.fSize_20()),
-                    Text(
-                      interest,
-                      style: GoogleFonts.ibmPlexSansThaiLooped(
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF768AAB),
+                    Container(
+                      width: ScreenSize.horizontalBlockSize! * 40,
+                      color: Colors.transparent,
+                      child: Text(
+                        interest,
+                        style: GoogleFonts.ibmPlexSansThaiLooped(
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF768AAB),
+                        ),
                       ),
                     ),
                     Text(
@@ -2345,11 +2350,16 @@ emiAdvanceCalculation2(
                 Column(
                   children: [
                     SizedBox(height: ScreenSize.fSize_20()),
-                    Text(
-                      payment,
-                      style: GoogleFonts.ibmPlexSansThaiLooped(
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF768AAB),
+                    Container(
+                      alignment: Alignment.center,
+                      width: ScreenSize.horizontalBlockSize! * 40,
+                      color: Colors.transparent,
+                      child: Text(
+                        payment,
+                        style: GoogleFonts.ibmPlexSansThaiLooped(
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF768AAB),
+                        ),
                       ),
                     ),
                     Text(
@@ -2376,64 +2386,64 @@ emiAdvanceCalculation2(
           SizedBox(height: ScreenSize.fSize_10()),
           IntrinsicHeight(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(width: ScreenSize.fSize_20()),
+                SizedBox(width: ScreenSize.fSize_10()),
                 Column(
                   children: [
-                    SizedBox(height: ScreenSize.fSize_10()),
-                    Text(
-                      principal,
-                      style: GoogleFonts.ibmPlexSansThaiLooped(
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFF768AAB),
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      width: ScreenSize.horizontalBlockSize! * 40,
+                      color: Colors.transparent,
+                      child: Text(
+                        principal,
+                        style: GoogleFonts.ibmPlexSansThaiLooped(
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF768AAB),
+                        ),
                       ),
                     ),
                     Text(
                       // NumberFormat.currency(name: 'INR ')
-                      //     .format(int.parse(principalValue)),
+                      //     .format(int.parse(interestValue)),
                       principalValue,
                       style: GoogleFonts.ibmPlexSansThaiLooped(
                           color: Colors.white, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
-                SizedBox(width: ScreenSize.horizontalBlockSize! * 8.5),
-                const VerticalDivider(
-                  thickness: 1,
-                  color: Color(0xFF768AAB),
-                ),
-                SizedBox(width: ScreenSize.horizontalBlockSize! * 12),
-                Column(
-                  children: [
-                    SizedBox(height: ScreenSize.fSize_10()),
-                    Row(
-                      children: [
-                        SizedBox(width: ScreenSize.fSize_18()),
-                        Text(
-                          emi,
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF768AAB),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: ScreenSize.fSize_18()),
-                        Text(
-                          // NumberFormat.currency(name: "INR ")
-                          //     .format(int.parse(emiValue))
-                          //     .toString(),
-                          emiValue,
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                              color: Colors.white, fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                Stack(
+                  children: const [
+                    VerticalDivider(
+                      thickness: 1,
+                      color: Color(0xFF768AAB),
                     ),
                   ],
                 ),
-                SizedBox(width: ScreenSize.fSize_12())
+                Column(
+                  children: [
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      alignment: Alignment.center,
+                      width: ScreenSize.horizontalBlockSize! * 40,
+                      color: Colors.transparent,
+                      child: Text(
+                        emi,
+                        style: GoogleFonts.ibmPlexSansThaiLooped(
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFF768AAB),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      // NumberFormat.currency(name: 'INR ')
+                      //     .format(int.parse(paymentValue)),
+                      emiValue,
+                      style: GoogleFonts.ibmPlexSansThaiLooped(
+                          color: Colors.white, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

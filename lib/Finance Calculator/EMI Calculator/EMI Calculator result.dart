@@ -118,7 +118,11 @@ class _EMICalculatorResultScreenState extends State<EMICalculatorResultScreen> {
                         viewMoreDetail(context, () {
                           Get.to(
                             () =>  EMICalculatorDetailScreen(),
-                            arguments: [],
+                            arguments: [
+                              Result.value,
+                              rateController.value.text,
+                              principalController.value.text
+                            ],
                           );
                         }),
                         SizedBox(height: ScreenSize.fSize_70()),

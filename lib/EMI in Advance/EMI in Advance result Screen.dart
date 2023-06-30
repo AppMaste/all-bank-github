@@ -63,7 +63,7 @@ class _EMIAdvanceResultScreenState extends State<EMIAdvanceResultScreen> {
           GestureDetector(
             onTap: () {
               Share.share(
-                  "Principal Amount:-${principalController.value.text}\nInterest Rate:-${rateController.value.text}\nFeesView:-${feesController.value.text}\nLoan Tenure Year:-${tenureController.value.text}\n");
+                  "Principal Amount:-${principalController.value.text}\n\nInterest Rate:-${rateController.value.text}\n\nFeesView:-${feesController.value.text}\n\nLoan Tenure Year:-${tenureController.value.text}\n\nTotal Interest Payable:- ${Totalrate.value}\n\nTotal Payment:- ${TotalPayment.value}\n\nTotal Principal Payble:- ${principalController.value.text}\n\nEMI:- ${Result.value}");
             },
             child: Padding(
               padding: EdgeInsets.only(right: ScreenSize.fSize_10()),
@@ -378,11 +378,16 @@ class _EMIAdvanceResultScreenState extends State<EMIAdvanceResultScreen> {
     int P = Principal;
     double r = Rate / 12 / 100;
     int n = Year * 12;
+    int n1 = Year;
     print("N valueee:  $n");
 
-    A = (P * r * pow((1 + r), n) / (pow((1 + r), n) - 1));
+    id.value == 1
+        ? A = (P * r * pow((1 + r), n) / (pow((1 + r), n) - 1))
+        : A = (P * r * pow((1 + r), n1) / (pow((1 + r), n1) - 1));
     var ee = Principal - A;
-    B = (ee * r * pow((1 + r), n - 1) / (pow((1 + r), n - 1) - 1));
+    id.value == 1
+        ? B = (ee * r * pow((1 + r), n - 1) / (pow((1 + r), n - 1) - 1))
+        : B = (ee * r * pow((1 + r), n1 - 1) / (pow((1 + r), n1 - 1) - 1));
 
     print("AAAA  $A");
     print("PPPP  $P");
@@ -397,10 +402,14 @@ class _EMIAdvanceResultScreenState extends State<EMIAdvanceResultScreen> {
     // setState(() {});
     // double FinalAmount = Principal + (Principal * Term * Rate) / 100;
     // double loanamount = FinalAmount / Term * 12;
-    int totalrate = int.parse(Result.value) * n - Principal;
+    int totalrate = id.value == 1
+        ? int.parse(Result.value) * n - Principal
+        : int.parse(Result.value) * n1 - Principal;
     print("rateee:  $totalrate");
 
-    int totalpayment = int.parse(Result.value) * n;
+    int totalpayment = id.value == 1
+        ? int.parse(Result.value) * n
+        : int.parse(Result.value) * n1;
     print("payment:  $totalpayment");
 
     // TotalMonth.value = n.toStringAsFixed(0);

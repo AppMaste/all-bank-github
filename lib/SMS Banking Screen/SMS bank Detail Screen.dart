@@ -23,6 +23,7 @@ class SMSBankDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("argument ${arg}");
     return Scaffold(
       appBar: appbarr,
       body: Stack(

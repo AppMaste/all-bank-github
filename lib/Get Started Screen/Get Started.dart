@@ -37,7 +37,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               child: Column(
                 children: [
                   SizedBox(height: ScreenSize.fSize_20()),
-                  adload,
+                  // adload,
                   SizedBox(height: ScreenSize.fSize_10()),
                   Container(
                     width: double.maxFinite,

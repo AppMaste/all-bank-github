@@ -48,7 +48,7 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>  EMICalculatorDetailScreen());
+                                  Get.to(() => EMICalculatorDetailScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(9),
@@ -63,7 +63,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() => const EMICalculatorPieChartScreen());
+                                  Get
+                                      .to(() => const EMICalculatorPieChartScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -89,7 +90,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         "Bar Chart",
-                                        style: GoogleFonts.ibmPlexSansThaiLooped(
+                                        style: GoogleFonts
+                                            .ibmPlexSansThaiLooped(
                                             color: Colors.white,
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w600),
@@ -130,33 +132,10 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                   barchart2(context, "30"),
                                   barchart2(context, "20"),
                                   barchart2(context, "10"),
-                                  Stack(
-                                    children: [
-                                      barchart2(context, "  0"),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: ScreenSize.fSize_80(),
-                                            top: ScreenSize.fSize_3()),
-                                        child: Container(
-                                          width: ScreenSize.fSize_50(),
-                                          height: ScreenSize.fSize_8(),
-                                          color: Color(0xFFDD8839),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  barchart2(context, "  0"),
                                 ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: ScreenSize.horizontalBlockSize! * 72,
-                                    top: ScreenSize.horizontalBlockSize! * 7),
-                                child: Container(
-                                  width: ScreenSize.fSize_50(),
-                                  height: ScreenSize.horizontalBlockSize! * 54.5,
-                                  color: Color(0xFF5B83C4),
-                                ),
-                              ),
+
                               Positioned(
                                 left: ScreenSize.horizontalBlockSize! * 26,
                                 bottom: ScreenSize.fSize_15(),
@@ -168,6 +147,32 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: ScreenSize
+                                .horizontalBlockSize! * 6),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: ScreenSize.fSize_80(),
+                                      top: ScreenSize.fSize_3()),
+                                  child: Container(
+                                    width: ScreenSize.fSize_50(),
+                                    height: ScreenSize.fSize_8(),
+                                    color: Color(0xFFDD8839),
+                                  ),
+                                ),
+                                SizedBox(width: ScreenSize.horizontalBlockSize! * 37),
+                                Container(
+                                  width: ScreenSize.fSize_50(),
+                                  height: ScreenSize.horizontalBlockSize! *
+                                      61.3,
+                                  color: Color(0xFF5B83C4),
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: ScreenSize.fSize_6(),
@@ -235,14 +240,16 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               SizedBox(height: ScreenSize.fSize_15()),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Loan Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -250,7 +257,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "2000",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -269,7 +277,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Interest",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -277,7 +286,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "2.5",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -299,14 +309,16 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               SizedBox(height: ScreenSize.fSize_10()),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .spaceAround,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Period (Month)",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -314,7 +326,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "34",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -329,7 +342,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Monthly EMI",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -337,7 +351,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "60.99",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -358,14 +373,16 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               ),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Total Interest",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -373,7 +390,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "73.78",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),
@@ -393,7 +411,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Total Payment",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -401,7 +420,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "2073.78",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style: GoogleFonts
+                                              .ibmPlexSansThaiLooped(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w500),
                                         ),

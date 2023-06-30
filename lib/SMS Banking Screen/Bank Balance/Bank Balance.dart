@@ -17,7 +17,8 @@ class SMSBankBalanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("SMSBankBalanceScreen arg $arg");
+    print("SMSBankBalanceScreen arg ${arg[1].toString()}");
+    // print("SMSBankBalanceScreen arg ${arg.toString().split("[")[1].split(",")[1]}");
     return Scaffold(
       appBar: appbarr,
       body: Stack(
