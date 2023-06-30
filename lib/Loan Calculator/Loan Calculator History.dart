@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Loan%20Calculator/Loan%20Calculator%20Detail%20Screen.dart';
-import 'package:all_bank/Loan%20Calculator/Loan%20Calculator%20Result%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
@@ -189,7 +188,7 @@ class _LoanCalculatorHistoryScreenState
                                                       GestureDetector(
                                                         onTap: () {
                                                           Get.to(() =>
-                                                              const LoanCalculatorDetailScreen());
+                                                               LoanCalculatorDetailScreen());
                                                         },
                                                         child: Container(
                                                           width: ScreenSize

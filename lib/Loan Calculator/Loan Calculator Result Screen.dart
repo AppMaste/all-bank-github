@@ -12,8 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../ScreenSize.dart';
 import 'Loan Calculator Detail Screen.dart';
 
-var totalloan;
-
 class LoanCalculatorResultScreen extends StatefulWidget {
   const LoanCalculatorResultScreen({Key? key}) : super(key: key);
 
@@ -32,6 +30,8 @@ class _LoanCalculatorResultScreenState
   TextEditingController monthController = TextEditingController();
 
   bool load = false;
+
+  var totalloan = 0.0.obs;
 
   var totalPayment;
   var totalinterest;
@@ -124,7 +124,7 @@ class _LoanCalculatorResultScreenState
                                 load = true;
                                 loanCalculation();
                                 addData.add([
-                                  totalloan,
+                                  totalloan.value,
                                   DateFormat("hh:mm a").format(DateTime.now()),
                                   DateFormat("dd/MM/yyyy")
                                       .format(DateTime.now()),
@@ -132,7 +132,7 @@ class _LoanCalculatorResultScreenState
                                   Duration,
                                 ]);
                                 print("datedatedatedate $addData");
-                                totalloan;
+                                totalloan.value;
                               });
                             }),
                             comparereset(context, "Reset", () {}),
@@ -152,11 +152,20 @@ class _LoanCalculatorResultScreenState
                                 : "00",
                             load == true
                                 ? NumberFormat.simpleCurrency(name: '')
-                                    .format(totalloan)
+                                    .format(totalloan.value)
                                 : "00"),
                         SizedBox(height: ScreenSize.fSize_20()),
                         viewMoreDetail(context, () {
-                          Get.to(() => const LoanCalculatorDetailScreen());
+                          Get.to(() => LoanCalculatorDetailScreen(),
+                              arguments: [
+                                /*0*/ emiController.value.text,
+                                /*1*/ totalloan.value.toStringAsFixed(0),
+                                /*2*/ interestController.value.text,
+                                /*3*/ totalPayment,
+                                /*4*/ Duration,
+                                /*5*/ yearController.value.text,
+                                /*6*/ monthController.value.text
+                              ]);
                         }),
                         SizedBox(height: ScreenSize.fSize_70()),
                       ],
@@ -175,7 +184,6 @@ class _LoanCalculatorResultScreenState
   loanCalculation() {
     int Emi = int.parse(emiController.text);
     double Interest = double.parse(interestController.text) / 1200;
-    double I = double.parse(interestController.text);
     int Year = int.parse(yearController.text) * 12;
     int Month = int.parse(monthController.text);
     int Period = Year + Month;
@@ -189,17 +197,17 @@ class _LoanCalculatorResultScreenState
     print("IIII:--------- $Interest");
     print("PPPP:--------- $P");
 
-    totalloan =
+    totalloan.value =
         (Emi / Interest) * (1 - (1 / ((pow((1 + Interest), (Period))))));
 
     Duration = Period;
     totalPayment = Emi * Period;
-    totalinterest = totalPayment - totalloan;
+    totalinterest = totalPayment - totalloan.value;
     // var data = totalloan * I * P / 100 + totalloan;
     // totalinterest = (1 / P) * (data / totalloan - 1) * 100;
 
     // totalPayment = (Emi * Period).toStringAsFixed(0);
-    print("TOTAL-Loan:------------ $totalloan");
+    print("TOTAL-Loan:------------ ${totalloan.value}");
     print("TOTAL-Interest:------------ $totalinterest");
     print("TOTAL-Payment:------------ $totalPayment\n");
   }

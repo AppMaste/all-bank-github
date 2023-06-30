@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -8,10 +10,31 @@ import 'package:google_fonts/google_fonts.dart';
 import 'Loan Calculator Pie Chart Screen.dart';
 
 class LoanCalculatorDetailScreen extends StatelessWidget {
-  const LoanCalculatorDetailScreen({Key? key}) : super(key: key);
+  LoanCalculatorDetailScreen({Key? key}) : super(key: key);
+
+  var arg = Get.arguments;
+
+  var style = const TextStyle(color: Colors.white);
+  var style1 = const TextStyle(fontWeight: FontWeight.w500);
+
+  var dividerr = const VerticalDivider(
+    color: Colors.white,
+    thickness: 1,
+  );
+  var dividerr2 = const VerticalDivider(
+    color: Colors.grey,
+    thickness: 1,
+  );
+
+  var month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].obs;
+  var rate = [6.25, 6.1, 5.95, 5.8, 5.65, 5.5, 5.3, 5.15, 5.0, 4.85].obs;
+
+  var padding =
+      EdgeInsets.only(top: ScreenSize.fSize_6(), bottom: ScreenSize.fSize_6());
 
   @override
   Widget build(BuildContext context) {
+    print("LoanCalculatorDetailScreenarg $arg");
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -60,10 +83,11 @@ class LoanCalculatorDetailScreen extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         "Details",
-                                        style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            color: Colors.white,
-                                            fontSize: ScreenSize.fSize_17(),
-                                            fontWeight: FontWeight.w600),
+                                        style:
+                                            GoogleFonts.ibmPlexSansThaiLooped(
+                                                color: Colors.white,
+                                                fontSize: ScreenSize.fSize_17(),
+                                                fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -71,26 +95,40 @@ class LoanCalculatorDetailScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>  LoanCalculatorPieChartScreen());
+                                  Get.to(() => LoanCalculatorPieChartScreen(),
+                                      arguments: [
+                                        arg[0],
+                                        arg[1],
+                                        arg[2],
+                                        arg[3],
+                                        arg[4],
+                                        arg[5],
+                                        arg[6],
+                                      ]);
                                 },
                                 child: Stack(
                                   children: [
                                     Container(
-                                      width: ScreenSize.horizontalBlockSize! * 43,
+                                      width:
+                                          ScreenSize.horizontalBlockSize! * 43,
                                       height: ScreenSize.fSize_50(),
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(ScreenSize.fSize_10()),
+                                          Radius.circular(
+                                              ScreenSize.fSize_10()),
                                         ),
                                       ),
                                       child: Center(
                                         child: Text(
                                           "Pie Chart",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: const Color(0xFF768AAB),
-                                              fontSize: ScreenSize.fSize_17(),
-                                              fontWeight: FontWeight.w600),
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color:
+                                                      const Color(0xFF768AAB),
+                                                  fontSize:
+                                                      ScreenSize.fSize_17(),
+                                                  fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     )
@@ -104,124 +142,159 @@ class LoanCalculatorDetailScreen extends StatelessWidget {
                       SizedBox(height: ScreenSize.fSize_20()),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Stack(
+                        child: Column(
                           children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
                             Container(
-                              width: double.maxFinite,
+                              height: ScreenSize.fSize_50(),
                               decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3))
-                                ],
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenSize.fSize_15()),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: ScreenSize.fSize_70()),
-                                  IntrinsicHeight(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            emimonth(context, "1"),
-                                            emimonth(context, "2"),
-                                            emimonth(context, "3"),
-                                            emimonth(context, "4"),
-                                            emimonth(context, "5"),
-                                            emimonth(context, "6"),
-                                            emimonth(context, "7"),
-                                            emimonth(context, "8"),
-                                            emimonth(context, "9"),
-                                            emimonth(context, "10"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "1875"),
-                                            emimonth(context, "1878"),
-                                            emimonth(context, "1881"),
-                                            emimonth(context, "1884"),
-                                            emimonth(context, "1887"),
-                                            emimonth(context, "1890"),
-                                            emimonth(context, "1894"),
-                                            emimonth(context, "1897"),
-                                            emimonth(context, "1900"),
-                                            emimonth(context, "1903"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "125"),
-                                            emimonth(context, "122"),
-                                            emimonth(context, "119"),
-                                            emimonth(context, "116"),
-                                            emimonth(context, "113"),
-                                            emimonth(context, "110"),
-                                            emimonth(context, "106"),
-                                            emimonth(context, "103"),
-                                            emimonth(context, "100"),
-                                            emimonth(context, "97"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "73583"),
-                                            emimonth(context, "71705"),
-                                            emimonth(context, "69824"),
-                                            emimonth(context, "67940"),
-                                            emimonth(context, "66053"),
-                                            emimonth(context, "64163"),
-                                            emimonth(context, "62269"),
-                                            emimonth(context, "60372"),
-                                            emimonth(context, "58472"),
-                                            emimonth(context, "56569"),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenSize.fSize_60()),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: ScreenSize.fSize_55(),
-                              decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 3),
+                                        blurRadius: 5)
+                                  ],
                                   color: const Color(0xFF12356E),
                                   borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(ScreenSize.fSize_15()),
-                                    topRight:
-                                        Radius.circular(ScreenSize.fSize_15()),
-                                  )),
+                                      topRight: Radius.circular(
+                                          ScreenSize.fSize_10()),
+                                      topLeft: Radius.circular(
+                                          ScreenSize.fSize_10()))),
                               child: IntrinsicHeight(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      emidetailtext(context, "Month"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Principle"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Interest"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Balance"),
-                                    ],
-                                  ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "Month",
+                                      style: style,
+                                    ),
+                                    Padding(
+                                      padding: padding,
+                                      child: dividerr,
+                                    ),
+                                    Text(
+                                      "Principle",
+                                      style: style,
+                                    ),
+                                    Padding(
+                                      padding: padding,
+                                      child: dividerr,
+                                    ),
+                                    Text(
+                                      "Interest",
+                                      style: style,
+                                    ),
+                                    Padding(
+                                      padding: padding,
+                                      child: dividerr,
+                                    ),
+                                    Text(
+                                      "Balance",
+                                      style: style,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
+                            Container(
+                              height: ScreenSize.horizontalBlockSize! * 110,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 3),
+                                        blurRadius: 5),
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft:
+                                        Radius.circular(ScreenSize.fSize_15()),
+                                    bottomRight:
+                                        Radius.circular(ScreenSize.fSize_15()),
+                                  )),
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: month.value.length,
+                                itemBuilder: (context, index) {
+                                  final aa = (rate.value[index] *
+                                          int.parse(arg[0]) /
+                                          100)
+                                      .toStringAsFixed(0);
+                                  final bb = int.parse(arg[0]) - int.parse(aa);
+                                  final cc = int.parse(arg[1]) -
+                                      int.parse(bb.toStringAsFixed(0));
+                                  log("Interest $aa");
+                                  log("Principal $bb");
+                                  log("Balance $cc\n\n");
+                                  return IntrinsicHeight(
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          top: ScreenSize.fSize_20()),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Container(
+                                            width: ScreenSize.fSize_30(),
+                                            alignment: Alignment.center,
+                                            color: Colors.transparent,
+                                            child: Text(
+                                              "${month[index]}",
+                                              style: style1,
+                                            ),
+                                          ),
+                                          dividerr2,
+                                          Container(
+                                            width: ScreenSize.fSize_45(),
+                                            alignment: Alignment.center,
+                                            color: Colors.transparent,
+                                            child: Text(
+                                              "$bb",
+                                              style: style1,
+                                            ),
+                                          ),
+                                          dividerr2,
+                                          Container(
+                                            width: ScreenSize.fSize_30(),
+                                            alignment: Alignment.center,
+                                            color: Colors.transparent,
+                                            child: Text(
+                                              aa,
+                                              style: style1,
+                                            ),
+                                          ),
+                                          dividerr2,
+                                          Container(
+                                            width: ScreenSize.fSize_45(),
+                                            alignment: Alignment.center,
+                                            color: Colors.transparent,
+                                            child: Text(
+                                              "$cc",
+                                              style: style1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            // ElevatedButton(
+                            //   onPressed: () {
+                            //     Get.to(() => HomePage(), arguments: [
+                            //       arg[2],
+                            //       arg[3],
+                            //       arg[0],
+                            //       arg[4],
+                            //       arg[5],
+                            //       arg[6],
+                            //     ]);
+                            //   },
+                            //   child: const Text("Pie Chart Screen-->>"),
+                            // ),
                           ],
                         ),
                       ),
