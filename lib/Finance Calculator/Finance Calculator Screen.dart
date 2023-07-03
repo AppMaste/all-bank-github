@@ -1,4 +1,3 @@
-import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/EMI%20in%20Advance/EMI%20in%20Advance%20Screen.dart';
 import 'package:all_bank/FD%20Calculation/FD%20Calculation%20Screen.dart';
 import 'package:all_bank/Interest%20calculation/Interest%20Calculation%20Screen.dart';
@@ -25,6 +24,7 @@ class FinanceCalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.sizerInit(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appbarr,

@@ -33,15 +33,16 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    amountController = data[0];
-    interestController = data[1];
-    emiController = data[2];
+    amountController = arg[0];
+    interestController = arg[1];
+    emiController = arg[2];
   }
 
-  var data = Get.arguments;
+  var arg = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    print("LoanPeriodResultScreenarg $arg");
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -67,7 +68,11 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                           ),
                         ),
                         SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(context, amountController, "₹",),
+                        emiadvance(
+                          context,
+                          amountController,
+                          "₹",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Interest %",
@@ -76,7 +81,11 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                           ),
                         ),
                         SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(context, interestController, "%",),
+                        emiadvance(
+                          context,
+                          interestController,
+                          "%",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "EMI",
@@ -85,13 +94,17 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                           ),
                         ),
                         SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(context, emiController, "₹",),
+                        emiadvance(
+                          context,
+                          emiController,
+                          "₹",
+                        ),
                         SizedBox(height: ScreenSize.fSize_30()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            compareLoanContainer(context, "Loan Period Calculate",
-                                () {
+                            compareLoanContainer(
+                                context, "Loan Period Calculate", () {
                               load = true;
                               calculation();
                               setState(() {});
@@ -135,7 +148,8 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                             left: ScreenSize.fSize_15()),
                                         child: Column(
                                           children: [
-                                            SizedBox(height: ScreenSize.fSize_20()),
+                                            SizedBox(
+                                                height: ScreenSize.fSize_20()),
                                             Text(
                                               "Monthly EMI",
                                               style: style,
@@ -159,7 +173,8 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                       ),
                                       Column(
                                         children: [
-                                          SizedBox(height: ScreenSize.fSize_20()),
+                                          SizedBox(
+                                              height: ScreenSize.fSize_20()),
                                           Text(
                                             "Total Payment",
                                             style: style,
@@ -193,7 +208,8 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                     children: [
                                       Column(
                                         children: [
-                                          SizedBox(height: ScreenSize.fSize_20()),
+                                          SizedBox(
+                                              height: ScreenSize.fSize_20()),
                                           Text(
                                             "Total Interest",
                                             style: style,
@@ -219,7 +235,8 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                             right: ScreenSize.fSize_13()),
                                         child: Column(
                                           children: [
-                                            SizedBox(height: ScreenSize.fSize_20()),
+                                            SizedBox(
+                                                height: ScreenSize.fSize_20()),
                                             Text(
                                               "Period",
                                               style: style,
@@ -244,7 +261,14 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                         ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         viewMoreDetail(context, () {
-                          Get.to(() => const LoanPeriodDetailScreen());
+                          Get.to(() => LoanPeriodDetailScreen(), arguments: [
+                            amountController.text,
+                            interestController.text,
+                            emiController.text,
+                            payment,
+                            interest,
+                            period
+                          ]);
                         }),
                         SizedBox(height: ScreenSize.fSize_70()),
                       ],
@@ -263,14 +287,28 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
   calculation() {
     int P = int.parse(amountController.text);
     double R = double.parse(interestController.text) / 100;
-    int E = int.parse(emiController.text);
+    // int E = int.parse(emiController.text);
+
+    // double calculateLoanPeriod(double loanAmount, double monthlyPayment, double annualInterestRate) {
+    //   double monthlyInterestRate = annualInterestRate / 12;
+    //   double loanPeriod = (1 / monthlyInterestRate) *
+    //       log((monthlyPayment / (monthlyPayment - (loanAmount * monthlyInterestRate))));
+    //   return loanPeriod;
+    // }
 
     payment = P * (1 + R);
     interest = payment - P;
+    // var rate = 2 / 100 / 12;
+    // var amount = 100000;
+    var monthlyrate = 0.02 / 12;
+    // var monthlypay = 2500;
     var data = (1 / R) * (payment / P) - 1;
+    // var data = (1 / monthlyrate) *
+    //     ((monthlypay / (monthlypay - (amount * monthlyrate))));
+    print("jhvfvasgfva $data");
     period = data / 12;
-    log("Payment===== $payment");
-    log("Interest===== $interest");
+    log("Payment===== $data");
+    log("Interest===== $monthlyrate");
     log("Period===== $period");
   }
 }

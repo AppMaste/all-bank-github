@@ -6,8 +6,6 @@ import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class EMICalculatorResultScreen extends StatefulWidget {
@@ -74,15 +72,21 @@ class _EMICalculatorResultScreenState extends State<EMICalculatorResultScreen> {
                         SizedBox(height: ScreenSize.fSize_20()),
                         EMICALCULATION("Loan Amount", "₹", "Interest %", "%",
                             principalController.value, rateController.value),
-                        EMICALCULATION("Loan Year", "Year", "Loan Month", "Month",
-                            yearController.value, monthController.value),
+                        EMICALCULATION(
+                            "Loan Year",
+                            "Year",
+                            "Loan Month",
+                            "Month",
+                            yearController.value,
+                            monthController.value),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              compareLoanContainer(context, "EMI Calculate", () {
+                              compareLoanContainer(context, "EMI Calculate",
+                                  () {
                                 if (principalController.value.text.isEmpty ||
                                     rateController.value.text.isEmpty ||
                                     yearController.value.text.isEmpty ||
@@ -112,16 +116,23 @@ class _EMICalculatorResultScreenState extends State<EMICalculatorResultScreen> {
                             "Periods(Month)",
                             load.value == true ? Result.toString() : "0.0",
                             load.value == true ? Totalrate.toString() : "0.0",
-                            load.value == true ? TotalPayment.toString() : "0.0",
+                            load.value == true
+                                ? TotalPayment.toString()
+                                : "0.0",
                             load.value == true ? TotalMonth.toString() : "0.0"),
                         SizedBox(height: ScreenSize.fSize_30()),
                         viewMoreDetail(context, () {
                           Get.to(
-                            () =>  EMICalculatorDetailScreen(),
+                            () => EMICalculatorDetailScreen(),
                             arguments: [
                               Result.value,
                               rateController.value.text,
-                              principalController.value.text
+                              principalController.value.text,
+                              TotalMonth.value,
+                              TotalPayment.value,
+                              Totalrate.value,
+                              yearController.value.text,
+                              monthController.value.text,
                             ],
                           );
                         }),

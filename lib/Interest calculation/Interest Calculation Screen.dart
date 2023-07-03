@@ -1,4 +1,3 @@
-import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,10 +10,10 @@ import 'Interest Calculation Result Screen.dart';
 class InterestCalculationScreen extends StatelessWidget {
   InterestCalculationScreen({Key? key}) : super(key: key);
 
-  TextEditingController amountController = TextEditingController();
-  TextEditingController emiController = TextEditingController();
-  TextEditingController yearController = TextEditingController();
-  TextEditingController monthController = TextEditingController();
+  var amountController = TextEditingController();
+  var emiController = TextEditingController();
+  var yearController = TextEditingController();
+  var monthController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,14 +65,23 @@ class InterestCalculationScreen extends StatelessWidget {
                             fluttertost();
                           } else {
                             Get.to(
-                              () => const InterestCalculationResultScreen(),
+                                  () => const InterestCalculationResultScreen(),
                               arguments: [
                                 amountController,
                                 emiController,
                                 yearController,
-                                monthController
+                                monthController,
                               ],
                             );
+                            // Get.to(
+                            //   () =>  InterestCalculationResultScreen(),
+                            //   arguments: [
+                            //     amountController,
+                            //     emiController,
+                            //     yearController,
+                            //     monthController,
+                            //   ],
+                            // );
                           }
                         }),
                         SizedBox(height: ScreenSize.fSize_30()),

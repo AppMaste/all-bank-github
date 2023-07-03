@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:all_bank/Loan%20Calculator/Loan%20Calculator%20Detail%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ import 'dart:math' as math;
 import '../ScreenSize.dart';
 
 class LoanCalculatorPieChartScreen extends StatefulWidget {
-  LoanCalculatorPieChartScreen({Key? key}) : super(key: key);
+  const LoanCalculatorPieChartScreen({Key? key}) : super(key: key);
 
   @override
   State<LoanCalculatorPieChartScreen> createState() =>
@@ -229,7 +228,7 @@ class _LoanCalculatorPieChartScreenState
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color(0xFF12356E),
+                              color: const Color(0xFF12356E),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   ScreenSize.fSize_15(),
@@ -270,8 +269,7 @@ class _LoanCalculatorPieChartScreenState
                                   children: [
                                     textfunction("Period (Month)", "${arg[4]}"),
                                     rowdivider(),
-                                    textfunction(
-                                        "Monthly EMI", "${Result.value}"),
+                                    textfunction("Monthly EMI", Result.value),
                                   ],
                                 ),
                               ),
@@ -289,10 +287,10 @@ class _LoanCalculatorPieChartScreenState
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     textfunction(
-                                        "Total Interest", "${Totalrate.value}"),
+                                        "Total Interest", Totalrate.value),
                                     rowdivider(),
-                                    textfunction("Total Payment",
-                                        "${TotalPayment.value}"),
+                                    textfunction(
+                                        "Total Payment", TotalPayment.value),
                                   ],
                                 ),
                               ),
@@ -315,41 +313,45 @@ class _LoanCalculatorPieChartScreenState
   }
 
   emicalcualtion() {
+    // ignore: non_constant_identifier_names
     int Principal = int.parse(arg[0]);
+    // ignore: non_constant_identifier_names
     double Rate = double.parse(arg[2]);
+    // ignore: non_constant_identifier_names
     int Year = int.parse(arg[5]);
+    // ignore: non_constant_identifier_names
     int Month = int.parse(arg[6]);
 
     double A = 0.0;
     int P = Principal;
     double r = Rate / 12 / 100;
     int n = Year * 12 + Month;
-    print("N valueee:  $n");
+    // print("N valueee:  $n");
 
     A = (P * r * pow((1 + r), n) / (pow((1 + r), n) - 1));
 
-    print("AAAA  $A");
-    print("PPPP  $P");
-    print("rrrr  $r");
-    print("nnnn  $n");
+    // print("AAAA  $A");
+    // print("PPPP  $P");
+    // print("rrrr  $r");
+    // print("nnnn  $n");
 
     Result.value = A.toStringAsFixed(0);
     // double FinalAmount = Principal + (Principal * Term * Rate) / 100;
     // double loanamount = FinalAmount / Term * 12;
     int totalrate = int.parse(Result.value) * n - Principal;
-    print("rateee:  $totalrate");
+    // print("rateee:  $totalrate");
 
     int totalpayment = int.parse(Result.value) * n;
-    print("Result:  ${Result.value}");
-    print("payment:  $totalpayment");
+    // print("Result:  ${Result.value}");
+    // print("payment:  $totalpayment");
 
     TotalMonth.value = n.toStringAsFixed(0);
 
     Totalrate.value = totalrate.toStringAsFixed(0);
 
     TotalPayment.value = totalpayment.toStringAsFixed(0);
-    print("TotalPayment.value:  ${TotalPayment.value}");
-    print("loanamount $Result\n\n");
+    // print("TotalPayment.value:  ${TotalPayment.value}");
+    // print("loanamount $Result\n\n");
     return Result;
   }
 }

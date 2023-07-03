@@ -5,13 +5,79 @@ import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:math' as math;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pie_chart/pie_chart.dart';
 
+// ignore: must_be_immutable
 class EMICalculatorPieChartScreen extends StatelessWidget {
-  const EMICalculatorPieChartScreen({Key? key}) : super(key: key);
+  EMICalculatorPieChartScreen({Key? key}) : super(key: key);
+
+  final colorList = <Color>[
+    const Color(0xff5b83c5),
+    const Color(0xffdd8839),
+  ];
+
+  var arg = Get.arguments;
+
+  textfunction(String title, String title2) {
+    print("ttttttttttttttttt $arg");
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          width: ScreenSize.fSize_90(),
+          color: Colors.transparent,
+          child: Text(
+            title,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: Color(0xFF768AAB)),
+          ),
+        ),
+        SizedBox(height: ScreenSize.fSize_8()),
+        Container(
+          alignment: Alignment.center,
+          width: ScreenSize.fSize_50(),
+          color: Colors.transparent,
+          child: Text(
+            title2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    );
+  }
+
+  rowdivider() {
+    return const VerticalDivider(
+      color: Color(0xFF768AAB),
+      thickness: 1,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    print("afvjavsfhgascfhas $arg");
+    double aa = 100 - double.parse(arg[1]);
+    double arggg = double.parse(arg[1]);
+    final dataMap = <String, double>{
+      "INTEREST": aa,
+      "PRINCIPAL": arggg,
+    };
+    final chart = PieChart(
+      legendOptions: const LegendOptions(
+        legendPosition: LegendPosition.bottom,
+        legendShape: BoxShape.rectangle,
+        showLegendsInRow: true,
+      ),
+      dataMap: dataMap,
+      animationDuration: const Duration(milliseconds: 800),
+      chartRadius: math.min(MediaQuery.of(context).size.width / 1.7, 300),
+      colorList: colorList,
+      emptyColor: Colors.grey,
+      // baseChartColor: Colors.transparent,
+    );
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -48,7 +114,7 @@ class EMICalculatorPieChartScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>  EMICalculatorDetailScreen());
+                                  Get.to(() => EMICalculatorDetailScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(9),
@@ -74,10 +140,11 @@ class EMICalculatorPieChartScreen extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         "Pie Chart",
-                                        style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            color: Colors.white,
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w600),
+                                        style:
+                                            GoogleFonts.ibmPlexSansThaiLooped(
+                                                color: Colors.white,
+                                                fontSize: ScreenSize.fSize_15(),
+                                                fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
@@ -85,7 +152,8 @@ class EMICalculatorPieChartScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() => const EMICalculatorBarChartScreen());
+                                  Get.to(() =>
+                                      const EMICalculatorBarChartScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -103,107 +171,13 @@ class EMICalculatorPieChartScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: ScreenSize.fSize_30()),
-                      Stack(
-                        children: [
-                          Container(
-                            height: ScreenSize.horizontalBlockSize! * 65,
-                            width: ScreenSize.horizontalBlockSize! * 65,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF5B83C5),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(ScreenSize.fSize_50()),
-                              child: Container(
-                                height: ScreenSize.fSize_50(),
-                                width: ScreenSize.fSize_50(),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(
-                                        color: const Color(0xFF8CB6FB), width: 10),
-                                    shape: BoxShape.circle),
-                              ),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(height: ScreenSize.fSize_50()),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: ScreenSize.horizontalBlockSize! * 53),
-                                child: Text(
-                                  "4",
-                                  style: GoogleFonts.ibmPlexSansThaiLooped(
-                                      fontSize: ScreenSize.fSize_24(),
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                  height: ScreenSize.horizontalBlockSize! * 43),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: ScreenSize.horizontalBlockSize! * 8),
-                                child: Text(
-                                  "96",
-                                  style: GoogleFonts.ibmPlexSansThaiLooped(
-                                      fontSize: ScreenSize.fSize_24(),
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: ScreenSize.fSize_20()),
-                      Row(
-                        children: [
-                          SizedBox(width: ScreenSize.fSize_70()),
-                          Container(
-                            height: ScreenSize.fSize_24(),
-                            width: ScreenSize.fSize_24(),
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF5B83C4),
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(ScreenSize.fSize_6()))),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_10()),
-                          Text(
-                            "INTEREST",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontSize: ScreenSize.fSize_15(),
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_20()),
-                          Container(
-                            height: ScreenSize.fSize_24(),
-                            width: ScreenSize.fSize_24(),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFDD8839),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_6()),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_10()),
-                          Text(
-                            "PRINCIPAL",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontSize: ScreenSize.fSize_15(),
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
+                      chart,
                       SizedBox(height: ScreenSize.fSize_20()),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: double.maxFinite,
                           decoration: BoxDecoration(
-                              color: Color(0xFF12356E),
+                              color: const Color(0xFF12356E),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(
                                   ScreenSize.fSize_15(),
@@ -216,180 +190,56 @@ class EMICalculatorPieChartScreen extends StatelessWidget {
                                     offset: Offset(0, 3))
                               ]),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SizedBox(height: ScreenSize.fSize_15()),
+                              SizedBox(height: ScreenSize.fSize_20()),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Loan Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "2000",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding:  EdgeInsets.only(right: ScreenSize.fSize_18()),
-                                      child: const VerticalDivider(
-                                        thickness: 1,
-                                        color: Color(0xFF768AAB),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Interest",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "2.5",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction("Loan Amount", "${arg[2]}"),
+                                    rowdivider(),
+                                    textfunction("Interest", "${arg[1]}"),
                                   ],
                                 ),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_15(),
-                                    right: ScreenSize.fSize_15()),
-                                child: const Divider(
-                                  thickness: 1,
-                                  color: Color(0xFF768AAB),
-                                ),
+                                    left: ScreenSize.fSize_10(),
+                                    right: ScreenSize.fSize_10()),
+                                child: const Divider(color: Color(0xFF768AAB)),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Period (Month)",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "34",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    VerticalDivider(
-                                      thickness: 1,
-                                      color: Color(0xFF768AAB),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Monthly EMI",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "60.99",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction("Period (Month)", "${arg[3]}"),
+                                    rowdivider(),
+                                    textfunction("Monthly EMI", "${arg[0]}"),
                                   ],
                                 ),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_15(),
-                                    right: ScreenSize.fSize_15()),
-                                child: const Divider(
-                                  thickness: 1,
-                                  color: Color(0xFF768AAB),
-                                ),
+                                    left: ScreenSize.fSize_10(),
+                                    right: ScreenSize.fSize_10()),
+                                child: const Divider(color: Color(0xFF768AAB)),
                               ),
+                              SizedBox(height: ScreenSize.fSize_10()),
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Total Interest",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "73.78",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                     Padding(
-                                      padding: EdgeInsets.only(left: ScreenSize.fSize_20(),top: ScreenSize.fSize_4()),
-                                      child: const VerticalDivider(
-                                        thickness: 1,
-                                        color: Color(0xFF768AAB),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Total Payment",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "2073.78",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction(
+                                        "Total Interest", "${arg[6]}"),
+                                    rowdivider(),
+                                    textfunction(
+                                        "Total Payment", "${arg[5]}"),
                                   ],
                                 ),
                               ),

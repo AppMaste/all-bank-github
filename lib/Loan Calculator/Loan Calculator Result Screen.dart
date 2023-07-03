@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Loan%20Calculator/Loan%20Calculator%20History.dart';
 import 'package:all_bank/Local%20Data.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../ScreenSize.dart';
 import 'Loan Calculator Detail Screen.dart';
 
@@ -33,9 +31,16 @@ class _LoanCalculatorResultScreenState
 
   var totalloan = 0.0.obs;
 
+  // ignore: prefer_typing_uninitialized_variables
   var totalPayment;
+
+  // ignore: prefer_typing_uninitialized_variables
   var totalinterest;
+
+  // ignore: prefer_typing_uninitialized_variables
   var total;
+
+  // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
   var Duration;
 
   var value = Get.arguments;
@@ -120,20 +125,28 @@ class _LoanCalculatorResultScreenState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             compareLoanContainer(context, "Loan Calculate", () {
-                              setState(() {
-                                load = true;
-                                loanCalculation();
-                                addData.add([
-                                  totalloan.value,
-                                  DateFormat("hh:mm a").format(DateTime.now()),
-                                  DateFormat("dd/MM/yyyy")
-                                      .format(DateTime.now()),
-                                  interestController.text,
-                                  Duration,
-                                ]);
-                                print("datedatedatedate $addData");
-                                totalloan.value;
-                              });
+                              if (emiController.value.text.isEmpty ||
+                                  interestController.value.text.isEmpty ||
+                                  yearController.value.text.isEmpty ||
+                                  monthController.value.text.isEmpty) {
+                                fluttertost();
+                              } else {
+                                setState(() {
+                                  load = true;
+                                  loanCalculation();
+                                  addData.add([
+                                    totalloan.value,
+                                    DateFormat("hh:mm a")
+                                        .format(DateTime.now()),
+                                    DateFormat("dd/MM/yyyy")
+                                        .format(DateTime.now()),
+                                    interestController.text,
+                                    Duration,
+                                  ]);
+                                  // print("datedatedatedate $addData");
+                                  totalloan.value;
+                                });
+                              }
                             }),
                             comparereset(context, "Reset", () {}),
                           ],
@@ -158,13 +171,13 @@ class _LoanCalculatorResultScreenState
                         viewMoreDetail(context, () {
                           Get.to(() => LoanCalculatorDetailScreen(),
                               arguments: [
-                                /*0*/ emiController.value.text,
-                                /*1*/ totalloan.value.toStringAsFixed(0),
-                                /*2*/ interestController.value.text,
-                                /*3*/ totalPayment,
-                                /*4*/ Duration,
-                                /*5*/ yearController.value.text,
-                                /*6*/ monthController.value.text
+                                emiController.value.text,
+                                totalloan.value.toStringAsFixed(0),
+                                interestController.value.text,
+                                totalPayment,
+                                Duration,
+                                yearController.value.text,
+                                monthController.value.text
                               ]);
                         }),
                         SizedBox(height: ScreenSize.fSize_70()),
@@ -182,20 +195,25 @@ class _LoanCalculatorResultScreenState
   }
 
   loanCalculation() {
+    // ignore: non_constant_identifier_names
     int Emi = int.parse(emiController.text);
+    // ignore: non_constant_identifier_names
     double Interest = double.parse(interestController.text) / 1200;
+    // ignore: non_constant_identifier_names
     int Year = int.parse(yearController.text) * 12;
+    // ignore: non_constant_identifier_names
     int Month = int.parse(monthController.text);
+    // ignore: non_constant_identifier_names
     int Period = Year + Month;
-    double P = double.parse(Period.toString()) / 12;
+    // double P = double.parse(Period.toString()) / 12;
 
-    print("EMI:--------- $Emi");
-    print("INTEREST:--------- $Interest");
-    print("YEAR:--------- $Year");
-    print("MONTH:--------- $Month");
-    print("PERIOD:--------- $Period");
-    print("IIII:--------- $Interest");
-    print("PPPP:--------- $P");
+    // print("EMI:--------- $Emi");
+    // print("INTEREST:--------- $Interest");
+    // print("YEAR:--------- $Year");
+    // print("MONTH:--------- $Month");
+    // print("PERIOD:--------- $Period");
+    // print("IIII:--------- $Interest");
+    // print("PPPP:--------- $P");
 
     totalloan.value =
         (Emi / Interest) * (1 - (1 / ((pow((1 + Interest), (Period))))));
@@ -207,8 +225,8 @@ class _LoanCalculatorResultScreenState
     // totalinterest = (1 / P) * (data / totalloan - 1) * 100;
 
     // totalPayment = (Emi * Period).toStringAsFixed(0);
-    print("TOTAL-Loan:------------ ${totalloan.value}");
-    print("TOTAL-Interest:------------ $totalinterest");
-    print("TOTAL-Payment:------------ $totalPayment\n");
+    // print("TOTAL-Loan:------------ ${totalloan.value}");
+    // print("TOTAL-Interest:------------ $totalinterest");
+    // print("TOTAL-Payment:------------ $totalPayment\n");
   }
 }

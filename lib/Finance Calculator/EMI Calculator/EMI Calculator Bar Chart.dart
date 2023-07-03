@@ -64,7 +64,7 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   Get
-                                      .to(() => const EMICalculatorPieChartScreen());
+                                      .to(() =>  EMICalculatorPieChartScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

@@ -57,7 +57,7 @@ class LoanPeriodPieChartScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>  const LoanPeriodDetailScreen());
+                                  Get.to(() =>   LoanPeriodDetailScreen());
                                 },
                                 child: Stack(
                                   children: [

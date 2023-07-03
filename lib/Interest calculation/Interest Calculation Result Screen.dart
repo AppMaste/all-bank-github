@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
+import '../Loan Calculator/Loan Calculator History.dart';
+
 class InterestCalculationResultScreen extends StatefulWidget {
   const InterestCalculationResultScreen({Key? key}) : super(key: key);
 
@@ -27,18 +29,20 @@ class _InterestCalculationResultScreenState
   var monthlyemi;
   var totalpayment;
   var totalinterest;
-  var interest;
+  var interest = 0.0;
+  var Duration;
 
-  var data = Get.arguments;
+  var arg = Get.arguments;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    amountController = data[0];
-    emiController = data[1];
-    yearController = data[2];
-    monthController = data[3];
+    amountController = arg[0];
+    emiController = arg[1];
+    yearController = arg[2];
+    monthController = arg[3];
+    print("ararararar $arg");
   }
 
   @override
@@ -103,8 +107,16 @@ class _InterestCalculationResultScreenState
                           children: [
                             compareLoanContainer(context, "Interest Calculate",
                                 () {
+                              var aaa = int.parse(amountController.value.text);
                               setState(() {});
                               calculation();
+                              addData.add([
+                                aaa,
+                                DateFormat("hh:mm a").format(DateTime.now()),
+                                DateFormat("dd/MM/yyyy").format(DateTime.now()),
+                                interest.toStringAsFixed(2),
+                                Duration,
+                              ]);
                             }),
                             comparereset(context, "Reset", () {
                               emiController.clear();
@@ -270,7 +282,7 @@ class _InterestCalculationResultScreenState
                                       SizedBox(
                                           width:
                                               ScreenSize.horizontalBlockSize! *
-                                                  10),
+                                                  14),
                                       Container(
                                         width: ScreenSize.fSize_70(),
                                         color: Colors.transparent,
@@ -288,9 +300,9 @@ class _InterestCalculationResultScreenState
                                               ),
                                             ),
                                             Text(
-                                              // interest,
-                                              NumberFormat.simpleCurrency(name: '')
-                                                  .format(interest),
+                                              interest.toStringAsFixed(2),
+                                              // NumberFormat.simpleCurrency(name: '')
+                                              //     .format(interest),
                                               style: GoogleFonts
                                                   .ibmPlexSansThaiLooped(
                                                       color: Colors.white,
@@ -300,7 +312,6 @@ class _InterestCalculationResultScreenState
                                           ],
                                         ),
                                       ),
-                                      SizedBox(width: ScreenSize.fSize_12())
                                     ],
                                   ),
                                 ),
@@ -309,20 +320,19 @@ class _InterestCalculationResultScreenState
                             ),
                           ),
                         ),
-                        /*    emiAdvanceCalculation2(
-                          context,
-                          "Monthly EMI",
-                          "Total Payment",
-                          "Total Interest",
-                          "Interest",
-                          totalpayment.toString(),
-                          totalpayment.toString(),
-                          totalpayment.toString(),
-                          totalpayment.toString(),
-                        ),*/
                         SizedBox(height: ScreenSize.fSize_20()),
                         viewMoreDetail(context, () {
-                          Get.to(() => const InterestCalculationDetailScreen());
+                          Get.to(() => InterestCalculationDetailScreen(),
+                              arguments: [
+                                amountController.value.text,
+                                emiController.value.text,
+                                yearController.value.text,
+                                monthController.value.text,
+                                totalinterest,
+                                totalpayment,
+                                interest,
+                                Duration
+                              ]);
                         }),
                         SizedBox(height: ScreenSize.fSize_70()),
                       ],
@@ -348,6 +358,7 @@ class _InterestCalculationResultScreenState
     log("Yearrrrr:--------------- $Year");
 
     monthlyemi = EMI;
+    Duration = Period;
     totalpayment = EMI * Period;
     totalinterest = totalpayment - P;
     var Interest = (1 / Year) * ((totalpayment / P) - 1);
