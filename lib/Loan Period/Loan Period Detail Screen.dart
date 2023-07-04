@@ -93,7 +93,17 @@ class LoanPeriodDetailScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() => LoanPeriodPieChartScreen());
+                                  Get.to(
+                                    () => LoanPeriodPieChartScreen(),
+                                    arguments: [
+                                      arg[0],
+                                      arg[1],
+                                      arg[2],
+                                      arg[3],
+                                      arg[4],
+                                      arg[5],
+                                    ]
+                                  );
                                 },
                                 child: Stack(
                                   children: [
@@ -152,7 +162,7 @@ class LoanPeriodDetailScreen extends StatelessWidget {
                               child: IntrinsicHeight(
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
                                       "Month",
@@ -198,31 +208,31 @@ class LoanPeriodDetailScreen extends StatelessWidget {
                                   ],
                                   borderRadius: BorderRadius.only(
                                     bottomLeft:
-                                    Radius.circular(ScreenSize.fSize_15()),
+                                        Radius.circular(ScreenSize.fSize_15()),
                                     bottomRight:
-                                    Radius.circular(ScreenSize.fSize_15()),
+                                        Radius.circular(ScreenSize.fSize_15()),
                                   )),
                               child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 itemCount: month.value.length,
                                 itemBuilder: (context, index) {
                                   final aa = (rate.value[index] *
-                                      int.parse(arg[0]) /
-                                      100)
+                                          int.parse(arg[0]) /
+                                          100)
                                       .toStringAsFixed(0);
                                   final bb = int.parse(arg[0]) - int.parse(aa);
-                                  final cc = int.parse(arg[1]) -
+                                  final cc = int.parse(arg[0]) -
                                       int.parse(bb.toStringAsFixed(0));
-                                  log("Interest $aa");
-                                  log("Principal $bb");
-                                  log("Balance $cc\n\n");
+                                  log("aaaaaaa $aa");
+                                  log("bbbbbbb $bb");
+                                  log("ccccccc $cc\n\n");
                                   return IntrinsicHeight(
                                     child: Padding(
                                       padding: EdgeInsets.only(
                                           top: ScreenSize.fSize_20()),
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Container(
                                             width: ScreenSize.fSize_30(),
@@ -261,7 +271,7 @@ class LoanPeriodDetailScreen extends StatelessWidget {
                                             alignment: Alignment.center,
                                             color: Colors.transparent,
                                             child: Text(
-                                              "$cc",
+                                              "$bb",
                                               overflow: TextOverflow.ellipsis,
                                               style: style1,
                                             ),
@@ -273,145 +283,9 @@ class LoanPeriodDetailScreen extends StatelessWidget {
                                 },
                               ),
                             ),
-                            // ElevatedButton(
-                            //   onPressed: () {
-                            //     Get.to(() => HomePage(), arguments: [
-                            //       arg[2],
-                            //       arg[3],
-                            //       arg[0],
-                            //       arg[4],
-                            //       arg[5],
-                            //       arg[6],
-                            //     ]);
-                            //   },
-                            //   child: const Text("Pie Chart Screen-->>"),
-                            // ),
                           ],
                         ),
                       ),
-                      /* Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3))
-                                ],
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenSize.fSize_15()),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(height: ScreenSize.fSize_70()),
-                                  IntrinsicHeight(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            emimonth(context, "1"),
-                                            emimonth(context, "2"),
-                                            emimonth(context, "3"),
-                                            emimonth(context, "4"),
-                                            emimonth(context, "5"),
-                                            emimonth(context, "6"),
-                                            emimonth(context, "7"),
-                                            emimonth(context, "8"),
-                                            emimonth(context, "9"),
-                                            emimonth(context, "10"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "166"),
-                                            emimonth(context, "170"),
-                                            emimonth(context, "175"),
-                                            emimonth(context, "180"),
-                                            emimonth(context, "184"),
-                                            emimonth(context, "189"),
-                                            emimonth(context, "194"),
-                                            emimonth(context, "199"),
-                                            emimonth(context, "205"),
-                                            emimonth(context, "210"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "1334"),
-                                            emimonth(context, "1330"),
-                                            emimonth(context, "1325"),
-                                            emimonth(context, "1320"),
-                                            emimonth(context, "1316"),
-                                            emimonth(context, "1311"),
-                                            emimonth(context, "1306"),
-                                            emimonth(context, "1301"),
-                                            emimonth(context, "1295"),
-                                            emimonth(context, "1290"),
-                                          ],
-                                        ),
-                                        emidetaildivider(),
-                                        Column(
-                                          children: [
-                                            emimonth(context, "49834"),
-                                            emimonth(context, "49664"),
-                                            emimonth(context, "49489"),
-                                            emimonth(context, "49309"),
-                                            emimonth(context, "49125"),
-                                            emimonth(context, "48936"),
-                                            emimonth(context, "48742"),
-                                            emimonth(context, "48543"),
-                                            emimonth(context, "48338"),
-                                            emimonth(context, "48128"),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenSize.fSize_60()),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: ScreenSize.fSize_55(),
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFF12356E),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(ScreenSize.fSize_15()),
-                                    topRight:
-                                    Radius.circular(ScreenSize.fSize_15()),
-                                  )),
-                              child: IntrinsicHeight(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      emidetailtext(context, "Month"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Principle"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Interest"),
-                                      emidetaildivider(),
-                                      emidetailtext(context, "Balance"),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),*/
                       SizedBox(height: ScreenSize.fSize_70()),
                     ],
                   ),

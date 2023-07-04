@@ -27,6 +27,7 @@ class _SimpleCalculationResultScreenState
 
   var getamount;
   var getinvestment;
+  var period;
 
   @override
   void initState() {
@@ -60,8 +61,15 @@ class _SimpleCalculationResultScreenState
                       children: [
                         SizedBox(height: ScreenSize.fSize_20()),
                         SizedBox(height: ScreenSize.fSize_20()),
-                        compareContainer(context, "PPF Amount", "Interest %", "₹",
-                            "%", amountController, interestController,),
+                        compareContainer(
+                          context,
+                          "PPF Amount",
+                          "Interest %",
+                          "₹",
+                          "%",
+                          amountController,
+                          interestController,
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Period in Year",
@@ -69,12 +77,17 @@ class _SimpleCalculationResultScreenState
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        emiadvance(context, yearController, "Year",),
+                        emiadvance(
+                          context,
+                          yearController,
+                          "Year",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            compareLoanContainer(context, "Simple Calculate", () {
+                            compareLoanContainer(context, "Simple Calculate",
+                                () {
                               if (amountController.text.isEmpty ||
                                   interestController.text.isEmpty ||
                                   yearController.text.isEmpty) {
@@ -111,14 +124,16 @@ class _SimpleCalculationResultScreenState
                             children: [
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Investment Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -129,9 +144,10 @@ class _SimpleCalculationResultScreenState
                                               ? getinvestment.toString()
                                               : "0.0",
                                           textAlign: TextAlign.center,
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -147,7 +163,8 @@ class _SimpleCalculationResultScreenState
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Maturity Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -157,9 +174,10 @@ class _SimpleCalculationResultScreenState
                                           load == true
                                               ? "${amountController.text}.0"
                                               : "0.0",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -197,7 +215,18 @@ class _SimpleCalculationResultScreenState
                         ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         viewMoreDetail(context, () {
-                          Get.to(() => const SimpleCalculationDetailScreen());
+                          Get.to(
+                            () =>  SimpleCalculationDetailScreen(),
+                            arguments: [
+                              amountController.text,
+                              interestController.text,
+                              getamount,
+                              yearController.text,
+                              getinvestment,
+                              period,
+
+                            ]
+                          );
                         }),
                         SizedBox(height: ScreenSize.fSize_20()),
                       ],
@@ -220,6 +249,8 @@ class _SimpleCalculationResultScreenState
 
     getamount = Amount * Interest * Duration / 100;
     getinvestment = Amount + getamount;
+    var time = Duration * 12;
+    period = time;
     log("Investment:----------------- $getinvestment");
     log("Investment:----------------- $getamount");
     log("Maturity Amount:----------------- $Amount");

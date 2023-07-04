@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-
-import 'Finance Calculator/EMI Calculator/EMI Calculator Screen.dart';
 
 fluttertost() {
   return Fluttertoast.showToast(
@@ -2488,7 +2485,7 @@ loanCalculator(BuildContext context, var emivalue, var paymentValue,
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Monthly EMI",
-                          style: style,
+                          style: stylee,
                         ),
                         Text(
                           emivalue,
@@ -2509,7 +2506,7 @@ loanCalculator(BuildContext context, var emivalue, var paymentValue,
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Total Payment",
-                          style: style,
+                          style: stylee,
                         ),
                         Text(
                           paymentValue,
@@ -2545,7 +2542,7 @@ loanCalculator(BuildContext context, var emivalue, var paymentValue,
                           Text(
                             "Total Interest",
                             overflow: TextOverflow.clip,
-                            style: style,
+                            style: stylee,
                           ),
                           Text(
                             interestValue,
@@ -2566,7 +2563,7 @@ loanCalculator(BuildContext context, var emivalue, var paymentValue,
                           SizedBox(height: ScreenSize.fSize_20()),
                           Text(
                             "Loan",
-                            style: style,
+                            style: stylee,
                           ),
                           Text(
                             loan,
@@ -3019,8 +3016,61 @@ var decoration = BoxDecoration(
       topRight: Radius.circular(ScreenSize.fSize_30()),
       topLeft: Radius.circular(ScreenSize.fSize_30())),
 );
+var padding =
+EdgeInsets.only(top: ScreenSize.fSize_6(), bottom: ScreenSize.fSize_6());
 
-var style = GoogleFonts.ibmPlexSansThaiLooped(
+var style = const TextStyle(color: Colors.white);
+var style1 = const TextStyle(fontWeight: FontWeight.w500);
+
+var dividerr = const VerticalDivider(
+  color: Colors.white,
+  thickness: 1,
+);
+var dividerr2 = const VerticalDivider(
+  color: Colors.grey,
+  thickness: 1,
+);
+
+textfunction(String title, String title2) {
+  return Column(
+    children: [
+      Container(
+        alignment: Alignment.center,
+        width: ScreenSize.fSize_90(),
+        color: Colors.transparent,
+        child: Text(
+          title,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: Color(0xFF768AAB)),
+        ),
+      ),
+      SizedBox(height: ScreenSize.fSize_8()),
+      Container(
+        alignment: Alignment.center,
+        width: ScreenSize.fSize_50(),
+        color: Colors.transparent,
+        child: Text(
+          title2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(color: Colors.white),
+        ),
+      ),
+    ],
+  );
+}
+
+final colorList = <Color>[
+  const Color(0xff12356e),
+  const Color(0xff7ec1ff),
+];
+
+rowdivider() {
+  return const VerticalDivider(
+    color: Color(0xFF768AAB),
+    thickness: 1,
+  );
+}
+var stylee = GoogleFonts.ibmPlexSansThaiLooped(
   fontSize: ScreenSize.fSize_12(),
   fontWeight: FontWeight.w500,
   color: const Color(0xFF768AAB),

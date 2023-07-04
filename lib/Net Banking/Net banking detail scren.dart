@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../ScreenSize.dart';
-import 'Personal Banking Screen.dart';
 
 class NetBankingDetailScreen extends StatelessWidget {
   NetBankingDetailScreen({Key? key}) : super(key: key);
@@ -50,9 +49,6 @@ class NetBankingDetailScreen extends StatelessWidget {
                       SMSContainer2(context, () {
                         Get.to(() => const NetBankingWebScreen(),arguments: bankdata[1]);
                       }, "Official Website","Personal Banking"),
-                      // SMSContainer(context, () {
-                      //   Get.to(() => const NetBankingWebScreen());
-                      // }, "Personal Banking"),
                       SizedBox(height: ScreenSize.fSize_30()),
                     ],
                   ),

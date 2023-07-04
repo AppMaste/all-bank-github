@@ -1,4 +1,3 @@
-import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/FD%20Calculation/FD%20Calculation%20Result%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -127,7 +126,8 @@ class _FDCalculationScreenState extends State<FDCalculationScreen> {
                                 arguments: [
                                   principalController,
                                   interestRateController,
-                                  periodController
+                                  periodController,
+                                  id
                                 ]);
                           }
                         }),

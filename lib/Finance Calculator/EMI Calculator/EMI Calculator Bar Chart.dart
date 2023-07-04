@@ -1,6 +1,5 @@
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Finance%20Calculator/EMI%20Calculator/EMI%20Calculator%20Detaila.dart';
-import 'package:all_bank/Finance%20Calculator/EMI%20Calculator/EMI%20Calculator%20Pie%20Chart.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +62,8 @@ class EMICalculatorBarChartScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Get
-                                      .to(() =>  EMICalculatorPieChartScreen());
+                                  // Get
+                                  //     .to(() =>  EMICalculatorPieChartScreen());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

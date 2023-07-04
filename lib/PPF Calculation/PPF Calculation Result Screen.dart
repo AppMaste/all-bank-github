@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:all_bank/Controller/ads.dart';
@@ -27,7 +26,7 @@ class _PPFCalculationResultScreenState
   var amount;
   var amount2;
   var investment;
-  var total;
+  var total = 0.0;
 
   bool load = false;
 
@@ -74,8 +73,15 @@ class _PPFCalculationResultScreenState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: ScreenSize.fSize_20()),
-                        compareContainer(context, "PPF Amount", "Interest %", "₹",
-                            "%", amountController, interestController,),
+                        compareContainer(
+                          context,
+                          "PPF Amount",
+                          "Interest %",
+                          "₹",
+                          "%",
+                          amountController,
+                          interestController,
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Period of Deposite",
@@ -188,14 +194,16 @@ class _PPFCalculationResultScreenState
                             children: [
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Investment Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -209,9 +217,10 @@ class _PPFCalculationResultScreenState
                                               : "0.0",
                                           // "${investment}",
                                           textAlign: TextAlign.center,
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -227,7 +236,8 @@ class _PPFCalculationResultScreenState
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Maturity Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -240,9 +250,10 @@ class _PPFCalculationResultScreenState
                                                   .format(amount2)
                                               : "0.0",
                                           // "$amount2",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -284,7 +295,16 @@ class _PPFCalculationResultScreenState
                         ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         viewMoreDetail(context, () {
-                          Get.to(() => const PPFCalculationDetailScreen());
+                          Get.to(
+                            () => PPFCalculationDetailScreen(),
+                            arguments: [
+                              amountController.text,
+                              interestController.text,
+                              total.toStringAsFixed(0),
+                              amount2,
+                              dropdownvalue.toString()
+                            ]
+                          );
                         }),
                         SizedBox(height: ScreenSize.fSize_20()),
                       ],

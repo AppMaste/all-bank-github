@@ -152,7 +152,7 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                                 height: ScreenSize.fSize_20()),
                                             Text(
                                               "Monthly EMI",
-                                              style: style,
+                                              style: stylee,
                                             ),
                                             Text(
                                               load == true
@@ -177,7 +177,7 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                               height: ScreenSize.fSize_20()),
                                           Text(
                                             "Total Payment",
-                                            style: style,
+                                            style: stylee,
                                           ),
                                           Text(
                                             load == true
@@ -212,7 +212,7 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                               height: ScreenSize.fSize_20()),
                                           Text(
                                             "Total Interest",
-                                            style: style,
+                                            style: stylee,
                                           ),
                                           Text(
                                             load == true
@@ -239,7 +239,7 @@ class _LoanPeriodResultScreenState extends State<LoanPeriodResultScreen> {
                                                 height: ScreenSize.fSize_20()),
                                             Text(
                                               "Period",
-                                              style: style,
+                                              style: stylee,
                                             ),
                                             Text(
                                               load == true

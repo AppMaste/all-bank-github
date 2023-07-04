@@ -1,23 +1,66 @@
+import 'dart:math';
+
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
-import 'package:all_bank/Simple%20Calculation/Simple%20Calculation%20Detail%20Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Loan Calculator/Loan Calculator Pie Chart Screen.dart';
+import 'dart:math' as math;
 
-class SimpleCalculationPieChartScreen extends StatelessWidget {
+import 'package:pie_chart/pie_chart.dart';
+
+class SimpleCalculationPieChartScreen extends StatefulWidget {
   SimpleCalculationPieChartScreen({Key? key}) : super(key: key);
 
-  List<ChartData> chartData = [
-    ChartData('David', 95, const Color(0xFF12356E)),
-    ChartData('Steve', 5, const Color(0xFF7EC1FF)),
-  ];
+  @override
+  State<SimpleCalculationPieChartScreen> createState() =>
+      _SimpleCalculationPieChartScreenState();
+}
+
+class _SimpleCalculationPieChartScreenState
+    extends State<SimpleCalculationPieChartScreen> {
+  var arg = Get.arguments;
+
+  @override
+  void initState() {
+    super.initState();
+    emicalcualtion();
+  }
+
+  // ignore: non_constant_identifier_names
+  var Result = "".obs;
+
+  // ignore: non_constant_identifier_names
+  var Totalrate = "".obs;
+
+  // ignore: non_constant_identifier_names
+  var TotalMonth = "".obs;
+
+  // ignore: non_constant_identifier_names
+  var TotalPayment = "".obs;
 
   @override
   Widget build(BuildContext context) {
+    print("ghdchgadasgdcgsahd $arg");
+    final dataMap = <String, double>{
+      "Loan (${arg[0]})": 100,
+      "Interest (${arg[2]})": 4,
+    };
+    final chart = PieChart(
+      legendOptions: const LegendOptions(
+        legendPosition: LegendPosition.bottom,
+        legendShape: BoxShape.rectangle,
+        showLegendsInRow: true,
+      ),
+      dataMap: dataMap,
+      animationDuration: const Duration(milliseconds: 800),
+      chartRadius: math.min(MediaQuery.of(context).size.width / 1.7, 300),
+      colorList: colorList,
+      emptyColor: Colors.grey,
+      // baseChartColor: Colors.transparent,
+    );
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -54,14 +97,14 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>
-                                  const SimpleCalculationDetailScreen());
+                                  // Get.to(() =>
+                                  //  SimpleCalculationDetailScreen());
                                 },
                                 child: Stack(
                                   children: [
                                     Container(
                                       width:
-                                      ScreenSize.horizontalBlockSize! * 43,
+                                          ScreenSize.horizontalBlockSize! * 43,
                                       height: ScreenSize.fSize_50(),
                                       decoration: BoxDecoration(
                                         color: Colors.transparent,
@@ -74,12 +117,12 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                                         child: Text(
                                           "Details",
                                           style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color:
-                                              const Color(0xFF768AAB),
-                                              fontSize:
-                                              ScreenSize.fSize_17(),
-                                              fontWeight: FontWeight.w600),
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color:
+                                                      const Color(0xFF768AAB),
+                                                  fontSize:
+                                                      ScreenSize.fSize_17(),
+                                                  fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ),
@@ -101,10 +144,10 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                                       child: Text(
                                         "Pie Chart",
                                         style:
-                                        GoogleFonts.ibmPlexSansThaiLooped(
-                                            color: Colors.white,
-                                            fontSize: ScreenSize.fSize_17(),
-                                            fontWeight: FontWeight.w600),
+                                            GoogleFonts.ibmPlexSansThaiLooped(
+                                                color: Colors.white,
+                                                fontSize: ScreenSize.fSize_17(),
+                                                fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   )
@@ -116,81 +159,16 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenSize.fSize_15()),
                       Text(
-                        "Total Payment 101392.84",
+                        "Total Payment ${arg[4]}",
                         style: GoogleFonts.ibmPlexSansThaiLooped(
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenSize.fSize_15(),
                             color: const Color(0xFF12356E)),
                       ),
-                      // Container(
-                      //   height: 400,
-                      //   width: 400,
-                      //   child: SfCircularChart(
-                      //     series: [
-                      //       // Render pie chart
-                      //       PieSeries<ChartData, String>(
-                      //           animationDuration: 1000,
-                      //           dataLabelSettings: DataLabelSettings(
-                      //             isVisible: true,
-                      //             textStyle: GoogleFonts.ibmPlexSansThaiLooped(
-                      //               fontWeight: FontWeight.w600,
-                      //               color: Colors.black,
-                      //               fontSize: 20,
-                      //             ),
-                      //           ),
-                      //           dataSource: chartData,
-                      //           pointColorMapper: (ChartData data, _) =>
-                      //           data.color,
-                      //           xValueMapper: (ChartData data, _) => data.x,
-                      //           yValueMapper: (ChartData data, _) => data.y),
-                      //
-                      //     ],
-                      //   ),
-                      // ),
-                      Row(
-                        children: [
-                          SizedBox(width: ScreenSize.fSize_30()),
-                          Container(
-                            height: ScreenSize.fSize_20(),
-                            width: ScreenSize.fSize_20(),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF12356E),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_6()),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_8()),
-                          Text(
-                            "Loan (5000.00)",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w600,
-                                fontSize: ScreenSize.fSize_15()),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_17()),
-                          Container(
-                            height: ScreenSize.fSize_20(),
-                            width: ScreenSize.fSize_20(),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF7EC1FF),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_6()),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_8()),
-                          Text(
-                            "Interest (100.00)",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w600,
-                                fontSize: ScreenSize.fSize_15()),
-                          ),
-                        ],
-                      ),
+                      chart,
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: double.maxFinite,
                           decoration: BoxDecoration(
                               color: const Color(0xFF12356E),
                               borderRadius: BorderRadius.all(
@@ -205,76 +183,25 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                                     offset: Offset(0, 3))
                               ]),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SizedBox(height: ScreenSize.fSize_15()),
+                              SizedBox(height: ScreenSize.fSize_20()),
                               IntrinsicHeight(
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                  MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Loan Amount",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "5000",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          right: ScreenSize.fSize_18()),
-                                      child: const VerticalDivider(
-                                        thickness: 1,
-                                        color: Color(0xFF768AAB),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Interest",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "2.00",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction("Loan Amount", "${arg[0]}"),
+                                    rowdivider(),
+                                    textfunction("Interest", "${arg[1]}"),
                                   ],
                                 ),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_15(),
-                                    right: ScreenSize.fSize_15()),
-                                child: const Divider(
-                                  thickness: 1,
-                                  color: Color(0xFF768AAB),
-                                ),
+                                    left: ScreenSize.fSize_10(),
+                                    right: ScreenSize.fSize_10()),
+                                child: const Divider(color: Color(0xFF768AAB)),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               IntrinsicHeight(
@@ -282,125 +209,30 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                   MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: ScreenSize.fSize_15()),
-                                          child: Text(
-                                            "Period (Month)",
-                                            style: GoogleFonts
-                                                .ibmPlexSansThaiLooped(
-                                              fontSize: ScreenSize.fSize_15(),
-                                              fontWeight: FontWeight.w500,
-                                              color: const Color(0xFF768AAB),
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          "1",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    const VerticalDivider(
-                                      thickness: 1,
-                                      color: Color(0xFF768AAB),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Monthly EMI",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "5000",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction("Period (Month)", "${TotalMonth}"),
+                                    rowdivider(),
+                                    textfunction("Monthly EMI", Result.value),
                                   ],
                                 ),
                               ),
                               SizedBox(height: ScreenSize.fSize_10()),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_15(),
-                                    right: ScreenSize.fSize_15()),
-                                child: const Divider(
-                                  thickness: 1,
-                                  color: Color(0xFF768AAB),
-                                ),
+                                    left: ScreenSize.fSize_10(),
+                                    right: ScreenSize.fSize_10()),
+                                child: const Divider(color: Color(0xFF768AAB)),
                               ),
+                              SizedBox(height: ScreenSize.fSize_10()),
                               IntrinsicHeight(
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                  MainAxisAlignment.spaceAround,
                                   children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Total Interest",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "100.00",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: ScreenSize.fSize_20(),
-                                          top: ScreenSize.fSize_4()),
-                                      child: const VerticalDivider(
-                                        thickness: 1,
-                                        color: Color(0xFF768AAB),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_20()),
-                                        Text(
-                                          "Total Payment",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          "5200.00",
-                                          style:
-                                          GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
+                                    textfunction(
+                                        "Total Interest", Totalrate.value),
+                                    rowdivider(),
+                                    textfunction(
+                                        "Total Payment", TotalPayment.value),
                                   ],
                                 ),
                               ),
@@ -420,5 +252,48 @@ class SimpleCalculationPieChartScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  emicalcualtion() {
+    // ignore: non_constant_identifier_names
+    int Principal = int.parse(arg[0]);
+    // ignore: non_constant_identifier_names
+    double Rate = double.parse(arg[1]);
+    // ignore: non_constant_identifier_names
+    int Year = int.parse(arg[3]);
+    // ignore: non_constant_identifier_names
+    // int Month = int.parse(arg[6]);
+
+    double A = 0.0;
+    int P = Principal;
+    double r = Rate / 12 / 100;
+    int n = Year * 12;
+    // print("N valueee:  $n");
+
+    A = (P * r * pow((1 + r), n) / (pow((1 + r), n) - 1));
+
+    // print("AAAA  $A");
+    // print("PPPP  $P");
+    // print("rrrr  $r");
+    // print("nnnn  $n");
+
+    Result.value = A.toStringAsFixed(0);
+    // double FinalAmount = Principal + (Principal * Term * Rate) / 100;
+    // double loanamount = FinalAmount / Term * 12;
+    int totalrate = int.parse(Result.value) * n - Principal;
+    // print("rateee:  $totalrate");
+
+    int totalpayment = int.parse(Result.value) * n;
+    // print("Result:  ${Result.value}");
+    // print("payment:  $totalpayment");
+
+    TotalMonth.value = n.toStringAsFixed(0);
+
+    Totalrate.value = totalrate.toStringAsFixed(0);
+
+    TotalPayment.value = totalpayment.toStringAsFixed(0);
+    // print("TotalPayment.value:  ${TotalPayment.value}");
+    // print("loanamount $Result\n\n");
+    return Result;
   }
 }

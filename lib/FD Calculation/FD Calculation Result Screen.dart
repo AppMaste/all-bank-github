@@ -18,12 +18,12 @@ class FDCalculationResultScreen extends StatefulWidget {
 class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
   int id = 1;
 
-  var data = Get.arguments;
+  var arg = Get.arguments;
 
   bool load = false;
 
-  var interest;
-  var total;
+  var interest = 0.0;
+  var total = 0.0;
 
   TextEditingController principalController = TextEditingController();
   TextEditingController interestRateController = TextEditingController();
@@ -33,9 +33,10 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    principalController = data[0];
-    interestRateController = data[1];
-    periodController = data[2];
+    principalController = arg[0];
+    interestRateController = arg[1];
+    periodController = arg[2];
+    id = arg[3];
   }
 
   @override
@@ -65,7 +66,11 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                           ),
                         ),
                         SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(context, data[0], "₹",),
+                        emiadvance(
+                          context,
+                          arg[0],
+                          "₹",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Interest Rate",
@@ -73,7 +78,11 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        emiadvance(context, data[1], "%",),
+                        emiadvance(
+                          context,
+                          arg[1],
+                          "%",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
                           "Period of Deposite",
@@ -81,7 +90,11 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        emiadvance(context, data[2], "",),
+                        emiadvance(
+                          context,
+                          arg[2],
+                          "",
+                        ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -176,14 +189,16 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                             children: [
                               IntrinsicHeight(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Column(
                                       children: [
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Investment Amount",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
@@ -191,10 +206,11 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                                         ),
                                         Text(
                                           textAlign: TextAlign.center,
-                                          "Maturity Amount =\n${load == true ? total : "0.0"}",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          "Maturity Amount =\n${load == true ? total.toStringAsFixed(2) : "0.0"}",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -210,17 +226,19 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
                                         SizedBox(height: ScreenSize.fSize_20()),
                                         Text(
                                           "Total Investment Value",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
                                             fontSize: ScreenSize.fSize_15(),
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xFF768AAB),
                                           ),
                                         ),
                                         Text(
-                                          "Interest = ${load == true ? interest : "0.0"}",
-                                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500),
+                                          "Interest = ${load == true ? interest.toStringAsFixed(2) : "0.0"}",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
                                         ),
                                       ],
                                     ),
@@ -254,14 +272,22 @@ class _FDCalculationResultScreenState extends State<FDCalculationResultScreen> {
     print("Rate:-------- $Rate");
     print("Period:------ $Period");
 
-    var FD = (Principal * Rate * Period) / 100;
+    // var FD = id == 1
+    //     ? (Principal * Rate * Period) / 100
+    //     : (Principal * Rate * Period) / 100;
+    // var FD = Principal * (1 + (Rate / 4));
+    var FD = id == 1
+        ? Principal * pow((1 + (Rate / 100)), (Period))
+        : Principal * pow((1 + (Rate / 100 / 4)), (4 * Period));
+    print("FDFDFDFDFDFD:---- $FD");
 
-    var T = (FD + Principal);
+    // var T = (FD + Principal);
+    var II = FD - Principal;
 
-    interest = FD;
+    interest = double.parse(II.toString());
     print("interest:---- $interest");
 
-    total = T;
+    total = double.parse(FD.toString());
     print("total:---- $total");
   }
 }

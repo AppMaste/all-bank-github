@@ -1,13 +1,18 @@
+import 'dart:math';
+
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'dart:math' as math;
+import 'package:pie_chart/pie_chart.dart';
+
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../Loan Calculator/Loan Calculator Pie Chart Screen.dart';
 
 class SIPCalculationResultScreen extends StatefulWidget {
   SIPCalculationResultScreen({Key? key}) : super(key: key);
@@ -23,11 +28,6 @@ class _SIPCalculationResultScreenState
   TextEditingController rateController = TextEditingController();
   TextEditingController yearController = TextEditingController();
 
-  List<ChartData> chartData = [
-    ChartData('David', (500000), const Color(0xFF12356E)),
-    ChartData('Steve', (159956), const Color(0xFF7EC1FF)),
-  ];
-
   @override
   void initState() {
     // TODO: implement initState
@@ -39,8 +39,29 @@ class _SIPCalculationResultScreenState
 
   var getdata = Get.arguments;
 
+  var returnsip = 0.0;
+  var investsip = 0.0;
+  var load = false;
+
   @override
   Widget build(BuildContext context) {
+    final dataMap = <String, double>{
+      "": load == true ? investsip : 10.0,
+      " ": load == true ? returnsip : 0.0
+    };
+    final chart = PieChart(
+      legendOptions: const LegendOptions(
+        legendPosition: LegendPosition.bottom,
+        legendShape: BoxShape.rectangle,
+        showLegendsInRow: true,
+      ),
+      dataMap: dataMap,
+      animationDuration: const Duration(milliseconds: 800),
+      chartRadius: math.min(MediaQuery.of(context).size.width / 1.7, 300),
+      colorList: colorList,
+      emptyColor: Colors.grey,
+      // baseChartColor: Colors.transparent,
+    );
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -81,7 +102,7 @@ class _SIPCalculationResultScreenState
                         emiadvance(
                           context,
                           rateController,
-                          "₹",
+                          "%",
                         ),
                         SizedBox(height: ScreenSize.fSize_20()),
                         Text(
@@ -99,8 +120,18 @@ class _SIPCalculationResultScreenState
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            compareLoanContainer(
-                                context, "SIP Plan Calculate", () {}),
+                            compareLoanContainer(context, "SIP Plan Calculate",
+                                () {
+                              if (amountController.text.isNotEmpty ||
+                                  rateController.text.isNotEmpty ||
+                                  yearController.text.isNotEmpty) {
+                                setState(() {});
+                                load = true;
+                                cal();
+                              } else {
+                                fluttertost();
+                              }
+                            }),
                             comparereset(context, "Reset", () {}),
                           ],
                         ),
@@ -139,7 +170,8 @@ class _SIPCalculationResultScreenState
                                         ),
                                         Text(
                                           textAlign: TextAlign.center,
-                                          "159957",
+                                          NumberFormat.simpleCurrency(name: '')
+                                              .format(investsip),
                                           style:
                                               GoogleFonts.ibmPlexSansThaiLooped(
                                                   color: Colors.white,
@@ -167,7 +199,8 @@ class _SIPCalculationResultScreenState
                                           ),
                                         ),
                                         Text(
-                                          "13330",
+                                          NumberFormat.simpleCurrency(name: '')
+                                              .format(returnsip),
                                           style:
                                               GoogleFonts.ibmPlexSansThaiLooped(
                                                   color: Colors.white,
@@ -178,56 +211,12 @@ class _SIPCalculationResultScreenState
                                   ],
                                 ),
                               ),
-                              SizedBox(height: ScreenSize.fSize_20())
+                              SizedBox(height: ScreenSize.fSize_20()),
                             ],
                           ),
                         ),
-                        // SfCircularChart(
-                        //   series: [
-                        //     // Render pie chart
-                        //     PieSeries<ChartData, String>(
-                        //         animationDuration: 1000,
-                        //         dataLabelSettings: DataLabelSettings(
-                        //           isVisible: true,
-                        //           textStyle: GoogleFonts.ibmPlexSansThaiLooped(
-                        //             fontWeight: FontWeight.w600,
-                        //             color: Colors.white,
-                        //             fontSize: 17,
-                        //           ),
-                        //         ),
-                        //         dataSource: chartData,
-                        //         pointColorMapper: (ChartData data, _) =>
-                        //             data.color,
-                        //         xValueMapper: (ChartData data, _) => data.x,
-                        //         yValueMapper: (ChartData data, _) => data.y)
-                        //   ],
-                        // ),
-                        Row(
-                          children: [
-                            SizedBox(width: ScreenSize.fSize_30()),
-                            Container(
-                              height: ScreenSize.fSize_20(),
-                              width: ScreenSize.fSize_20(),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF12356E),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenSize.fSize_6()),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: ScreenSize.fSize_20()),
-                            Container(
-                              height: ScreenSize.fSize_20(),
-                              width: ScreenSize.fSize_20(),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF7EC1FF),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenSize.fSize_6()),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        SizedBox(height: ScreenSize.fSize_20()),
+                        chart,
                         SizedBox(height: ScreenSize.fSize_30()),
                         Center(
                           child: Container(
@@ -261,5 +250,16 @@ class _SIPCalculationResultScreenState
         ],
       ),
     );
+  }
+
+  cal() {
+    int A = int.parse(amountController.text);
+    double R = double.parse(rateController.text) / 12 / 100;
+    int Y = int.parse(yearController.text) * 12;
+
+    var IA = A * ((pow((1 + R), (Y)) - 1) / R) * (1 + R);
+    investsip = double.parse((A * Y).toString());
+    returnsip = IA - investsip;
+    print("IAIAIAIAIAI $returnsip");
   }
 }

@@ -355,11 +355,3 @@ class _LoanCalculatorPieChartScreenState
     return Result;
   }
 }
-
-class ChartData {
-  ChartData(this.x, this.y, [this.color]);
-
-  String x;
-  final num y;
-  final Color? color;
-}

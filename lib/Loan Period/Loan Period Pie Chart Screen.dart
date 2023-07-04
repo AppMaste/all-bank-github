@@ -1,26 +1,46 @@
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/Loan%20Period/Loan%20Period%20Detail%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pie_chart/pie_chart.dart';
+import 'dart:math' as math;
 // import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../Loan Calculator/Loan Calculator Pie Chart Screen.dart';
 
 class LoanPeriodPieChartScreen extends StatelessWidget {
    LoanPeriodPieChartScreen({Key? key}) : super(key: key);
 
-  List<ChartData> chartData = [
-    ChartData('David', 95, const Color(0xFF12356E)),
-    ChartData('Steve', 5, const Color(0xFF7EC1FF)),
-  ];
+
+  var arg = Get.arguments;
 
 
   @override
   Widget build(BuildContext context) {
+    print("================= $arg");
+    final dataMap = <String, double>{
+      "Loan (null)": 100,
+      "Interest (null)": 30,
+    };
+    final colorList = <Color>[
+      const Color(0xff12356e),
+      const Color(0xff7ec1ff),
+    ];
+    final chart = PieChart(
+      legendOptions: const LegendOptions(
+        legendPosition: LegendPosition.bottom,
+        legendShape: BoxShape.rectangle,
+        showLegendsInRow: true,
+      ),
+      dataMap: dataMap,
+      animationDuration: const Duration(milliseconds: 800),
+      chartRadius: math.min(MediaQuery.of(context).size.width / 1.7, 300),
+      colorList: colorList,
+      emptyColor: Colors.grey,
+      // baseChartColor: Colors.transparent,
+    );
     return Scaffold(
       appBar: appbarr,
       body: Stack(
@@ -57,7 +77,7 @@ class LoanPeriodPieChartScreen extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() =>   LoanPeriodDetailScreen());
+                                  // Get.to(() =>   LoanPeriodDetailScreen());
                                 },
                                 child: Stack(
                                   children: [
@@ -112,71 +132,13 @@ class LoanPeriodPieChartScreen extends StatelessWidget {
                       ),
                       SizedBox(height: ScreenSize.fSize_15()),
                       Text(
-                        "Total Payment 105000.00",
+                        "Total Payment ${arg[3]}",
                         style: GoogleFonts.ibmPlexSansThaiLooped(
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenSize.fSize_15(),
                             color: const Color(0xFF12356E)),
                       ),
-                      // SfCircularChart(
-                      //   series: [
-                      //     // Render pie chart
-                      //     PieSeries<ChartData, String>(
-                      //         animationDuration: 1000,
-                      //         dataLabelSettings: DataLabelSettings(
-                      //           isVisible: true,
-                      //           textStyle: GoogleFonts.ibmPlexSansThaiLooped(
-                      //             fontWeight: FontWeight.w600,
-                      //             color: Colors.black,
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //         dataSource: chartData,
-                      //         pointColorMapper: (ChartData data, _) => data.color,
-                      //         xValueMapper: (ChartData data, _) => data.x,
-                      //         yValueMapper: (ChartData data, _) => data.y)
-                      //   ],
-                      // ),
-                      Row(
-                        children: [
-                          SizedBox(width: ScreenSize.fSize_80()),
-                          Container(
-                            height: ScreenSize.fSize_20(),
-                            width: ScreenSize.fSize_20(),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF12356E),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_6()),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_8()),
-                          Text(
-                            "Loan (null)",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w600,
-                                fontSize: ScreenSize.fSize_15()),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_17()),
-                          Container(
-                            height: ScreenSize.fSize_20(),
-                            width: ScreenSize.fSize_20(),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF7EC1FF),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_6()),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: ScreenSize.fSize_8()),
-                          Text(
-                            "Interest (null)",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w600,
-                                fontSize: ScreenSize.fSize_15()),
-                          ),
-                        ],
-                      ),
+                      chart,
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(

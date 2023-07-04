@@ -51,8 +51,8 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
       body: Stack(
         children: [
           SingleChildScrollView(
-              child:  Obx(
-                    () =>Column(
+            child: Obx(
+              () => Column(
                 children: [
                   sameRow(context, "GST Calculate"),
                   SizedBox(height: ScreenSize.fSize_20()),
@@ -72,7 +72,11 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
                             ),
                           ),
                           SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(context, amountController.value, "₹",),
+                          emiadvance(
+                            context,
+                            amountController.value,
+                            "₹",
+                          ),
                           SizedBox(height: ScreenSize.fSize_20()),
                           Text(
                             "Rate of GST",
@@ -80,7 +84,11 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          emiadvance(context, rateController.value, "₹",),
+                          emiadvance(
+                            context,
+                            rateController.value,
+                            "₹",
+                          ),
                           SizedBox(height: ScreenSize.fSize_20()),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +146,8 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              compareLoanContainer(context, "GST Calculate", () {
+                              compareLoanContainer(context, "GST Calculate",
+                                  () {
                                 if (amountController.value.text.isEmpty ||
                                     rateController.value.text.isEmpty) {
                                   fluttertost();
@@ -167,7 +176,8 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
                                   cgst.toString())
                               : GSTCalculationContainer(
                                   context,
-                                  NumberFormat.simpleCurrency(name: '').format(cal),
+                                  NumberFormat.simpleCurrency(name: '')
+                                      .format(cal),
                                   NumberFormat.simpleCurrency(name: '')
                                       .format(rate),
                                   getGST.toStringAsFixed(0),
@@ -177,7 +187,8 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: ScreenSize.fSize_60())
                 ],
               ),
             ),

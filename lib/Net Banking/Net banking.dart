@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
@@ -9,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../ScreenSize.dart';
 import '../dbHelper/db Helper.dart';
-import 'Net Banking webview screen.dart';
 import 'Net banking detail scren.dart';
 
 class NetBankingScreen extends StatefulWidget {
@@ -219,37 +217,6 @@ class _NetBankingScreenState extends State<NetBankingScreen> {
                                                   ],
                                                 ),
                                               ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(8.0),
-                                              //   child: Text(
-                                              //       "Bank id: ${data[index]['iBankDetailsId']}"),
-                                              // ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(8.0),
-                                              //   child: Text(
-                                              //       "Bank Name: ${data[index]['vName']}"),
-                                              // ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(8.0),
-                                              //   child: Text(
-                                              //       "Bank Balance: ${data[index]['vBalance']}"),
-                                              // ),
-                                              // Padding(
-                                              //   padding: const EdgeInsets.all(8.0),
-                                              //   child: Text(
-                                              //       "Bank Statement:  ${data[index]['vStatement']}"),
-                                              // ),
-                                              // TextButton(
-                                              //   onPressed: () {
-                                              //     Get.to(
-                                              //       () => const NetBankingWebScreen(),
-                                              //       arguments: data[index]
-                                              //           ['NetBanking'],
-                                              //     );
-                                              //   },
-                                              //   child: Text(
-                                              //       "Bank Net-banking: ${data[index]['NetBanking']}"),
-                                              // ),
                                             ],
                                           ),
                                         ),

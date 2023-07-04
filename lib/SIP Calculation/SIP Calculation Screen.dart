@@ -1,4 +1,3 @@
-import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/SIP%20Calculation/SIP%20Calculation%20Result%20Screen.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -75,7 +74,8 @@ class _SIPCalculationScreenState extends State<SIPCalculationScreen> {
                               arguments: [
                                 amountController,
                                 rateController,
-                                yearController
+                                yearController,
+                                rateController.text,
                               ],
                             );
                           }
