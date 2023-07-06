@@ -1,23 +1,12 @@
 import 'dart:io';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/EPF%20Balance%20&%20Passbook/EPF%20Balance%20&%20Passbook%20Screen.dart';
-import 'package:all_bank/Finance%20Calculator/Finance%20Calculator%20Screen.dart';
-import 'package:all_bank/IFSC%20&%20MICR%20Select%20Bank/IFSC%20&%20MICR%20Detail%20Screen.dart';
-import 'package:all_bank/IFSC%20&%20MICR%20Select%20Bank/IFSC%20&%20MICR%20Select%20Bank%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
-import 'package:all_bank/Missed%20Call%20Bank%20List/Missed%20Call%20Bank%20List%20Screen.dart';
-import 'package:all_bank/Net%20Banking/Net%20banking.dart';
 import 'package:all_bank/ScreenSize.dart';
-import 'package:all_bank/Setting/Setting%20Screen.dart';
-import 'package:all_bank/USSD%20Screen/ussd%20Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Bank Holiday/Bank Holiday Screen.dart';
-import '../Near By place/Near By Place Screen.dart';
-import '../SMS Banking Screen/SMS Banking Screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -114,22 +103,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            /*  ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.red,
-                shadowColor: Colors.redAccent,
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                minimumSize: const Size(100, 40), //////// HERE
-              ),
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text(
-                'No',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),*/
           ],
         ),
       ],
@@ -162,7 +135,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => const SettingScreen());
+                            tapButton.button(context, "/SettingScreen", '');
+                            // Get.to(() => const SettingScreen());
                           },
                           child: Padding(
                             padding:
@@ -238,25 +212,30 @@ class HomeScreen extends StatelessWidget {
                                     context,
                                     "assets/icons/SMS Banking icon.png",
                                     "SMS Banking", () {
-                                  Get.to(() => const SMSBankingScreen());
+                                  tapButton.button(
+                                      context, "/SMSBankingScreen", '');
+                                  // Get.to(() => const SMSBankingScreen());
                                 }),
                                 smscontrolller(
                                     context,
                                     "assets/icons/net banking icon.png",
                                     "Net Banking", () {
-                                  Get.to(() => const NetBankingScreen());
+                                      tapButton.button(context, "/NetBankingScreen", '');
+                                  // Get.to(() => const NetBankingScreen());
                                 }),
                                 smscontrolller(
                                     context,
                                     "assets/icons/USSD banking icon.png",
                                     "USSD Banking", () {
-                                  Get.to(() => const USSDBankingScreen());
+                                      tapButton.button(context, '/USSDBankingScreen', '');
+                                  // Get.to(() => const USSDBankingScreen());
                                 }),
                               ],
                             ),
                             SizedBox(height: ScreenSize.fSize_28()),
                             financeController(() {
-                              Get.to(() => const FinanceCalculatorScreen());
+                              tapButton.button(context, "/FinanceCalculatorScreen", "");
+                              // Get.to(() => const FinanceCalculatorScreen());
                             }),
                             SizedBox(height: ScreenSize.fSize_28()),
                             Row(
@@ -278,34 +257,37 @@ class HomeScreen extends StatelessWidget {
                                 smscontrolller(
                                     context,
                                     "assets/icons/EPF & Passbook icon.png",
-                                    "EPF & Passbook",
-                                    () {
-                                      Get.to(() => const EPFBalancePassbookScreen());
-                                    }),
+                                    "EPF & Passbook", () {
+                                      tapButton.button(context, "/EPFBalancePassbookScreen", '');
+                                  // Get.to(
+                                  //     () => const EPFBalancePassbookScreen());
+                                }),
                                 smscontrolller(
                                     context,
                                     "assets/icons/bank holiday icon.png",
-                                    "Bank Holiday",
-                                    () {
-                                      Get.to(() =>  BankHolidayScreen());
-                                    }),
+                                    "Bank Holiday", () {
+                                  tapButton.button(context, "/BankHolidayScreen", '');
+                                  // Get.to(() => BankHolidayScreen());
+                                }),
                                 smscontrolller(
                                     context,
                                     "assets/icons/near by place icon.png",
-                                    "Near By Place",
-                                    () {
-                                      Get.to(() => const NearByPlaceScreen());
-                                    }),
+                                    "Near By Place", () {
+                                  tapButton.button(context, "/NearByPlaceScreen", '');
+                                  // Get.to(() => const NearByPlaceScreen());
+                                }),
                               ],
                             ),
                             SizedBox(height: ScreenSize.fSize_100()),
                           ],
                         ),
                         rightarrowcontroller(context, () {
-                          Get.to(() => const MissedCallBankScreen());
+                          tapButton.button(context, "/MissedCallBankScreen", '');
+                          // Get.to(() => const MissedCallBankScreen());
                         }, ScreenSize.horizontalBlockSize! * 17),
                         rightarrowcontroller(context, () {
-                          Get.to(() =>  IFSCBankScreen());
+                          tapButton.button(context, "/IFSCBankScreen", '');
+                          // Get.to(() => IFSCBankScreen());
                         }, ScreenSize.horizontalBlockSize! * 67),
                       ],
                     ),

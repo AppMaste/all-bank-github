@@ -14,6 +14,7 @@ class LogoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.sizerInit(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.maxFinite,
         decoration: const BoxDecoration(

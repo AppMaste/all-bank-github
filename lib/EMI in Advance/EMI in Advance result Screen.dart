@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -55,314 +56,323 @@ class _EMIAdvanceResultScreenState extends State<EMIAdvanceResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("asfhuvasgfhasf $id");
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Share.share(
-                  "Principal Amount:-${principalController.value.text}\n\nInterest Rate:-${rateController.value.text}\n\nFeesView:-${feesController.value.text}\n\nLoan Tenure Year:-${tenureController.value.text}\n\nTotal Interest Payable:- ${Totalrate.value}\n\nTotal Payment:- ${TotalPayment.value}\n\nTotal Principal Payble:- ${principalController.value.text}\n\nEMI:- ${Result.value}");
-            },
-            child: Padding(
-              padding: EdgeInsets.only(right: ScreenSize.fSize_10()),
-              child: Image(
-                image: const AssetImage("assets/icons/share-icon.png"),
-                width: ScreenSize.fSize_25(),
+    // print("asfhuvasgfhasf $id");
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/EMIAdvanceResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Share.share(
+                    "Principal Amount:-${principalController.value.text}\n\nInterest Rate:-${rateController.value.text}\n\nFeesView:-${feesController.value.text}\n\nLoan Tenure Year:-${tenureController.value.text}\n\nTotal Interest Payable:- ${Totalrate.value}\n\nTotal Payment:- ${TotalPayment.value}\n\nTotal Principal Payble:- ${principalController.value.text}\n\nEMI:- ${Result.value}");
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: ScreenSize.fSize_10()),
+                child: Image(
+                  image: const AssetImage("assets/icons/share-icon.png"),
+                  width: ScreenSize.fSize_25(),
+                ),
               ),
             ),
+          ],
+          leading: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(Icons.arrow_back_rounded,
+                color: const Color(0xFF12356E), size: ScreenSize.fSize_30()),
           ),
-        ],
-        leading: GestureDetector(
-          onTap: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back_rounded,
-              color: const Color(0xFF12356E), size: ScreenSize.fSize_30()),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  sameRow(context, "EMI in Advance Calculator"),
-                  SizedBox(height: ScreenSize.fSize_20()),
-                  Container(
-                    width: double.maxFinite,
-                    decoration: decoration,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "Principal Amount",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Obx(
+                () => Column(
+                  children: [
+                    sameRow(context, "EMI in Advance Calculator"),
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      width: double.maxFinite,
+                      decoration: decoration,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "Principal Amount",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(
-                            context,
-                            principalController.value,
-                            "₹",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "Interest Rate : Max 50%",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+                            SizedBox(height: ScreenSize.fSize_10()),
+                            emiadvance(
+                              context,
+                              principalController.value,
+                              "₹",
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(
-                            context,
-                            rateController.value,
-                            "% ",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "FeesView",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "Interest Rate : Max 50%",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(
-                            context,
-                            feesController.value,
-                            "₹",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "Loan Tenure Year",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+                            SizedBox(height: ScreenSize.fSize_10()),
+                            emiadvance(
+                              context,
+                              rateController.value,
+                              "% ",
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(
-                            context,
-                            tenureController.value,
-                            tenureType.value,
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 1,
-                                  groupValue: id.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'ONE';
-                                    // if (value.value) {
-                                    //   tenureType.value = tenureTypes[1];
-                                    // } else {
-                                    //   tenureType.value = tenureTypes[0];
-                                    // }
-                                    id.value = 1;
-                                    // });
-                                  },
-                                ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "FeesView",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
                               ),
-                              Text(
-                                'Years',
-                                style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_17(),
-                                ),
+                            ),
+                            SizedBox(height: ScreenSize.fSize_10()),
+                            emiadvance(
+                              context,
+                              feesController.value,
+                              "₹",
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "Loan Tenure Year",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
                               ),
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 2,
-                                  groupValue: id.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'TWO';
-                                    // if (value.value == true) {
-                                    //   tenureType.value = tenureTypes[0];
-                                    // } else {
-                                    //   tenureType.value = tenureTypes[1];
-                                    // }
-                                    id.value = 2;
-                                    // });
-                                  },
-                                ),
-                              ),
-                              Text(
-                                'Months',
-                                style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_17(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 1,
-                                  groupValue: id2.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'ONE';
-                                    id2.value = 1;
-                                    // });
-                                  },
-                                ),
-                              ),
-                              Text(
-                                'EMI in Arrears',
-                                style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_17(),
-                                ),
-                              ),
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 2,
-                                  groupValue: id2.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'TWO';
-                                    id2.value = 2;
-                                    // });
-                                  },
-                                ),
-                              ),
-                              Text(
-                                'EMI in Advance',
-                                style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_17(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  if (principalController.value.text.isEmpty ||
-                                      rateController.value.text.isEmpty ||
-                                      feesController.value.text.isEmpty ||
-                                      tenureController.value.text.isEmpty) {
-                                    fluttertost();
-                                  } else {
-                                    load.value = true;
-                                    emiCalculation();
-                                  }
-                                },
-                                child: Container(
-                                  height: ScreenSize.fSize_70(),
-                                  width: ScreenSize.horizontalBlockSize! * 55,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFF12356E),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                              ScreenSize.fSize_10()))),
-                                  child: Center(
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      "EMI in Advance\nCalculator",
-                                      style: GoogleFonts.ibmPlexSansThaiLooped(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600),
-                                    ),
+                            ),
+                            SizedBox(height: ScreenSize.fSize_10()),
+                            emiadvance(
+                              context,
+                              tenureController.value,
+                              tenureType.value,
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 1,
+                                    groupValue: id.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'ONE';
+                                      // if (value.value) {
+                                      //   tenureType.value = tenureTypes[1];
+                                      // } else {
+                                      //   tenureType.value = tenureTypes[0];
+                                      // }
+                                      id.value = 1;
+                                      // });
+                                    },
                                   ),
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  principalController.value.clear();
-                                  rateController.value.clear();
-                                  feesController.value.clear();
-                                  tenureController.value.clear();
-                                  load.value = false;
-                                },
-                                child: Container(
-                                  height: ScreenSize.fSize_50(),
-                                  width: ScreenSize.horizontalBlockSize! * 38,
-                                  decoration: BoxDecoration(
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 3))
-                                    ],
-                                    color: const Color(0xFFC7DBFF),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                        ScreenSize.fSize_10(),
+                                Text(
+                                  'Years',
+                                  style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_17(),
+                                  ),
+                                ),
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 2,
+                                    groupValue: id.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'TWO';
+                                      // if (value.value == true) {
+                                      //   tenureType.value = tenureTypes[0];
+                                      // } else {
+                                      //   tenureType.value = tenureTypes[1];
+                                      // }
+                                      id.value = 2;
+                                      // });
+                                    },
+                                  ),
+                                ),
+                                Text(
+                                  'Months',
+                                  style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_17(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 1,
+                                    groupValue: id2.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'ONE';
+                                      id2.value = 1;
+                                      // });
+                                    },
+                                  ),
+                                ),
+                                Text(
+                                  'EMI in Arrears',
+                                  style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_17(),
+                                  ),
+                                ),
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 2,
+                                    groupValue: id2.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'TWO';
+                                      id2.value = 2;
+                                      // });
+                                    },
+                                  ),
+                                ),
+                                Text(
+                                  'EMI in Advance',
+                                  style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_17(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (principalController
+                                            .value.text.isEmpty ||
+                                        rateController.value.text.isEmpty ||
+                                        feesController.value.text.isEmpty ||
+                                        tenureController.value.text.isEmpty) {
+                                      fluttertost();
+                                    } else {
+                                      load.value = true;
+                                      emiCalculation();
+                                    }
+                                  },
+                                  child: Container(
+                                    height: ScreenSize.fSize_70(),
+                                    width: ScreenSize.horizontalBlockSize! * 55,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFF12356E),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                ScreenSize.fSize_10()))),
+                                    child: Center(
+                                      child: Text(
+                                        textAlign: TextAlign.center,
+                                        "EMI in Advance\nCalculator",
+                                        style:
+                                            GoogleFonts.ibmPlexSansThaiLooped(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      "Reset",
-                                      style: GoogleFonts.ibmPlexSansThaiLooped(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    principalController.value.clear();
+                                    rateController.value.clear();
+                                    feesController.value.clear();
+                                    tenureController.value.clear();
+                                    load.value = false;
+                                  },
+                                  child: Container(
+                                    height: ScreenSize.fSize_50(),
+                                    width: ScreenSize.horizontalBlockSize! * 38,
+                                    decoration: BoxDecoration(
+                                      boxShadow: const [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 3))
+                                      ],
+                                      color: const Color(0xFFC7DBFF),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                          ScreenSize.fSize_10(),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        textAlign: TextAlign.center,
+                                        "Reset",
+                                        style:
+                                            GoogleFonts.ibmPlexSansThaiLooped(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          emiAdvanceCalculation2(
-                            context,
-                            "Total Interest Payable",
-                            "Total Payment",
-                            "Total Principal Payble",
-                            "EMI",
-                            load.value == true ? Totalrate.value : "00",
-                            load.value == true ? TotalPayment.value : "00",
-                            load.value == true
-                                ? principalController.value.text
-                                : "00",
-                            load.value == true ? Result.value : "00",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_70()),
-                        ],
+                              ],
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            emiAdvanceCalculation2(
+                              context,
+                              "Total Interest Payable",
+                              "Total Payment",
+                              "Total Principal Payble",
+                              "EMI",
+                              load.value == true ? Totalrate.value : "00",
+                              load.value == true ? TotalPayment.value : "00",
+                              load.value == true
+                                  ? principalController.value.text
+                                  : "00",
+                              load.value == true ? Result.value : "00",
+                            ),
+                            SizedBox(height: ScreenSize.fSize_70()),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

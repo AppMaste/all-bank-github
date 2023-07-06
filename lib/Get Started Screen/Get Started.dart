@@ -1,9 +1,9 @@
-import 'package:all_bank/HomeScreen/HomeScreen.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Controller/Button Controller.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
@@ -26,6 +26,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   Widget build(BuildContext context) {
     ScreenSize.sizerInit(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -37,7 +38,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               child: Column(
                 children: [
                   SizedBox(height: ScreenSize.fSize_20()),
-                  // adload,
+                  adload,
                   SizedBox(height: ScreenSize.fSize_10()),
                   Container(
                     width: double.maxFinite,
@@ -102,7 +103,8 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                             SizedBox(width: ScreenSize.fSize_170()),
                             GestureDetector(
                               onTap: () {
-                                Get.to(() => const HomeScreen());
+                                tapButton.button(context, "/HomeScreen", '');
+                                // Get.to(() => const HomeScreen());
                               },
                               child: Container(
                                 decoration: BoxDecoration(

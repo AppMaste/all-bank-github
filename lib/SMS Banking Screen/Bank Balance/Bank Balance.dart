@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SMSBankBalanceScreen extends StatelessWidget {
   SMSBankBalanceScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class SMSBankBalanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("SMSBankBalanceScreen arg ${arg[1].toString()}");
+    print("SMSBankBalanceScreen arg ${arg[1].toString().split(" ")}");
     // print("SMSBankBalanceScreen arg ${arg.toString().split("[")[1].split(",")[1]}");
     return Scaffold(
       appBar: appbarr,
@@ -72,15 +73,21 @@ class SMSBankBalanceScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: ScreenSize.fSize_8()),
                         child: Text(
-                          "Example : BALAVL ${random.nextInt(4656)}",
+                          "Example : ${arg[1].toString().split(" ")[0]} ${random.nextInt(4656)}",
                           style: GoogleFonts.ibmPlexSansThaiLooped(
                               fontWeight: FontWeight.w600, color: Colors.grey),
                         ),
                       ),
                       SizedBox(height: ScreenSize.fSize_10()),
-                      SMSBankbalance2(context, controller,arg[1]),
+                      SMSBankbalance2(context, controller, arg[1]),
                       SizedBox(height: ScreenSize.fSize_20()),
-                      SMSSendMessage(context, () {}),
+                      SMSSendMessage(context, () {
+                        if (controller.text.isNotEmpty) {
+                          Share.share(controller.text);
+                        } else {
+                          fluttertost();
+                        }
+                      }),
                       SizedBox(height: ScreenSize.fSize_70()),
                     ],
                   ),

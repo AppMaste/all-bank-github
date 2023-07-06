@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Loan%20Calculator/Loan%20Calculator%20History.dart';
 import 'package:all_bank/Local%20Data.dart';
@@ -8,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../ScreenSize.dart';
-import 'Loan Calculator Detail Screen.dart';
 
 class LoanCalculatorResultScreen extends StatefulWidget {
   const LoanCalculatorResultScreen({Key? key}) : super(key: key);
@@ -57,139 +57,171 @@ class _LoanCalculatorResultScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: loanCalculatorBar,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "Loan Calculator"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Text(
-                          "Loan EMI",
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w700,
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/LoanCalculatorResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: loanCalculatorBar,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "Loan Calculator"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Text(
+                            "Loan EMI",
+                            style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(
-                          context,
-                          emiController,
-                          "₹",
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Text(
-                          "Interest %",
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(
-                          context,
-                          interestController,
-                          "%",
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        SizedBox(height: ScreenSize.fSize_10()),
-                        compareContainer(
-                          context,
-                          "Loan Year",
-                          "Loan Month",
-                          "Year",
-                          "Month",
-                          yearController,
-                          monthController,
-                        ),
-                        /*            Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            loanCalculatorContainer(
-                                context, "Loan Year", "00", "Year"),
-                            loanCalculatorContainer(
-                                context, "Loan Month", "00", "Month"),
-                          ],
-                        ),*/
-                        SizedBox(height: ScreenSize.fSize_30()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            compareLoanContainer(context, "Loan Calculate", () {
-                              if (emiController.value.text.isEmpty ||
-                                  interestController.value.text.isEmpty ||
-                                  yearController.value.text.isEmpty ||
-                                  monthController.value.text.isEmpty) {
-                                fluttertost();
-                              } else {
-                                setState(() {
-                                  load = true;
-                                  loanCalculation();
-                                  addData.add([
-                                    totalloan.value,
-                                    DateFormat("hh:mm a")
-                                        .format(DateTime.now()),
-                                    DateFormat("dd/MM/yyyy")
-                                        .format(DateTime.now()),
-                                    interestController.text,
-                                    Duration,
-                                  ]);
-                                  // print("datedatedatedate $addData");
-                                  totalloan.value;
-                                });
-                              }
-                            }),
-                            comparereset(context, "Reset", () {}),
-                          ],
-                        ),
-                        SizedBox(height: ScreenSize.fSize_30()),
-                        loanCalculator(
+                          SizedBox(height: ScreenSize.fSize_10()),
+                          emiadvance(
                             context,
-                            int.parse(emiController.text).toStringAsFixed(2),
-                            load == true
-                                ? NumberFormat.simpleCurrency(name: '')
-                                    .format(totalPayment)
-                                : "00",
-                            load == true
-                                ? NumberFormat.simpleCurrency(name: '')
-                                    .format(totalinterest)
-                                : "00",
-                            load == true
-                                ? NumberFormat.simpleCurrency(name: '')
-                                    .format(totalloan.value)
-                                : "00"),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        viewMoreDetail(context, () {
-                          Get.to(() => LoanCalculatorDetailScreen(),
-                              arguments: [
-                                emiController.value.text,
-                                totalloan.value.toStringAsFixed(0),
-                                interestController.value.text,
-                                totalPayment,
-                                Duration,
-                                yearController.value.text,
-                                monthController.value.text
-                              ]);
-                        }),
-                        SizedBox(height: ScreenSize.fSize_70()),
-                      ],
+                            emiController,
+                            "₹",
+                          ),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Text(
+                            "Interest %",
+                            style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(height: ScreenSize.fSize_10()),
+                          emiadvance(
+                            context,
+                            interestController,
+                            "%",
+                          ),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          SizedBox(height: ScreenSize.fSize_10()),
+                          compareContainer(
+                            context,
+                            "Loan Year",
+                            "Loan Month",
+                            "Year",
+                            "Month",
+                            yearController,
+                            monthController,
+                          ),
+                          /*            Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              loanCalculatorContainer(
+                                  context, "Loan Year", "00", "Year"),
+                              loanCalculatorContainer(
+                                  context, "Loan Month", "00", "Month"),
+                            ],
+                          ),*/
+                          SizedBox(height: ScreenSize.fSize_30()),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              compareLoanContainer(context, "Loan Calculate",
+                                  () {
+                                if (emiController.value.text.isEmpty ||
+                                    interestController.value.text.isEmpty ||
+                                    yearController.value.text.isEmpty ||
+                                    monthController.value.text.isEmpty) {
+                                  fluttertost();
+                                } else {
+                                  setState(() {
+                                    load = true;
+                                    loanCalculation();
+                                    addData.add([
+                                      totalloan.value,
+                                      DateFormat("hh:mm a")
+                                          .format(DateTime.now()),
+                                      DateFormat("dd/MM/yyyy")
+                                          .format(DateTime.now()),
+                                      interestController.text,
+                                      Duration,
+                                      emiController.value.text,
+                                      totalloan.value.toStringAsFixed(0),
+                                      interestController.value.text,
+                                      totalPayment,
+                                      Duration,
+                                      yearController.value.text,
+                                      monthController.value.text
+                                    ]);
+                                    // print("datedatedatedate $addData");
+                                    totalloan.value;
+                                  });
+                                }
+                              }),
+                              comparereset(context, "Reset", () {}),
+                            ],
+                          ),
+                          SizedBox(height: ScreenSize.fSize_30()),
+                          loanCalculator(
+                              context,
+                              int.parse(emiController.text).toStringAsFixed(2),
+                              load == true
+                                  ? NumberFormat.simpleCurrency(name: '')
+                                      .format(totalPayment)
+                                  : "00",
+                              load == true
+                                  ? NumberFormat.simpleCurrency(name: '')
+                                      .format(totalinterest)
+                                  : "00",
+                              load == true
+                                  ? NumberFormat.simpleCurrency(name: '')
+                                      .format(totalloan.value)
+                                  : "00"),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          viewMoreDetail(context, () {
+                            if (load == false) {
+                              tost();
+                            } else {
+                              tapButton.button(
+                                context,
+                                "/LoanCalculatorDetailScreen",
+                                [
+                                  emiController.value.text,
+                                  totalloan.value.toStringAsFixed(0),
+                                  interestController.value.text,
+                                  totalPayment,
+                                  Duration,
+                                  yearController.value.text,
+                                  monthController.value.text
+                                ],
+                              );
+                            }
+                            /*   Get.to(() => LoanCalculatorDetailScreen(),
+                                arguments: [
+                                  emiController.value.text,
+                                  totalloan.value.toStringAsFixed(0),
+                                  interestController.value.text,
+                                  totalPayment,
+                                  Duration,
+                                  yearController.value.text,
+                                  monthController.value.text
+                                ]);*/
+                          }),
+                          SizedBox(height: ScreenSize.fSize_70()),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

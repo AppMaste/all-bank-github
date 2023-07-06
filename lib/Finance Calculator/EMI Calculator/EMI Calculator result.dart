@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/Finance%20Calculator/EMI%20Calculator/EMI%20Calculator%20Detaila.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -18,6 +19,17 @@ class EMICalculatorResultScreen extends StatefulWidget {
 
 class _EMICalculatorResultScreenState extends State<EMICalculatorResultScreen> {
   var data = Get.arguments;
+
+  tost() {
+    return Fluttertoast.showToast(
+        msg: "Please First Calculate",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: const Color(0xFF12356E),
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
 
   var load = false.obs;
 
@@ -52,100 +64,124 @@ class _EMICalculatorResultScreenState extends State<EMICalculatorResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("DATAAA $data");
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  sameRow(context, "EMI Calculator"),
-                  SizedBox(height: ScreenSize.fSize_20()),
-                  Container(
-                    width: double.maxFinite,
-                    decoration: decoration,
-                    child: Column(
-                      children: [
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        EMICALCULATION("Loan Amount", "₹", "Interest %", "%",
-                            principalController.value, rateController.value),
-                        EMICALCULATION(
-                            "Loan Year",
-                            "Year",
-                            "Loan Month",
-                            "Month",
-                            yearController.value,
-                            monthController.value),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              compareLoanContainer(context, "EMI Calculate",
-                                  () {
-                                if (principalController.value.text.isEmpty ||
-                                    rateController.value.text.isEmpty ||
-                                    yearController.value.text.isEmpty ||
-                                    monthController.value.text.isEmpty) {
-                                  fluttertost();
-                                } else {
-                                  load.value = true;
-                                  handleclaculation();
-                                }
-                              }),
-                              comparereset(context, "Reset", () {
-                                principalController.value.clear();
-                                rateController.value.clear();
-                                yearController.value.clear();
-                                monthController.value.clear();
-                                load.value = false;
-                              }),
-                            ],
+    // print("DATAAA $data");
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/EMICalculatorResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Obx(
+                () => Column(
+                  children: [
+                    sameRow(context, "EMI Calculator"),
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      width: double.maxFinite,
+                      decoration: decoration,
+                      child: Column(
+                        children: [
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          EMICALCULATION("Loan Amount", "₹", "Interest %", "%",
+                              principalController.value, rateController.value),
+                          EMICALCULATION(
+                              "Loan Year",
+                              "Year",
+                              "Loan Month",
+                              "Month",
+                              yearController.value,
+                              monthController.value),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                compareLoanContainer(context, "EMI Calculate",
+                                    () {
+                                  if (principalController.value.text.isEmpty ||
+                                      rateController.value.text.isEmpty ||
+                                      yearController.value.text.isEmpty ||
+                                      monthController.value.text.isEmpty) {
+                                    fluttertost();
+                                  } else {
+                                    load.value = true;
+                                    handleclaculation();
+                                  }
+                                }),
+                                comparereset(context, "Reset", () {
+                                  principalController.value.clear();
+                                  rateController.value.clear();
+                                  yearController.value.clear();
+                                  monthController.value.clear();
+                                  load.value = false;
+                                }),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        emiAdvanceCalculation(
-                            context,
-                            "Loan Amount",
-                            "Total Interest",
-                            "Total Payment",
-                            "Periods(Month)",
-                            load.value == true ? Result.toString() : "0.0",
-                            load.value == true ? Totalrate.toString() : "0.0",
-                            load.value == true
-                                ? TotalPayment.toString()
-                                : "0.0",
-                            load.value == true ? TotalMonth.toString() : "0.0"),
-                        SizedBox(height: ScreenSize.fSize_30()),
-                        viewMoreDetail(context, () {
-                          Get.to(
-                            () => EMICalculatorDetailScreen(),
-                            arguments: [
-                              Result.value,
-                              rateController.value.text,
-                              principalController.value.text,
-                              TotalMonth.value,
-                              TotalPayment.value,
-                              Totalrate.value,
-                              yearController.value.text,
-                              monthController.value.text,
-                            ],
-                          );
-                        }),
-                        SizedBox(height: ScreenSize.fSize_70()),
-                      ],
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          emiAdvanceCalculation(
+                              context,
+                              "Loan Amount",
+                              "Total Interest",
+                              "Total Payment",
+                              "Periods(Month)",
+                              load.value == true ? Result.toString() : "0.0",
+                              load.value == true ? Totalrate.toString() : "0.0",
+                              load.value == true
+                                  ? TotalPayment.toString()
+                                  : "0.0",
+                              load.value == true ? TotalMonth.toString() : "0.0"),
+                          SizedBox(height: ScreenSize.fSize_30()),
+                          viewMoreDetail(context, () {
+                            if (load.value == true) {
+                              tapButton.button(
+                                context,
+                                "/EMICalculatorDetailScreen",
+                                [
+                                  Result.value,
+                                  rateController.value.text,
+                                  principalController.value.text,
+                                  TotalMonth.value,
+                                  TotalPayment.value,
+                                  Totalrate.value,
+                                  yearController.value.text,
+                                  monthController.value.text,
+                                ],
+                              );
+                              /*      Get.to(
+                              () => EMICalculatorDetailScreen(),
+                              arguments: [
+                                Result.value,
+                                rateController.value.text,
+                                principalController.value.text,
+                                TotalMonth.value,
+                                TotalPayment.value,
+                                Totalrate.value,
+                                yearController.value.text,
+                                monthController.value.text,
+                              ],
+                            );*/
+                            } else {
+                              tost();
+                            }
+                          }),
+                          SizedBox(height: ScreenSize.fSize_70()),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

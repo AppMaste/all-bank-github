@@ -1,3 +1,4 @@
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -9,55 +10,62 @@ class NearByPlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "Near By Place"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        // native.getNT("listTileMedium"),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            holidaycontainer(
-                                context,
-                                "Nearest Bank",
-                                "List of Bank branches in near",
-                                "assets/icons/bank-icon.png", () {
-                              launchMapsUrl("Nearest Bank");
-                            }),
-                            holidaycontainer(
-                                context,
-                                "Nearest ATM",
-                                "List of ATM branches in near kocation",
-                                "assets/icons/nearest atm icon.png", () {
-                              launchMapsUrl("Nearest ATM");
-                            }),
-                          ],
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                      ],
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/NearByPlaceScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "Near By Place"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          // native.getNT("listTileMedium"),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              holidaycontainer(
+                                  context,
+                                  "Nearest Bank",
+                                  "List of Bank branches in near",
+                                  "assets/icons/bank-icon.png", () {
+                                launchMapsUrl("Nearest Bank");
+                              }),
+                              holidaycontainer(
+                                  context,
+                                  "Nearest ATM",
+                                  "List of ATM branches in near kocation",
+                                  "assets/icons/nearest atm icon.png", () {
+                                launchMapsUrl("Nearest ATM");
+                              }),
+                            ],
+                          ),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

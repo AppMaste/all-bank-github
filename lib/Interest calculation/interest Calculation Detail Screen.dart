@@ -1,12 +1,12 @@
-
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/Interest%20calculation/Interest%20Calculation%20Pie%20Chart%20Screen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../ScreenSize.dart';
+import 'Interest Calculation Pie Chart Screen.dart';
 
 class InterestCalculationDetailScreen extends StatefulWidget {
   InterestCalculationDetailScreen({Key? key}) : super(key: key);
@@ -74,294 +74,301 @@ class _InterestCalculationDetailScreenState
 
   @override
   Widget build(BuildContext context) {
-    print("gyqwetrtwetwteytwue $arg");
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "Loan Details"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Column(
-                    children: [
-                      SizedBox(height: ScreenSize.fSize_24()),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: ScreenSize.fSize_50(),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(ScreenSize.fSize_10()),
-                            ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3))
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: ScreenSize.horizontalBlockSize! * 43,
-                                    height: ScreenSize.fSize_50(),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF12356E),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(ScreenSize.fSize_10()),
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Details",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                                color: Colors.white,
-                                                fontSize: ScreenSize.fSize_17(),
-                                                fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+    // print("gyqwetrtwetwteytwue $arg");
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/InterestCalculationDetailScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "Loan Details"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        SizedBox(height: ScreenSize.fSize_24()),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: ScreenSize.fSize_50(),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(ScreenSize.fSize_10()),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(
-                                    () =>
-                                         InterestCalculationPieChartScreen(),
-                                    arguments: [
-                                      arg[0],
-                                      arg[1],
-                                      arg[4],
-                                      arg[5],
-                                      arg[6],
-                                      arg[7],
-                                      arg[2],
-                                      arg[3]
-                                    ],
-                                  );
-                                },
-                                child: Stack(
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3))
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Stack(
                                   children: [
                                     Container(
-                                      width:
-                                          ScreenSize.horizontalBlockSize! * 43,
+                                      width: ScreenSize.horizontalBlockSize! * 43,
                                       height: ScreenSize.fSize_50(),
                                       decoration: BoxDecoration(
-                                        color: Colors.transparent,
+                                        color: const Color(0xFF12356E),
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                              ScreenSize.fSize_10()),
+                                          Radius.circular(ScreenSize.fSize_10()),
                                         ),
                                       ),
                                       child: Center(
                                         child: Text(
-                                          "Pie Chart",
+                                          "Details",
                                           style:
                                               GoogleFonts.ibmPlexSansThaiLooped(
-                                                  color:
-                                                      const Color(0xFF768AAB),
-                                                  fontSize:
-                                                      ScreenSize.fSize_17(),
+                                                  color: Colors.white,
+                                                  fontSize: ScreenSize.fSize_17(),
                                                   fontWeight: FontWeight.w600),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: ScreenSize.fSize_20()),
-                      Column(
-                        children: [
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenSize.fSize_6()),
-                            child: Container(
-                              height: ScreenSize.fSize_60(),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF12356E),
-                                borderRadius: BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(ScreenSize.fSize_15()),
-                                  topRight:
-                                      Radius.circular(ScreenSize.fSize_15()),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: IntrinsicHeight(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                GestureDetector(
+                                  onTap: () {
+                                     Get.to(
+                                      () =>
+                                           InterestCalculationPieChartScreen(),
+                                      arguments: [
+                                        arg[0],
+                                        arg[1],
+                                        arg[4],
+                                        arg[5],
+                                        arg[6],
+                                        arg[7],
+                                        arg[2],
+                                        arg[3]
+                                      ],
+                                    );
+                                  },
+                                  child: Stack(
                                     children: [
-                                      Text(
-                                        "Month",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Principal",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Interest",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Balance",
-                                        style: textstyl1,
-                                      ),
+                                      Container(
+                                        width:
+                                            ScreenSize.horizontalBlockSize! * 43,
+                                        height: ScreenSize.fSize_50(),
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                ScreenSize.fSize_10()),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Pie Chart",
+                                            style:
+                                                GoogleFonts.ibmPlexSansThaiLooped(
+                                                    color:
+                                                        const Color(0xFF768AAB),
+                                                    fontSize:
+                                                        ScreenSize.fSize_17(),
+                                                    fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenSize.fSize_6()),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
+                        ),
+                        SizedBox(height: ScreenSize.fSize_20()),
+                        Column(
+                          children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ScreenSize.fSize_6()),
+                              child: Container(
+                                height: ScreenSize.fSize_60(),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF12356E),
                                   borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(
-                                          ScreenSize.fSize_15()),
-                                      bottomLeft: Radius.circular(
-                                          ScreenSize.fSize_15())),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0, 3),
-                                        blurRadius: 5)
-                                  ]),
-                              child: Stack(
-                                children: [
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: demo.length,
-                                    itemBuilder: (context, index) {
-                                      rate = double.parse(arg[1]) - demo[index];
-                                      var RR =
-                                          rate / 100 / 1200 * month2[index];
-                                      var cal2 = double.parse(arg[0]) - rate;
-                                      print("casdyasgd $RR");
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                            top: ScreenSize.fSize_10(),
-                                            left: ScreenSize.fSize_17(),
-                                            right: ScreenSize.fSize_12(),
-                                            bottom: ScreenSize.fSize_12()),
-                                        child: IntrinsicHeight(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    8,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  "${month[index]}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    12,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  "${arg[0]}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    12,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  rate.toStringAsFixed(0),
-                                                  overflow: TextOverflow.fade,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    13,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  cal2.toStringAsFixed(0),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                      fontSize:
-                                                          ScreenSize.fSize_11(),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
+                                    topLeft:
+                                        Radius.circular(ScreenSize.fSize_15()),
+                                    topRight:
+                                        Radius.circular(ScreenSize.fSize_15()),
                                   ),
-                                ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: IntrinsicHeight(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          "Month",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Principal",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Interest",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Balance",
+                                          style: textstyl1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: ScreenSize.fSize_70()),
-                    ],
-                  ),
-                )
-              ],
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ScreenSize.fSize_6()),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(
+                                            ScreenSize.fSize_15()),
+                                        bottomLeft: Radius.circular(
+                                            ScreenSize.fSize_15())),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 3),
+                                          blurRadius: 5)
+                                    ]),
+                                child: Stack(
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: demo.length,
+                                      itemBuilder: (context, index) {
+                                        rate = double.parse(arg[1]) - demo[index];
+                                        var RR =
+                                            rate / 100 / 1200 * month2[index];
+                                        var cal2 = double.parse(arg[0]) - rate;
+                                        print("casdyasgd $RR");
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              top: ScreenSize.fSize_10(),
+                                              left: ScreenSize.fSize_17(),
+                                              right: ScreenSize.fSize_12(),
+                                              bottom: ScreenSize.fSize_12()),
+                                          child: IntrinsicHeight(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      8,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    "${month[index]}",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      12,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    "${arg[0]}",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      12,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    rate.toStringAsFixed(0),
+                                                    overflow: TextOverflow.fade,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      13,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    cal2.toStringAsFixed(0),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize:
+                                                            ScreenSize.fSize_11(),
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: ScreenSize.fSize_70()),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

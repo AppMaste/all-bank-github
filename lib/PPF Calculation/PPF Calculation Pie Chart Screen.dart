@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _PPFCalculationPieChartScreenState
 
   @override
   Widget build(BuildContext context) {
-    print("PPFCalculationPieChartScreen $arg");
+    // print("PPFCalculationPieChartScreen $arg");
     double aa = 100 - double.parse(arg[1]);
     double arggg = double.parse(arg[1]);
     // double bb = double.parse(arg[2]);
@@ -65,45 +66,47 @@ class _PPFCalculationPieChartScreenState
       emptyColor: Colors.grey,
       // baseChartColor: Colors.transparent,
     );
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "PPF Details"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Column(
-                    children: [
-                      SizedBox(height: ScreenSize.fSize_24()),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: ScreenSize.fSize_50(),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(ScreenSize.fSize_10()),
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/PPFCalculationPieChartScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "PPF Details"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        SizedBox(height: ScreenSize.fSize_24()),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: ScreenSize.fSize_50(),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(ScreenSize.fSize_10()),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3))
+                              ],
                             ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3))
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  // Get.to(() =>  const LoanPeriodDetailScreen());
-                                },
-                                child: Stack(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Stack(
                                   children: [
                                     Container(
                                       width:
@@ -131,129 +134,129 @@ class _PPFCalculationPieChartScreenState
                                     ),
                                   ],
                                 ),
-                              ),
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: ScreenSize.horizontalBlockSize! * 43,
-                                    height: ScreenSize.fSize_50(),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF12356E),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(ScreenSize.fSize_10()),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: ScreenSize.horizontalBlockSize! * 43,
+                                      height: ScreenSize.fSize_50(),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF12356E),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(ScreenSize.fSize_10()),
+                                        ),
                                       ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Pie Chart",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                                color: Colors.white,
-                                                fontSize: ScreenSize.fSize_17(),
-                                                fontWeight: FontWeight.w600),
+                                      child: Center(
+                                        child: Text(
+                                          "Pie Chart",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontSize: ScreenSize.fSize_17(),
+                                                  fontWeight: FontWeight.w600),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: ScreenSize.fSize_15()),
-                      Text(
-                        "Total Payment ${arg[2]}",
-                        style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w600,
-                            fontSize: ScreenSize.fSize_15(),
-                            color: const Color(0xFF12356E)),
-                      ),
-                      chart,
+                        SizedBox(height: ScreenSize.fSize_15()),
+                        Text(
+                          "Total Payment ${arg[2]}",
+                          style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w600,
+                              fontSize: ScreenSize.fSize_15(),
+                              color: const Color(0xFF12356E)),
+                        ),
+                        chart,
 
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF12356E),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  ScreenSize.fSize_15(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFF12356E),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                    ScreenSize.fSize_15(),
+                                  ),
                                 ),
-                              ),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3))
-                              ]),
-                          child: Column(
-                            children: [
-                              SizedBox(height: ScreenSize.fSize_20()),
-                              IntrinsicHeight(
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
-                                  children: [
-                                    textfunction("Loan Amount", "${arg[0]}"),
-                                    rowdivider(),
-                                    textfunction("Interest", "${arg[1]}"),
-                                  ],
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3))
+                                ]),
+                            child: Column(
+                              children: [
+                                SizedBox(height: ScreenSize.fSize_20()),
+                                IntrinsicHeight(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      textfunction("Loan Amount", "${arg[0]}"),
+                                      rowdivider(),
+                                      textfunction("Interest", "${arg[1]}"),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_10()),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_10(),
-                                    right: ScreenSize.fSize_10()),
-                                child: const Divider(color: Color(0xFF768AAB)),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_10()),
-                              IntrinsicHeight(
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
-                                  children: [
-                                    textfunction("Period (Month)", "${TotalMonth}"),
-                                    rowdivider(),
-                                    textfunction("Monthly EMI", Result.value),
-                                  ],
+                                SizedBox(height: ScreenSize.fSize_10()),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: ScreenSize.fSize_10(),
+                                      right: ScreenSize.fSize_10()),
+                                  child: const Divider(color: Color(0xFF768AAB)),
                                 ),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_10()),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: ScreenSize.fSize_10(),
-                                    right: ScreenSize.fSize_10()),
-                                child: const Divider(color: Color(0xFF768AAB)),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_10()),
-                              IntrinsicHeight(
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
-                                  children: [
-                                    textfunction(
-                                        "Total Interest", Totalrate.value),
-                                    rowdivider(),
-                                    textfunction(
-                                        "Total Payment", TotalPayment.value),
-                                  ],
+                                SizedBox(height: ScreenSize.fSize_10()),
+                                IntrinsicHeight(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      textfunction("Period (Month)", "${TotalMonth}"),
+                                      rowdivider(),
+                                      textfunction("Monthly EMI", Result.value),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_20()),
-                            ],
+                                SizedBox(height: ScreenSize.fSize_10()),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: ScreenSize.fSize_10(),
+                                      right: ScreenSize.fSize_10()),
+                                  child: const Divider(color: Color(0xFF768AAB)),
+                                ),
+                                SizedBox(height: ScreenSize.fSize_10()),
+                                IntrinsicHeight(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      textfunction(
+                                          "Total Interest", Totalrate.value),
+                                      rowdivider(),
+                                      textfunction(
+                                          "Total Payment", TotalPayment.value),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: ScreenSize.fSize_20()),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: ScreenSize.fSize_70()),
-                    ],
-                  ),
-                )
-              ],
+                        SizedBox(height: ScreenSize.fSize_70()),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

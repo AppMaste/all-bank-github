@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
@@ -46,155 +47,162 @@ class _GSTCalculatorResultScreenState extends State<GSTCalculatorResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  sameRow(context, "GST Calculate"),
-                  SizedBox(height: ScreenSize.fSize_20()),
-                  Container(
-                    width: double.maxFinite,
-                    decoration: decoration,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "Investment Amount",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/GSTCalculatorResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Obx(
+                () => Column(
+                  children: [
+                    sameRow(context, "GST Calculate"),
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      width: double.maxFinite,
+                      decoration: decoration,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "Investment Amount",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_10()),
-                          emiadvance(
-                            context,
-                            amountController.value,
-                            "₹",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Text(
-                            "Rate of GST",
-                            style: GoogleFonts.ibmPlexSansThaiLooped(
-                              fontWeight: FontWeight.w700,
+                            SizedBox(height: ScreenSize.fSize_10()),
+                            emiadvance(
+                              context,
+                              amountController.value,
+                              "₹",
                             ),
-                          ),
-                          emiadvance(
-                            context,
-                            rateController.value,
-                            "₹",
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 1,
-                                  groupValue: id.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'ONE';
-                                    id.value = 1;
-                                    // });
-                                  },
-                                ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Text(
+                              "Rate of GST",
+                              style: GoogleFonts.ibmPlexSansThaiLooped(
+                                fontWeight: FontWeight.w700,
                               ),
-                              Text(
-                                'Add GST',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_15(),
+                            ),
+                            emiadvance(
+                              context,
+                              rateController.value,
+                              "₹",
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 1,
+                                    groupValue: id.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'ONE';
+                                      id.value = 1;
+                                      // });
+                                    },
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: ScreenSize.fSize_40()),
-                              Transform.scale(
-                                scale: 1.3,
-                                child: Radio(
-                                  fillColor: MaterialStateColor.resolveWith(
-                                      (states) => const Color(0xFF12356E)),
-                                  activeColor: const Color(0xFF12356E),
-                                  value: 2,
-                                  groupValue: id.value,
-                                  onChanged: (val) {
-                                    // setState(() {
-                                    // radioButtonItem = 'TWO';
-                                    id.value = 2;
-                                    // });
-                                  },
+                                Text(
+                                  'Add GST',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_15(),
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Remove GST',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: ScreenSize.fSize_17(),
+                                SizedBox(width: ScreenSize.fSize_40()),
+                                Transform.scale(
+                                  scale: 1.3,
+                                  child: Radio(
+                                    fillColor: MaterialStateColor.resolveWith(
+                                        (states) => const Color(0xFF12356E)),
+                                    activeColor: const Color(0xFF12356E),
+                                    value: 2,
+                                    groupValue: id.value,
+                                    onChanged: (val) {
+                                      // setState(() {
+                                      // radioButtonItem = 'TWO';
+                                      id.value = 2;
+                                      // });
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              compareLoanContainer(context, "GST Calculate",
-                                  () {
-                                if (amountController.value.text.isEmpty ||
-                                    rateController.value.text.isEmpty) {
-                                  fluttertost();
-                                } else {
-                                  id.value == 1
-                                      ? load.value = false
-                                      : load.value = true;
-                                  calculation();
-                                }
-                              }),
-                              comparereset(context, "Reset", () {
-                                amountController.value.clear();
-                                rateController.value.clear();
-                                id.value = 1;
-                              }),
-                            ],
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          load.value == false
-                              ? GSTCalculationContainer(
-                                  context,
-                                  amountController.value.text,
-                                  getRate.toStringAsFixed(2),
-                                  getGST.toStringAsFixed(2),
-                                  cgstrate.toString(),
-                                  cgst.toString())
-                              : GSTCalculationContainer(
-                                  context,
-                                  NumberFormat.simpleCurrency(name: '')
-                                      .format(cal),
-                                  NumberFormat.simpleCurrency(name: '')
-                                      .format(rate),
-                                  getGST.toStringAsFixed(0),
-                                  cgstrate.toString(),
-                                  cgst.toString()),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                        ],
+                                Text(
+                                  'Remove GST',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: ScreenSize.fSize_17(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                compareLoanContainer(context, "GST Calculate",
+                                    () {
+                                  if (amountController.value.text.isEmpty ||
+                                      rateController.value.text.isEmpty) {
+                                    fluttertost();
+                                  } else {
+                                    id.value == 1
+                                        ? load.value = false
+                                        : load.value = true;
+                                    calculation();
+                                  }
+                                }),
+                                comparereset(context, "Reset", () {
+                                  amountController.value.clear();
+                                  rateController.value.clear();
+                                  id.value = 1;
+                                }),
+                              ],
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            load.value == false
+                                ? GSTCalculationContainer(
+                                    context,
+                                    amountController.value.text,
+                                    getRate.toStringAsFixed(2),
+                                    getGST.toStringAsFixed(2),
+                                    cgstrate.toString(),
+                                    cgst.toString())
+                                : GSTCalculationContainer(
+                                    context,
+                                    NumberFormat.simpleCurrency(name: '')
+                                        .format(cal),
+                                    NumberFormat.simpleCurrency(name: '')
+                                        .format(rate),
+                                    getGST.toStringAsFixed(0),
+                                    cgstrate.toString(),
+                                    cgst.toString()),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: ScreenSize.fSize_60())
-                ],
+                    SizedBox(height: ScreenSize.fSize_60())
+                  ],
+                ),
               ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

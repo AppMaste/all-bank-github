@@ -1,5 +1,5 @@
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/HomeScreen/HomeScreen.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,8 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../Controller/AppController.dart';
 import '../ScreenSize.dart';
-import 'IFSC & MICR Select Bank Screen.dart';
-import 'IFSC All Detail.dart';
 import 'IFSC Button.dart';
 
 class IFSCBankScreen extends StatefulWidget {
@@ -35,10 +33,12 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Get.to(() => const HomeScreen());
+        backButton.backbutton(context, "/IFSCBankScreen");
+        // Get.to(() => const HomeScreen());
         return Future(() => false);
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: appbarr,
         body: Stack(
           children: [
@@ -98,8 +98,10 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                             title: 'Bank Name',
                             fieldName: controller.bankName,
                             onTap: () {
-                              Get.to(() => const IFSCSelectBankScreenView(),
-                                  arguments: 'Select Bank');
+                              tapButton.button(context,
+                                  "/IFSCSelectBankScreenView", 'Select Bank');
+                              // Get.to(() => const IFSCSelectBankScreenView(),
+                              //     arguments: 'Select Bank');
                             }),
                         SizedBox(height: ScreenSize.fSize_15()),
                         fields(
@@ -112,8 +114,12 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                                 fluttertost();
                                 // dialog(title: 'Please Select Above Field...');
                               } else {
-                                Get.to(() => const IFSCSelectBankScreenView(),
-                                    arguments: 'Select State');
+                                tapButton.button(
+                                    context,
+                                    "/IFSCSelectBankScreenView",
+                                    'Select State');
+                                // Get.to(() => const IFSCSelectBankScreenView(),
+                                //     arguments: 'Select State');
                               }
                             }),
                         SizedBox(height: ScreenSize.fSize_15()),
@@ -126,8 +132,12 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                               if (controller.bankName.value != 'Select Bank' &&
                                   controller.stateName.value !=
                                       'Select State') {
-                                Get.to(() => const IFSCSelectBankScreenView(),
-                                    arguments: 'Select District');
+                                tapButton.button(
+                                    context,
+                                    "/IFSCSelectBankScreenView",
+                                    'Select District');
+                                // Get.to(() => const IFSCSelectBankScreenView(),
+                                //     arguments: 'Select District');
                               } else {
                                 fluttertost();
                                 // dialog(title: 'Please Select Above Field...');
@@ -145,8 +155,12 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                                       'Select State' &&
                                   controller.districtName.value !=
                                       'Select District') {
-                                Get.to(() => const IFSCSelectBankScreenView(),
-                                    arguments: 'Select Branch');
+                                tapButton.button(
+                                    context,
+                                    "/IFSCSelectBankScreenView",
+                                    'Select Branch');
+                                // Get.to(() => const IFSCSelectBankScreenView(),
+                                //     arguments: 'Select Branch');
                               } else {
                                 fluttertost();
                                 // dialog(title: 'Please Select Above Field...');
@@ -167,7 +181,7 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                                       'Select District' &&
                                   controller.branchName.value !=
                                       'Select Branch') {
-                                Get.to(() => IFSCAllDetail(), arguments: {
+                                tapButton.button(context, "/IFSCAllDetail", {
                                   'bank_name': controller.bankName.value,
                                   'state_name': controller.stateName.value,
                                   'district_name':
@@ -175,6 +189,14 @@ class _IFSCBankScreenState extends State<IFSCBankScreen> {
                                   'branch_name': controller.branchName.value,
                                   'details': controller.detailMap,
                                 });
+                                /*  Get.to(() => IFSCAllDetail(), arguments: {
+                                  'bank_name': controller.bankName.value,
+                                  'state_name': controller.stateName.value,
+                                  'district_name':
+                                      controller.districtName.value,
+                                  'branch_name': controller.branchName.value,
+                                  'details': controller.detailMap,
+                                });*/
                               } else {
                                 fluttertost();
                                 // dialog(title: 'Please Select Above Fields...');

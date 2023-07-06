@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../Controller/AppController.dart';
+import '../Controller/Button Controller.dart';
 
 class IFSCSelectBankScreenView extends GetView<IfscScreenController> {
   const IFSCSelectBankScreenView({Key? key}) : super(key: key);
@@ -16,27 +17,34 @@ class IFSCSelectBankScreenView extends GetView<IfscScreenController> {
     IfscScreenController controller = Get.put(IfscScreenController());
     controller.searchedList.value.clear();
 
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          Container(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              SizedBox(height: ScreenSize.fSize_30()),
-              searchBar(
-                  width: 00,
-                  fieldName:
-                      'Search ${Get.arguments.toString().split(' ').last} Name'),
-              SizedBox(height: ScreenSize.fSize_15()),
-              Expanded(
-                  child: Container(
-                child: bankList(controller: controller),
-              )),
-              SizedBox(height: ScreenSize.fSize_60()),
-            ]),
-          ),
-          banner.getBN()
-        ],
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, '/IFSCSelectBankScreenView');
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            Container(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                SizedBox(height: ScreenSize.fSize_30()),
+                searchBar(
+                    width: 00,
+                    fieldName:
+                        'Search ${Get.arguments.toString().split(' ').last} Name'),
+                SizedBox(height: ScreenSize.fSize_15()),
+                Expanded(
+                    child: Container(
+                  child: bankList(controller: controller),
+                )),
+                SizedBox(height: ScreenSize.fSize_60()),
+              ]),
+            ),
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

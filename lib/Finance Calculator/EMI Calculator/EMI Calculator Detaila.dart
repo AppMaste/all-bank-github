@@ -1,13 +1,14 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
-import 'package:all_bank/Finance%20Calculator/EMI%20Calculator/EMI%20Calculator%20Bar%20Chart.dart';
-import 'package:all_bank/Finance%20Calculator/EMI%20Calculator/EMI%20Calculator%20Pie%20Chart.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'EMI Calculator Pie Chart.dart';
 
 class EMICalculatorDetailScreen extends StatefulWidget {
   EMICalculatorDetailScreen({Key? key}) : super(key: key);
@@ -56,292 +57,297 @@ class _EMICalculatorDetailScreenState extends State<EMICalculatorDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("savhjsgfasuvasnfasi $arg");
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "EMI Details"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Column(
-                    children: [
-                      SizedBox(height: ScreenSize.fSize_24()),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: ScreenSize.fSize_50(),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(ScreenSize.fSize_10()),
+    // print("savhjsgfasuvasnfasi $arg");
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/EMICalculatorDetailScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "EMI Details"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Column(
+                      children: [
+                        SizedBox(height: ScreenSize.fSize_24()),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: ScreenSize.fSize_50(),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(ScreenSize.fSize_10()),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3))
+                              ],
                             ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 3))
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: ScreenSize.fSize_120(),
-                                    height: ScreenSize.fSize_50(),
-                                    decoration: BoxDecoration(
-                                        color: Color(0xFF12356E),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                                ScreenSize.fSize_10()))),
-                                    child: Center(
-                                      child: Text(
-                                        "Details",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                                color: Colors.white,
-                                                fontSize: ScreenSize.fSize_15(),
-                                                fontWeight: FontWeight.w600),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: ScreenSize.fSize_120(),
+                                      height: ScreenSize.fSize_50(),
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFF12356E),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(
+                                                  ScreenSize.fSize_10()))),
+                                      child: Center(
+                                        child: Text(
+                                          "Details",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      ScreenSize.fSize_15(),
+                                                  fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(() => EMICalculatorPieChartScreen(),
-                                      arguments: [
-                                        Result.value,
-                                        arg[1],
-                                        arg[0],
-                                        arg[3],
-                                        TotalMonth.value,
-                                        TotalPayment.value,
-                                        Totalrate.value,
-                                        arg[6],
-                                        arg[7]
-                                        // arg[0],
-                                        // arg[1],
-                                        // arg[2],
-                                        // arg[3],
-                                        // arg[4],
-                                        // arg[5],
-                                      ]);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Pie Chart",
-                                    style: GoogleFonts.ibmPlexSansThaiLooped(
-                                        color: const Color(0xFF768AAB),
-                                        fontSize: ScreenSize.fSize_15(),
-                                        fontWeight: FontWeight.w600),
+                                  ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => EMICalculatorPieChartScreen(),
+                                        arguments: [
+                                          Result.value,
+                                          arg[1],
+                                          arg[0],
+                                          arg[3],
+                                          TotalMonth.value,
+                                          TotalPayment.value,
+                                          Totalrate.value,
+                                          arg[6],
+                                          arg[7]
+                                        ]);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Pie Chart",
+                                      style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          color: const Color(0xFF768AAB),
+                                          fontSize: ScreenSize.fSize_15(),
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(() =>
-                                      const EMICalculatorBarChartScreen());
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "Bar Chart",
-                                    style: GoogleFonts.ibmPlexSansThaiLooped(
-                                        color: const Color(0xFF768AAB),
-                                        fontSize: ScreenSize.fSize_15(),
-                                        fontWeight: FontWeight.w600),
+                                GestureDetector(
+                                  onTap: () {
+                                    tapButton.button(context,
+                                        "/EMICalculatorBarChartScreen", '');
+                                    // Get.to(() =>
+                                    //     const EMICalculatorBarChartScreen());
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Bar Chart",
+                                      style: GoogleFonts.ibmPlexSansThaiLooped(
+                                          color: const Color(0xFF768AAB),
+                                          fontSize: ScreenSize.fSize_15(),
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenSize.fSize_6()),
-                            child: Container(
-                              height: ScreenSize.fSize_60(),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF12356E),
-                                borderRadius: BorderRadius.only(
-                                  topLeft:
-                                      Radius.circular(ScreenSize.fSize_15()),
-                                  topRight:
-                                      Radius.circular(ScreenSize.fSize_15()),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: IntrinsicHeight(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        "Month",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Principal",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Interest",
-                                        style: textstyl1,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: divider,
-                                      ),
-                                      Text(
-                                        "Balance",
-                                        style: textstyl1,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: ScreenSize.fSize_6()),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
+                        Column(
+                          children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ScreenSize.fSize_6()),
+                              child: Container(
+                                height: ScreenSize.fSize_60(),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF12356E),
                                   borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(
-                                          ScreenSize.fSize_15()),
-                                      bottomLeft: Radius.circular(
-                                          ScreenSize.fSize_15())),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0, 3),
-                                        blurRadius: 5)
-                                  ]),
-                              child: Stack(
-                                children: [
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: demo.length,
-                                    itemBuilder: (context, index) {
-                                      rate = int.parse(arg[1]) - demo[index];
-                                      var RR =
-                                          rate / 100 / 1200 * month2[index];
-                                      var cal = double.parse(arg[2]) * RR;
-                                      var cal2 =
-                                          double.parse(arg[2]) * cal / 100;
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                            top: ScreenSize.fSize_10(),
-                                            left: ScreenSize.fSize_17(),
-                                            right: ScreenSize.fSize_12(),
-                                            bottom: ScreenSize.fSize_12()),
-                                        child: IntrinsicHeight(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    8,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  "${month[index]}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    12,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  "${arg[0]}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    12,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  "$rate",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                              divider,
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: ScreenSize
-                                                        .horizontalBlockSize! *
-                                                    12,
-                                                color: Colors.transparent,
-                                                child: Text(
-                                                  cal2.toStringAsFixed(2),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: textstyle,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
+                                    topLeft:
+                                        Radius.circular(ScreenSize.fSize_15()),
+                                    topRight:
+                                        Radius.circular(ScreenSize.fSize_15()),
                                   ),
-                                ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: IntrinsicHeight(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          "Month",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Principal",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Interest",
+                                          style: textstyl1,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: divider,
+                                        ),
+                                        Text(
+                                          "Balance",
+                                          style: textstyl1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: ScreenSize.fSize_60()),
-                    ],
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: ScreenSize.fSize_6()),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(
+                                            ScreenSize.fSize_15()),
+                                        bottomLeft: Radius.circular(
+                                            ScreenSize.fSize_15())),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 3),
+                                          blurRadius: 5)
+                                    ]),
+                                child: Stack(
+                                  children: [
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: demo.length,
+                                      itemBuilder: (context, index) {
+                                        rate = int.parse(arg[1]) - demo[index];
+                                        var RR =
+                                            rate / 100 / 1200 * month2[index];
+                                        var cal = double.parse(arg[2]) * RR;
+                                        var cal2 =
+                                            double.parse(arg[2]) * cal / 100;
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                              top: ScreenSize.fSize_10(),
+                                              left: ScreenSize.fSize_17(),
+                                              right: ScreenSize.fSize_12(),
+                                              bottom: ScreenSize.fSize_12()),
+                                          child: IntrinsicHeight(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      8,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    "${month[index]}",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      12,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    "${arg[0]}",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      12,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    "$rate",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                                divider,
+                                                Container(
+                                                  alignment: Alignment.center,
+                                                  width: ScreenSize
+                                                          .horizontalBlockSize! *
+                                                      12,
+                                                  color: Colors.transparent,
+                                                  child: Text(
+                                                    cal2.toStringAsFixed(2),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: textstyle,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: ScreenSize.fSize_60()),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

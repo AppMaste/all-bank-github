@@ -34,6 +34,7 @@ import 'Interest calculation/interest Calculation Detail Screen.dart';
 import 'Investment Calculate/Investment Calculate Screen.dart';
 import 'Investment Calculate/Investment Calculation Result Screen.dart';
 import 'Loan Calculator/Loan Calculator Detail Screen.dart';
+import 'Loan Calculator/Loan Calculator History.dart';
 import 'Loan Calculator/Loan Calculator Pie Chart Screen.dart';
 import 'Loan Calculator/Loan Calculator Result Screen.dart';
 import 'Loan Calculator/Loan Calculator Screen.dart';
@@ -99,9 +100,7 @@ loadAd() {
       onAdFailedToLoad: (error) {
         // loadAd();
         AppOpenAd.load(
-          // adUnitId: "/6499/example/app-open",
           adUnitId: remoteconfig.value['AppOpen AD'],
-          // adUnitId: "ca-app-pub-3940256099942544/3419835294",
           orientation: AppOpenAd.orientationPortrait,
           request: const AdManagerAdRequest(),
           adLoadCallback: AppOpenAdLoadCallback(
@@ -112,7 +111,6 @@ loadAd() {
               ad.show();
             },
             onAdFailedToLoad: (error) {
-              // loadAd();
               // Handle the error.
             },
           ),
@@ -172,7 +170,7 @@ Future<void> main() async {
         '/SIPCalculationScreen': (context) => const SIPCalculationScreen(),
         '/LumpsumCalculationScreen': (context) => LumpsumCalculationScreen(),
         '/GSTCalculatorScreen': (context) => const GSTCalculatorScreen(),
-        '/CompareLoanResultScreen': (context) => CompareLoanResultScreen(),
+          '/CompareLoanResultScreen': (context) => CompareLoanResultScreen(),
         '/EMICalculatorResultScreen': (context) => EMICalculatorResultScreen(),
         '/EMICalculatorDetailScreen': (context) => EMICalculatorDetailScreen(),
         '/EMICalculatorPieChartScreen': (context) =>
@@ -212,6 +210,7 @@ Future<void> main() async {
         '/SimpleCalculationPieChartScreen': (context) =>
             SimpleCalculationPieChartScreen(),
         '/InvestmentResultScreen': (context) => const InvestmentResultScreen(),
+        '/LoanCalculatorHistoryScreen': (context) => const LoanCalculatorHistoryScreen(),
         '/SIPCalculationResultScreen': (context) =>
             SIPCalculationResultScreen(),
         '/LumpsumCalculationResultScreen': (context) =>
@@ -225,15 +224,8 @@ Future<void> main() async {
         '/IFSCAllDetail': (context) => IFSCAllDetail(),
       },
       debugShowCheckedModeBanner: false,
-      home: LogoScreen(),
+      // home: LogoScreen(),
     ),
   );
 }
 
-/*void main() {
-  runApp(
-    const GetMaterialApp(
-      home: FinanceCalculatorScreen(),
-    ),
-  );
-}*/

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -9,10 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import 'package:pie_chart/pie_chart.dart';
+import 'package:share_plus/share_plus.dart';
 
 // import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:syncfusion_flutter_charts/charts.dart';
-
 
 class SIPCalculationResultScreen extends StatefulWidget {
   SIPCalculationResultScreen({Key? key}) : super(key: key);
@@ -62,194 +63,221 @@ class _SIPCalculationResultScreenState
       emptyColor: Colors.grey,
       // baseChartColor: Colors.transparent,
     );
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                sameRow(context, "SIP Calculation"),
-                SizedBox(height: ScreenSize.fSize_20()),
-                Container(
-                  width: double.maxFinite,
-                  decoration: decoration,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Text(
-                          "Total Amount Expexcteed",
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w700,
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/SIPCalculationResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  sameRow(context, "SIP Calculation"),
+                  SizedBox(height: ScreenSize.fSize_20()),
+                  Container(
+                    width: double.maxFinite,
+                    decoration: decoration,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Text(
+                            "Total Amount Expexcteed",
+                            style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_10()),
-                        emiadvance(
-                          context,
-                          amountController,
-                          "₹",
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Text(
-                          "Expexcted Rate Of Return",
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w700,
+                          SizedBox(height: ScreenSize.fSize_10()),
+                          emiadvance(
+                            context,
+                            amountController,
+                            "₹",
                           ),
-                        ),
-                        emiadvance(
-                          context,
-                          rateController,
-                          "%",
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Text(
-                          "Investment Period (Years)",
-                          style: GoogleFonts.ibmPlexSansThaiLooped(
-                            fontWeight: FontWeight.w700,
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Text(
+                            "Expexcted Rate Of Return",
+                            style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
-                        emiadvance(
-                          context,
-                          yearController,
-                          "Year",
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            compareLoanContainer(context, "SIP Plan Calculate",
-                                () {
-                              if (amountController.text.isNotEmpty ||
-                                  rateController.text.isNotEmpty ||
-                                  yearController.text.isNotEmpty) {
-                                setState(() {});
-                                load = true;
-                                cal();
-                              } else {
-                                fluttertost();
-                              }
-                            }),
-                            comparereset(context, "Reset", () {}),
-                          ],
-                        ),
-                        SizedBox(height: ScreenSize.fSize_30()),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xFF12356E),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_10()),
-                              ),
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3)),
-                              ]),
-                          child: Column(
+                          emiadvance(
+                            context,
+                            rateController,
+                            "%",
+                          ),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Text(
+                            "Investment Period (Years)",
+                            style: GoogleFonts.ibmPlexSansThaiLooped(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          emiadvance(
+                            context,
+                            yearController,
+                            "Year",
+                          ),
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(height: ScreenSize.fSize_20()),
-                              IntrinsicHeight(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_10()),
-                                        Text(
-                                          "Investment Amount",
-                                          style:
-                                              GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          NumberFormat.simpleCurrency(name: '')
-                                              .format(investsip),
-                                          style:
-                                              GoogleFonts.ibmPlexSansThaiLooped(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: VerticalDivider(
-                                        thickness: 1,
-                                        color: Color(0xFF768AAB),
-                                      ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        SizedBox(height: ScreenSize.fSize_10()),
-                                        Text(
-                                          "You need to make SIP of",
-                                          style:
-                                              GoogleFonts.ibmPlexSansThaiLooped(
-                                            fontSize: ScreenSize.fSize_15(),
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Text(
-                                          NumberFormat.simpleCurrency(name: '')
-                                              .format(returnsip),
-                                          style:
-                                              GoogleFonts.ibmPlexSansThaiLooped(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: ScreenSize.fSize_20()),
+                              compareLoanContainer(
+                                  context, "SIP Plan Calculate", () {
+                                if (amountController.text.isNotEmpty ||
+                                    rateController.text.isNotEmpty ||
+                                    yearController.text.isNotEmpty) {
+                                  setState(() {});
+                                  load = true;
+                                  cal();
+                                } else {
+                                  fluttertost();
+                                }
+                              }),
+                              comparereset(context, "Reset", () {}),
                             ],
                           ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_20()),
-                        chart,
-                        SizedBox(height: ScreenSize.fSize_30()),
-                        Center(
-                          child: Container(
-                            height: ScreenSize.fSize_50(),
-                            width: ScreenSize.horizontalBlockSize! * 40,
+                          SizedBox(height: ScreenSize.fSize_30()),
+                          Container(
                             decoration: BoxDecoration(
-                              color: const Color(0xFF12356E),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(ScreenSize.fSize_10()),
-                              ),
-                            ),
-                            child: Center(
-                              child: Text("Share",
-                                  style: GoogleFonts.ibmPlexSansThaiLooped(
-                                    fontSize: ScreenSize.fSize_15(),
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  )),
+                                color: Color(0xFF12356E),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(ScreenSize.fSize_10()),
+                                ),
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3)),
+                                ]),
+                            child: Column(
+                              children: [
+                                SizedBox(height: ScreenSize.fSize_20()),
+                                IntrinsicHeight(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                              height: ScreenSize.fSize_10()),
+                                          Text(
+                                            "Investment Amount",
+                                            style: GoogleFonts
+                                                .ibmPlexSansThaiLooped(
+                                              fontSize: ScreenSize.fSize_15(),
+                                              fontWeight: FontWeight.w500,
+                                              color: const Color(0xFF768AAB),
+                                            ),
+                                          ),
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            NumberFormat.simpleCurrency(
+                                                    name: '')
+                                                .format(investsip),
+                                            style: GoogleFonts
+                                                .ibmPlexSansThaiLooped(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: VerticalDivider(
+                                          thickness: 1,
+                                          color: Color(0xFF768AAB),
+                                        ),
+                                      ),
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                              height: ScreenSize.fSize_10()),
+                                          Text(
+                                            "You need to make SIP of",
+                                            style: GoogleFonts
+                                                .ibmPlexSansThaiLooped(
+                                              fontSize: ScreenSize.fSize_15(),
+                                              fontWeight: FontWeight.w500,
+                                              color: const Color(0xFF768AAB),
+                                            ),
+                                          ),
+                                          Text(
+                                            NumberFormat.simpleCurrency(
+                                                    name: '')
+                                                .format(returnsip),
+                                            style: GoogleFonts
+                                                .ibmPlexSansThaiLooped(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: ScreenSize.fSize_20()),
+                              ],
                             ),
                           ),
-                        ),
-                        SizedBox(height: ScreenSize.fSize_60()),
-                      ],
+                          SizedBox(height: ScreenSize.fSize_20()),
+                          chart,
+                          SizedBox(height: ScreenSize.fSize_30()),
+                          GestureDetector(
+                            onTap: () {
+                              sharedata(
+                                  NumberFormat.simpleCurrency(name: '')
+                                      .format(investsip),
+                                  NumberFormat.simpleCurrency(name: '')
+                                      .format(returnsip));
+                            },
+                            child: Center(
+                              child: Container(
+                                height: ScreenSize.fSize_50(),
+                                width: ScreenSize.horizontalBlockSize! * 40,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF12356E),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(ScreenSize.fSize_10()),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text("Share",
+                                      style: GoogleFonts.ibmPlexSansThaiLooped(
+                                        fontSize: ScreenSize.fSize_15(),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      )),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: ScreenSize.fSize_60()),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
+  }
+
+  sharedata(String investAmount, String amount) {
+    Share.share(
+        "Investment Amount:- $investAmount\n\nYou need to make SIP of:- $amount");
   }
 
   cal() {

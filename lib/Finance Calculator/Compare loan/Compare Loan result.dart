@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
@@ -59,158 +60,165 @@ class _CompareLoanResultScreenState extends State<CompareLoanResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("objecttttt ${data}");
-    return Scaffold(
-      appBar: appbarr,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Obx(
-              () => Column(
-                children: [
-                  sameRow(context, "Compare Loan"),
-                  SizedBox(height: ScreenSize.fSize_20()),
-                  Container(
-                    width: double.maxFinite,
-                    decoration: decoration,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Center(
-                            child: Text(
-                              "Loan A",
-                              style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF12356E),
-                                  fontSize: ScreenSize.fSize_20()),
+    // print("objecttttt ${data}");
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/CompareLoanResultScreen");
+        return Future(() => false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: appbarr,
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Obx(
+                () => Column(
+                  children: [
+                    sameRow(context, "Compare Loan"),
+                    SizedBox(height: ScreenSize.fSize_20()),
+                    Container(
+                      width: double.maxFinite,
+                      decoration: decoration,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Center(
+                              child: Text(
+                                "Loan A",
+                                style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF12356E),
+                                    fontSize: ScreenSize.fSize_20()),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          compareContainer(context, "Loan Amount", "Interest %",
-                              "₹", "%", Aloanamount.value, Ainterest.value,),
-                          compareContainer(context, "Loan Year", "Loan Month",
-                              "Year", "Month", Aloanyear.value, Aloanmonth.value),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Center(
-                            child: Text(
-                              "Loan B",
-                              style: GoogleFonts.ibmPlexSansThaiLooped(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF12356E),
-                                  fontSize: ScreenSize.fSize_20()),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            compareContainer(context, "Loan Amount", "Interest %",
+                                "₹", "%", Aloanamount.value, Ainterest.value,),
+                            compareContainer(context, "Loan Year", "Loan Month",
+                                "Year", "Month", Aloanyear.value, Aloanmonth.value),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Center(
+                              child: Text(
+                                "Loan B",
+                                style: GoogleFonts.ibmPlexSansThaiLooped(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF12356E),
+                                    fontSize: ScreenSize.fSize_20()),
+                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          compareContainer(context, "Loan Amount", "Interest %",
-                              "₹", "%", Bloanamount.value, Binterest.value,),
-                          compareContainer(context, "Loan Year", "Loan Month",
-                              "Year", "Month", Bloanyear.value, Bloanmonth.value,),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              compareLoanContainer(context, "Compare Loan", () {
-                                if (Aloanamount.value.text.isEmpty ||
-                                    Ainterest.value.text.isEmpty ||
-                                    Aloanyear.value.text.isEmpty ||
-                                    Aloanmonth.value.text.isEmpty ||
-                                    Bloanamount.value.text.isEmpty ||
-                                    Binterest.value.text.isEmpty ||
-                                    Bloanyear.value.text.isEmpty ||
-                                    Bloanmonth.value.text.isEmpty) {
-                                  fluttertost();
-                                } else {
-                                  loan1Calculation();
-                                  loan2Calculation();
-                                  deference();
-                                  load.value = true;
-                                }
-                              }),
-                              comparereset(context, "Reset", () {
-                                load.value = false;
-                                Aloanamount.value.clear();
-                                Ainterest.value.clear();
-                                Aloanyear.value.clear();
-                                Aloanmonth.value.clear();
-                                Bloanamount.value.clear();
-                                Binterest.value.clear();
-                                Bloanyear.value.clear();
-                                Bloanmonth.value.clear();
-                                load.value = false;
-                              }),
-                            ],
-                          ),
-                          SizedBox(height: ScreenSize.fSize_20()),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: double.maxFinite,
-                              // height: ScreenSize.horizontalBlockSize! * 60,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF12356E),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(ScreenSize.fSize_20()),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            compareContainer(context, "Loan Amount", "Interest %",
+                                "₹", "%", Bloanamount.value, Binterest.value,),
+                            compareContainer(context, "Loan Year", "Loan Month",
+                                "Year", "Month", Bloanyear.value, Bloanmonth.value,),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                compareLoanContainer(context, "Compare Loan", () {
+                                  if (Aloanamount.value.text.isEmpty ||
+                                      Ainterest.value.text.isEmpty ||
+                                      Aloanyear.value.text.isEmpty ||
+                                      Aloanmonth.value.text.isEmpty ||
+                                      Bloanamount.value.text.isEmpty ||
+                                      Binterest.value.text.isEmpty ||
+                                      Bloanyear.value.text.isEmpty ||
+                                      Bloanmonth.value.text.isEmpty) {
+                                    fluttertost();
+                                  } else {
+                                    loan1Calculation();
+                                    loan2Calculation();
+                                    deference();
+                                    load.value = true;
+                                  }
+                                }),
+                                comparereset(context, "Reset", () {
+                                  load.value = false;
+                                  Aloanamount.value.clear();
+                                  Ainterest.value.clear();
+                                  Aloanyear.value.clear();
+                                  Aloanmonth.value.clear();
+                                  Bloanamount.value.clear();
+                                  Binterest.value.clear();
+                                  Bloanyear.value.clear();
+                                  Bloanmonth.value.clear();
+                                  load.value = false;
+                                }),
+                              ],
+                            ),
+                            SizedBox(height: ScreenSize.fSize_20()),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: double.maxFinite,
+                                // height: ScreenSize.horizontalBlockSize! * 60,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF12356E),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(ScreenSize.fSize_20()),
+                                  ),
+                                ),
+                                child: Stack(
+                                  children: [
+                                    SizedBox(height: ScreenSize.fSize_20()),
+                                    loan1(context, "Calculate", "Loan 1", "Loan 2",
+                                        "Deference"),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: ScreenSize.horizontalBlockSize! * 28),
+                                      child: loan1(
+                                          context,
+                                          "EMI",
+                                          load.value == true ? Result.value : "00",
+                                          load.value == true ? Result2.value : "00",
+                                          "${load.value == true ? deferenceEMI.value : '00'}"),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: ScreenSize.horizontalBlockSize! * 50),
+                                      child: loan1(
+                                          context,
+                                          "Interest",
+                                          load.value == true ? Totalrate.value : '00',
+                                          load.value == true
+                                              ? Totalrate2.value
+                                              : '00',
+                                          "${load.value == true ? deferenceRATE.value : '00'}"),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          left: ScreenSize.horizontalBlockSize! * 73),
+                                      child: loan2(
+                                          context,
+                                          "Total Payable",
+                                          load.value == true
+                                              ? TotalPayment.value
+                                              : '00',
+                                          load.value == true
+                                              ? TotalPayment2.value
+                                              : '00',
+                                          "${load.value == true ? deferenceTOTAL.value : '00'}"),
+                                    ),
+                                    SizedBox(height: ScreenSize.fSize_20()),
+                                  ],
                                 ),
                               ),
-                              child: Stack(
-                                children: [
-                                  SizedBox(height: ScreenSize.fSize_20()),
-                                  loan1(context, "Calculate", "Loan 1", "Loan 2",
-                                      "Deference"),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ScreenSize.horizontalBlockSize! * 28),
-                                    child: loan1(
-                                        context,
-                                        "EMI",
-                                        load.value == true ? Result.value : "00",
-                                        load.value == true ? Result2.value : "00",
-                                        "${load.value == true ? deferenceEMI.value : '00'}"),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ScreenSize.horizontalBlockSize! * 50),
-                                    child: loan1(
-                                        context,
-                                        "Interest",
-                                        load.value == true ? Totalrate.value : '00',
-                                        load.value == true
-                                            ? Totalrate2.value
-                                            : '00',
-                                        "${load.value == true ? deferenceRATE.value : '00'}"),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ScreenSize.horizontalBlockSize! * 73),
-                                    child: loan2(
-                                        context,
-                                        "Total Payable",
-                                        load.value == true
-                                            ? TotalPayment.value
-                                            : '00',
-                                        load.value == true
-                                            ? TotalPayment2.value
-                                            : '00',
-                                        "${load.value == true ? deferenceTOTAL.value : '00'}"),
-                                  ),
-                                  SizedBox(height: ScreenSize.fSize_20()),
-                                ],
-                              ),
                             ),
-                          ),
-                          SizedBox(height: ScreenSize.fSize_60()),
-                        ],
+                            SizedBox(height: ScreenSize.fSize_60()),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-          banner.getBN()
-        ],
+            banner.getBN()
+          ],
+        ),
       ),
     );
   }

@@ -16,6 +16,17 @@ fluttertost() {
       fontSize: 16.0);
 }
 
+tost() {
+  return Fluttertoast.showToast(
+      msg: "Please calculate First",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color(0xFF12356E),
+      textColor: Colors.white,
+      fontSize: 16.0);
+}
+
 List bankname = [
   "Abhyudaya Co-op Bank",
   "Abu Dhabi Commercial Bank",
@@ -2961,6 +2972,7 @@ var appbarr = AppBar(
 var loanCalculatorBar = AppBar(
   actions: [
     GestureDetector(
+      // onTap: ontap,
       onTap: () {
         Get.to(() => const LoanCalculatorHistoryScreen());
       },
@@ -3017,7 +3029,7 @@ var decoration = BoxDecoration(
       topLeft: Radius.circular(ScreenSize.fSize_30())),
 );
 var padding =
-EdgeInsets.only(top: ScreenSize.fSize_6(), bottom: ScreenSize.fSize_6());
+    EdgeInsets.only(top: ScreenSize.fSize_6(), bottom: ScreenSize.fSize_6());
 
 var style = const TextStyle(color: Colors.white);
 var style1 = const TextStyle(fontWeight: FontWeight.w500);
@@ -3070,6 +3082,7 @@ rowdivider() {
     thickness: 1,
   );
 }
+
 var stylee = GoogleFonts.ibmPlexSansThaiLooped(
   fontSize: ScreenSize.fSize_12(),
   fontWeight: FontWeight.w500,

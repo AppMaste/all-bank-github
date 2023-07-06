@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:all_bank/Controller/Button%20Controller.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -68,261 +69,267 @@ class _LumpsumCalculationResultScreenState
       emptyColor: Colors.grey,
       // baseChartColor: Colors.transparent,
     );
-    return RepaintBoundary(
-      key: sskey,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: appbarr,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Obx(
-                () => Column(
-                  children: [
-                    sameRow(context, "Lumpsum Calculate"),
-                    SizedBox(height: ScreenSize.fSize_20()),
-                    Container(
-                      width: double.maxFinite,
-                      decoration: decoration,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: ScreenSize.fSize_20()),
-                            Text(
-                              "Investment Amount",
-                              style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w700,
+    return WillPopScope(
+      onWillPop: () {
+        backButton.backbutton(context, "/LumpsumCalculationResultScreen");
+        return Future(() => false);
+      },
+      child: RepaintBoundary(
+        key: sskey,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: appbarr,
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Obx(
+                  () => Column(
+                    children: [
+                      sameRow(context, "Lumpsum Calculate"),
+                      SizedBox(height: ScreenSize.fSize_20()),
+                      Container(
+                        width: double.maxFinite,
+                        decoration: decoration,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: ScreenSize.fSize_20()),
+                              Text(
+                                "Investment Amount",
+                                style: GoogleFonts.ibmPlexSansThaiLooped(
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: ScreenSize.fSize_10()),
-                            emiadvance(
-                              context,
-                              amountController.value,
-                              "₹",
-                            ),
-                            SizedBox(height: ScreenSize.fSize_20()),
-                            Text(
-                              "Tenure in",
-                              style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w700,
+                              SizedBox(height: ScreenSize.fSize_10()),
+                              emiadvance(
+                                context,
+                                amountController.value,
+                                "₹",
                               ),
-                            ),
-                            emiadvance(
-                              context,
-                              tenureController.value,
-                              "Year",
-                            ),
-                            SizedBox(height: ScreenSize.fSize_20()),
-                            Text(
-                              "Rate of Return (%)",
-                              style: GoogleFonts.ibmPlexSansThaiLooped(
-                                fontWeight: FontWeight.w700,
+                              SizedBox(height: ScreenSize.fSize_20()),
+                              Text(
+                                "Tenure in",
+                                style: GoogleFonts.ibmPlexSansThaiLooped(
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            ),
-                            emiadvance(
-                              context,
-                              rateController.value,
-                              "%",
-                            ),
-                            SizedBox(height: ScreenSize.fSize_20()),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                compareLoanContainer(
-                                    context, "Lumpsum Calculate", () {
-                                  if (amountController.value.text.isEmpty ||
-                                      tenureController.value.text.isEmpty ||
-                                      rateController.value.text.isEmpty) {
-                                    fluttertost();
-                                  } else {
-                                    setState(() {});
-                                    load.value = true;
-                                    calculation();
-                                  }
-                                }),
-                                comparereset(context, "Reset", () {
-                                  amountController.value.clear();
-                                  tenureController.value.clear();
-                                  rateController.value.clear();
-                                  load.value = false;
-                                }),
-                              ],
-                            ),
-                            SizedBox(height: ScreenSize.fSize_30()),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFF12356E),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(ScreenSize.fSize_10()),
-                                  ),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 3)),
-                                  ]),
-                              child: Column(
+                              emiadvance(
+                                context,
+                                tenureController.value,
+                                "Year",
+                              ),
+                              SizedBox(height: ScreenSize.fSize_20()),
+                              Text(
+                                "Rate of Return (%)",
+                                style: GoogleFonts.ibmPlexSansThaiLooped(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              emiadvance(
+                                context,
+                                rateController.value,
+                                "%",
+                              ),
+                              SizedBox(height: ScreenSize.fSize_20()),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(height: ScreenSize.fSize_20()),
-                                  IntrinsicHeight(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            SizedBox(
-                                                height: ScreenSize.fSize_10()),
-                                            Text(
-                                              "Principal Amount",
-                                              style: GoogleFonts
-                                                  .ibmPlexSansThaiLooped(
-                                                fontSize: ScreenSize.fSize_15(),
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF768AAB),
-                                              ),
-                                            ),
-                                            Text(
-                                              textAlign: TextAlign.center,
-                                              load.value == true
-                                                  ? NumberFormat.currency(
-                                                          name: '',
-                                                          decimalDigits: 0)
-                                                      .format(controllerValue)
-                                                  : "00",
-                                              style: GoogleFonts
-                                                  .ibmPlexSansThaiLooped(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ],
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: VerticalDivider(
-                                            thickness: 1,
-                                            color: Color(0xFF768AAB),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            SizedBox(
-                                                height: ScreenSize.fSize_10()),
-                                            Text(
-                                              "Earning on Investment",
-                                              style: GoogleFonts
-                                                  .ibmPlexSansThaiLooped(
-                                                fontSize: ScreenSize.fSize_15(),
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF768AAB),
-                                              ),
-                                            ),
-                                            Text(
-                                              load.value == true
-                                                  ? NumberFormat.currency(
-                                                          name: '',
-                                                          decimalDigits: 0)
-                                                      .format(earning.value)
-                                                  : "00",
-                                              style: GoogleFonts
-                                                  .ibmPlexSansThaiLooped(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Divider(
-                                      color: Color(0xFF768AAB),
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      SizedBox(height: ScreenSize.fSize_10()),
-                                      Text(
-                                        "Accumulated Wealth",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                          fontSize: ScreenSize.fSize_15(),
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF768AAB),
-                                        ),
-                                      ),
-                                      Text(
-                                        load.value == true
-                                            ? NumberFormat.currency(
-                                                    name: '', decimalDigits: 0)
-                                                .format(total.value)
-                                            : "00",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: ScreenSize.fSize_20())
+                                  compareLoanContainer(
+                                      context, "Lumpsum Calculate", () {
+                                    if (amountController.value.text.isEmpty ||
+                                        tenureController.value.text.isEmpty ||
+                                        rateController.value.text.isEmpty) {
+                                      fluttertost();
+                                    } else {
+                                      setState(() {});
+                                      load.value = true;
+                                      calculation();
+                                    }
+                                  }),
+                                  comparereset(context, "Reset", () {
+                                    amountController.value.clear();
+                                    tenureController.value.clear();
+                                    rateController.value.clear();
+                                    load.value = false;
+                                  }),
                                 ],
                               ),
-                            ),
-                            SizedBox(height: ScreenSize.fSize_20()),
-                            chart,
-                            SizedBox(height: ScreenSize.fSize_30()),
-                            GestureDetector(
-                              onTap: () async {
-                                RenderRepaintBoundary boundary =
-                                    sskey.currentContext!.findRenderObject()
-                                        as RenderRepaintBoundary;
-                                ui.Image image =
-                                    await boundary.toImage(pixelRatio: 3.0);
-                                ByteData? byte = await image.toByteData(
-                                    format: ui.ImageByteFormat.png);
-
-                                imageData = byte!.buffer.asUint8List();
-                                _onShare(context);
-                                // Share.share(imageData!.toString());
-                              },
-                              child: Center(
-                                child: Container(
-                                  height: ScreenSize.fSize_50(),
-                                  width: ScreenSize.horizontalBlockSize! * 40,
-                                  decoration: BoxDecoration(
+                              SizedBox(height: ScreenSize.fSize_30()),
+                              Container(
+                                decoration: BoxDecoration(
                                     color: const Color(0xFF12356E),
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(ScreenSize.fSize_10()),
                                     ),
-                                  ),
-                                  child: Center(
-                                    child: Text("Share",
-                                        style:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                          fontSize: ScreenSize.fSize_15(),
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        )),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3)),
+                                    ]),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: ScreenSize.fSize_20()),
+                                    IntrinsicHeight(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                  height: ScreenSize.fSize_10()),
+                                              Text(
+                                                "Principal Amount",
+                                                style: GoogleFonts
+                                                    .ibmPlexSansThaiLooped(
+                                                  fontSize: ScreenSize.fSize_15(),
+                                                  fontWeight: FontWeight.w500,
+                                                  color: const Color(0xFF768AAB),
+                                                ),
+                                              ),
+                                              Text(
+                                                textAlign: TextAlign.center,
+                                                load.value == true
+                                                    ? NumberFormat.currency(
+                                                            name: '',
+                                                            decimalDigits: 0)
+                                                        .format(controllerValue)
+                                                    : "00",
+                                                style: GoogleFonts
+                                                    .ibmPlexSansThaiLooped(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: VerticalDivider(
+                                              thickness: 1,
+                                              color: Color(0xFF768AAB),
+                                            ),
+                                          ),
+                                          Column(
+                                            children: [
+                                              SizedBox(
+                                                  height: ScreenSize.fSize_10()),
+                                              Text(
+                                                "Earning on Investment",
+                                                style: GoogleFonts
+                                                    .ibmPlexSansThaiLooped(
+                                                  fontSize: ScreenSize.fSize_15(),
+                                                  fontWeight: FontWeight.w500,
+                                                  color: const Color(0xFF768AAB),
+                                                ),
+                                              ),
+                                              Text(
+                                                load.value == true
+                                                    ? NumberFormat.currency(
+                                                            name: '',
+                                                            decimalDigits: 0)
+                                                        .format(earning.value)
+                                                    : "00",
+                                                style: GoogleFonts
+                                                    .ibmPlexSansThaiLooped(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Divider(
+                                        color: Color(0xFF768AAB),
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        SizedBox(height: ScreenSize.fSize_10()),
+                                        Text(
+                                          "Accumulated Wealth",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                            fontSize: ScreenSize.fSize_15(),
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xFF768AAB),
+                                          ),
+                                        ),
+                                        Text(
+                                          load.value == true
+                                              ? NumberFormat.currency(
+                                                      name: '', decimalDigits: 0)
+                                                  .format(total.value)
+                                              : "00",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: ScreenSize.fSize_20())
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: ScreenSize.fSize_20()),
+                              chart,
+                              SizedBox(height: ScreenSize.fSize_30()),
+                              GestureDetector(
+                                onTap: () async {
+                                  RenderRepaintBoundary boundary =
+                                      sskey.currentContext!.findRenderObject()
+                                          as RenderRepaintBoundary;
+                                  ui.Image image =
+                                      await boundary.toImage(pixelRatio: 3.0);
+                                  ByteData? byte = await image.toByteData(
+                                      format: ui.ImageByteFormat.png);
+
+                                  imageData = byte!.buffer.asUint8List();
+                                  _onShare(context);
+                                  // Share.share(imageData!.toString());
+                                },
+                                child: Center(
+                                  child: Container(
+                                    height: ScreenSize.fSize_50(),
+                                    width: ScreenSize.horizontalBlockSize! * 40,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF12356E),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(ScreenSize.fSize_10()),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text("Share",
+                                          style:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                            fontSize: ScreenSize.fSize_15(),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          )),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: ScreenSize.fSize_60()),
-                          ],
+                              SizedBox(height: ScreenSize.fSize_60()),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            // banner.getBN()
-          ],
+              // banner.getBN()
+            ],
+          ),
         ),
       ),
     );

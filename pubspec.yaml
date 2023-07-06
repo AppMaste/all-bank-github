@@ -35,22 +35,55 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
+  # ads
   google_mobile_ads: ^3.0.0
+
+  # config data
   firebase_remote_config: ^4.0.1
+
+  # Facebook Ads
   facebook_audience_network: ^1.0.1
+
+  # State Manager
   get: ^4.6.5
+
+  # Core Usage documentation
   firebase_core: ^2.10.0
+
+  # Fonts.google.com
   google_fonts: ^4.0.3
+
+  # launching a URL
   url_launcher: ^6.1.10
+
+  # use an headless webview
   flutter_inappwebview: ^5.7.2+3
-#  syncfusion_flutter_charts: ^21.2.10
-#  syncfusion_flutter_charts: ^22.1.36
+
+  # create line chart and bar
+#  flutter_charts: ^0.5.1
+#  charts_flutter: ^0.12.0
+#  flutter_echarts: ^2.4.0
+
+  # share content from your Flutter app
   share_plus: ^7.0.1
+
+  #SQLite plugin for Flutter
   sqflite: ^2.2.8+1
+
+  # Easily create toast messages
   fluttertoast: ^8.2.1
-  intl: ^0.18.1
+
+  # NumberFormat
+  intl: ^0.18.0
+
+  # finding commonly used locations on the filesystem
   path_provider: ^2.0.15
+
+  #  storage for simple data
   shared_preferences: ^2.1.2
+
+  # provides a Pie Chart Widget
   pie_chart: ^5.3.2
 
 
