@@ -1,6 +1,5 @@
 import 'package:all_bank/Controller/AppController.dart';
 import 'package:all_bank/ScreenSize.dart';
-import 'package:all_bank/Controller/ads.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

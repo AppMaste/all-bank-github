@@ -5,7 +5,6 @@ import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
