@@ -23,10 +23,10 @@ class NativeAD extends GetxController {
   Widget getNT(String factoryId) {
     NativeAd? nativeAd;
     var isLoaded = false.obs;
-    // if (config.value[Get.currentRoute]["Native_Ad_type"] == "admob") {
+    if (remoteconfig.value["Native AD Type"] == "admob") {
     nativeAd = NativeAd(
       request: const AdManagerAdRequest(),
-      adUnitId: remoteconfig.value["Native AD"],
+      adUnitId: remoteconfig.value[Get.currentRoute]["Native_ADMOB"],
       // adUnitId: "/6499/example/native",
       listener: NativeAdListener(onAdLoaded: (ad) {
         nativeAd!.load();
@@ -39,7 +39,7 @@ class NativeAD extends GetxController {
       factoryId: factoryId,
     );
     nativeAd.load();
-    // }
+    }
     return remoteconfig.value[Get.currentRoute]["Native_AD"] == "admob"
         ? Obx(() => (isLoaded.value)
             ? factoryId == "listTile"
@@ -215,11 +215,11 @@ class BannerAD extends GetxController {
   // var bannerLoaded = false.obs;
 
   Widget getBN() {
-    // if (remoteconfig.value["Banner AD Type"] == "admob") {
+    if (remoteconfig.value["Banner AD Type"] == "admob") {
     bannerAd = BannerAd(
       size: AdSize.banner,
-      // adUnitId: remoteconfig.value["Banner AD"],
-      adUnitId: "ca-app-pub-3940256099942544/6300978111",
+      adUnitId: remoteconfig.value["Banner AD"],
+      // adUnitId: "ca-app-pub-3940256099942544/6300978111",
       listener: BannerAdListener(
           onAdLoaded: (ad) {
             print("Banner ad Loaded${a++}");
@@ -228,7 +228,7 @@ class BannerAD extends GetxController {
       request: const AdRequest(),
     );
     bannerAd.load();
-    // }
+    }
 
     return remoteconfig.value["Banner AD Type"] == "admob"
         ? Align(

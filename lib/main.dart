@@ -135,7 +135,7 @@ Future<void> main() async {
       initialRoute: "/",
       routes: {
         '/': (context) => LogoScreen(),
-        '/GetStartedScreen': (context) => const GetStartedScreen(),
+        '/GetStartedScreen': (context) =>  GetStartedScreen(),
         '/HomeScreen': (context) => const HomeScreen(),
         '/SettingScreen': (context) => const SettingScreen(),
         '/SMSBankingScreen': (context) => const SMSBankingScreen(),

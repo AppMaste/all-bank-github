@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:all_bank/Get%20Started%20Screen/Logo%20Screen.dart';
 import 'package:all_bank/main.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +21,7 @@ class AppController extends GetxController with WidgetsBindingObserver {
     // appOpenAdManager.loadAd();
     Future.delayed(const Duration(seconds: 3), () {
       remoteconfig.value != {}
-          ? Get.off(() => const GetStartedScreen())
+          ? Get.off(() =>  GetStartedScreen())
           : initConfig().whenComplete(() {
               remoteconfig.value =
                   json.decode(remoteConfig.getString('BankApp'));

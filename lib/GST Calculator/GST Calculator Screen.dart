@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Controller/ads.dart';
+
 
 class GSTCalculatorScreen extends StatefulWidget {
   const GSTCalculatorScreen({Key? key}) : super(key: key);
@@ -155,7 +157,7 @@ class _GSTCalculatorScreenState extends State<GSTCalculatorScreen> {
                 ],
               ),
             ),
-            // banner.getBN()
+            banner.getBN()
           ],
         ),
       ),

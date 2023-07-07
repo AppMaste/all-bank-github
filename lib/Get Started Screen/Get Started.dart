@@ -5,26 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../Controller/Button Controller.dart';
 
-class GetStartedScreen extends StatefulWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+class GetStartedScreen extends StatelessWidget {
+   GetStartedScreen({Key? key}) : super(key: key);
 
-  @override
-  State<GetStartedScreen> createState() => _GetStartedScreenState();
-}
-
-class _GetStartedScreenState extends State<GetStartedScreen> {
   var adload;
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    adload = native.getNT("listTileMedium");
-  }
-
-  @override
   Widget build(BuildContext context) {
-    ScreenSize.sizerInit(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

@@ -111,7 +111,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenSize.sizerInit(context);
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: Scaffold(

@@ -3,6 +3,7 @@ import 'package:all_bank/Controller/ads.dart';
 import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../dbHelper/db Helper.dart';
@@ -63,7 +64,7 @@ class _SMSBankingScreenState extends State<SMSBankingScreen> {
     {"name": "Tamilnad Mercantile"},
   ];
   Dbhelp dbhelp = Dbhelp();
-  TextEditingController textEditingController = TextEditingController();
+  var  textEditingController = TextEditingController().obs;
 
   @override
   initState() {
@@ -151,37 +152,39 @@ class _SMSBankingScreenState extends State<SMSBankingScreen> {
                                       blurRadius: 5,
                                       offset: Offset(0, 4))
                                 ]),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: ScreenSize.fSize_10()),
-                                  child: Container(
-                                    width: ScreenSize.horizontalBlockSize! * 80,
-                                    color: Colors.transparent,
-                                    child: TextField(
-                                      controller: textEditingController,
-                                      onChanged: (value) => _runFilter(value),
-                                      // onChanged: Search,
-                                      textAlign: TextAlign.start,
-                                      decoration: InputDecoration(
-                                        hintText: "Search Bank Name",
-                                        hintStyle:
-                                            GoogleFonts.ibmPlexSansThaiLooped(
-                                                color: const Color(0xFF768AAB),
-                                                fontWeight: FontWeight.w500),
-                                        border: InputBorder.none,
+                            child: Obx(
+                                () => Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: ScreenSize.fSize_10()),
+                                    child: Container(
+                                      width: ScreenSize.horizontalBlockSize! * 80,
+                                      color: Colors.transparent,
+                                      child: TextField(
+                                        controller: textEditingController.value,
+                                        onChanged: (value) => _runFilter(value),
+                                        // onChanged: Search,
+                                        textAlign: TextAlign.start,
+                                        decoration: InputDecoration(
+                                          hintText: "Search Bank Name",
+                                          hintStyle:
+                                              GoogleFonts.ibmPlexSansThaiLooped(
+                                                  color: const Color(0xFF768AAB),
+                                                  fontWeight: FontWeight.w500),
+                                          border: InputBorder.none,
+                                        ),
+                                        textInputAction: TextInputAction.done,
                                       ),
-                                      textInputAction: TextInputAction.done,
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: ScreenSize.fSize_8()),
-                                Image.asset(
-                                  "assets/icons/search icon.png",
-                                  scale: 2.3,
-                                ),
-                              ],
+                                  SizedBox(width: ScreenSize.fSize_8()),
+                                  Image.asset(
+                                    "assets/icons/search icon.png",
+                                    scale: 2.3,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
