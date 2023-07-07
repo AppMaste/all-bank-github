@@ -61,6 +61,7 @@ dependencies:
   flutter_inappwebview: ^5.7.2+3
 
   # create line chart and bar
+  charts_flutter: ^0.12.0
 #  flutter_charts: ^0.5.1
 #  charts_flutter: ^0.12.0
 #  flutter_echarts: ^2.4.0
@@ -75,7 +76,7 @@ dependencies:
   fluttertoast: ^8.2.1
 
   # NumberFormat
-  intl: ^0.18.0
+  intl: ^0.17.0
 
   # finding commonly used locations on the filesystem
   path_provider: ^2.0.15

@@ -38,7 +38,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               child: Column(
                 children: [
                   SizedBox(height: ScreenSize.fSize_20()),
-                  adload,
+                  native.getNT("listTileMedium"),
                   SizedBox(height: ScreenSize.fSize_10()),
                   Container(
                     width: double.maxFinite,

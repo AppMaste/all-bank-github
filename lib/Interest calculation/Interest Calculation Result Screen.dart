@@ -26,11 +26,13 @@ class _InterestCalculationResultScreenState
   TextEditingController yearController = TextEditingController();
   TextEditingController monthController = TextEditingController();
 
-  var monthlyemi;
-  var totalpayment;
-  var totalinterest;
+  var monthlyemi = 00;
+  var totalpayment = 00;
+  var totalinterest = 00;
   var interest = 0.0;
   var Duration;
+
+  var load = false;
 
   var arg = Get.arguments;
 
@@ -113,6 +115,7 @@ class _InterestCalculationResultScreenState
                             children: [
                               compareLoanContainer(
                                   context, "Interest Calculate", () {
+                                load = true;
                                 var aaa =
                                     int.parse(amountController.value.text);
                                 setState(() {});
@@ -342,20 +345,24 @@ class _InterestCalculationResultScreenState
                           ),
                           SizedBox(height: ScreenSize.fSize_20()),
                           viewMoreDetail(context, () {
-                            tapButton.button(
-                              context,
-                              "/InterestCalculationDetailScreen",
-                              [
-                                amountController.value.text,
-                                emiController.value.text,
-                                yearController.value.text,
-                                monthController.value.text,
-                                totalinterest,
-                                totalpayment,
-                                interest,
-                                Duration
-                              ],
-                            );
+                            if (load == false) {
+                              tost();
+                            } else {
+                              tapButton.button(
+                                context,
+                                "/InterestCalculationDetailScreen",
+                                [
+                                  amountController.value.text,
+                                  emiController.value.text,
+                                  yearController.value.text,
+                                  monthController.value.text,
+                                  totalinterest,
+                                  totalpayment,
+                                  interest,
+                                  Duration
+                                ],
+                              );
+                            }
                             /*  Get.to(() => InterestCalculationDetailScreen(),
                                 arguments: [
                                   amountController.value.text,

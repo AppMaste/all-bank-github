@@ -40,7 +40,7 @@ class NativeAD extends GetxController {
     );
     nativeAd.load();
     // }
-    return remoteconfig.value["Native AD Type"] == "admob"
+    return remoteconfig.value[Get.currentRoute]["Native_AD"] == "admob"
         ? Obx(() => (isLoaded.value)
             ? factoryId == "listTile"
                 ? Stack(
@@ -128,7 +128,7 @@ class NativeAD extends GetxController {
                       child: CircularProgressIndicator(),
                     ),
                   ))
-        : remoteconfig.value["Native AD Type"] == "fb"
+        : remoteconfig.value[Get.currentRoute]["Native_AD"] == "fb"
             ? Container(
                 height: factoryId == "listTile"
                     ? ScreenSize.fSize_150()
@@ -145,7 +145,7 @@ class NativeAD extends GetxController {
                 ),
                 child: FacebookNativeAd(
                   // placementId: "YOUR_PLACEMENT_ID",
-                  placementId: remoteconfig.value["Native FB AD"],
+                  placementId: remoteconfig.value["Native_FB_AD"],
                   // placementId:
                   //     "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
                   adType: NativeAdType.NATIVE_AD,
@@ -154,9 +154,9 @@ class NativeAD extends GetxController {
                       : ScreenSize.fSize_250(),
                   width: ScreenSize.fSize_350(),
                   backgroundColor: Colors.white,
-                  titleColor: Colors.black,
+                  titleColor: const Color(0xFF0072BB),
                   descriptionColor: Colors.grey,
-                  buttonColor: const Color(0xFF2676d2),
+                  buttonColor: const Color(0xFF194183),
                   buttonTitleColor: Colors.white,
                   buttonBorderColor: const Color(0xFF8bb9eb),
                   listener: (result, value) {
@@ -164,7 +164,7 @@ class NativeAD extends GetxController {
                   },
                 ),
               )
-            : remoteconfig.value["Native AD Type"] == "null"
+            : remoteconfig.value[Get.currentRoute]["Native_AD"] == "null"
                 ? Container()
                 : GestureDetector(
                     onTap: () {

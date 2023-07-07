@@ -2021,37 +2021,40 @@ alertContainer(BuildContext context, String title, var boxcolor, var fontcolor,
   );
 }
 
-epfContainer(BuildContext context, String title) {
-  return Container(
-    height: ScreenSize.fSize_50(),
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(ScreenSize.fSize_10()),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )
-        ]),
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: GoogleFonts.ibmPlexSansThaiLooped(
-                fontSize: ScreenSize.fSize_15(), fontWeight: FontWeight.w600),
+epfContainer(BuildContext context, String title,var ontap) {
+  return GestureDetector(
+    onTap: ontap,
+    child: Container(
+      height: ScreenSize.fSize_50(),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(ScreenSize.fSize_10()),
           ),
-          Image.asset(
-            "assets/icons/arrowright.png",
-            scale: 2.0,
-            color: Colors.black,
-          )
-        ],
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ]),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.ibmPlexSansThaiLooped(
+                  fontSize: ScreenSize.fSize_15(), fontWeight: FontWeight.w600),
+            ),
+            Image.asset(
+              "assets/icons/arrowright.png",
+              scale: 2.0,
+              color: Colors.black,
+            )
+          ],
+        ),
       ),
     ),
   );

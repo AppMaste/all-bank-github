@@ -4,6 +4,8 @@ import 'package:all_bank/Local%20Data.dart';
 import 'package:all_bank/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+
 // import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,13 +21,78 @@ class _EMICalculatorBarChartScreenState
     extends State<EMICalculatorBarChartScreen> {
   var arg = Get.arguments;
 
+  int value = 10;
+  int value2 = 1;
+
   @override
   void initState() {
     super.initState();
-    // seriesList = _createRandomData();
+    seriesList = _createRandomData();
+    // value = 100 - int.parse(arg[1]);
   }
+
+   List<charts.Series<dynamic, String>> seriesList = [];
+
+   List<charts.Series<Sales, String>> _createRandomData() {
+     value = 100 - int.parse(arg[1]);
+     value2 = int.parse(arg[1]);
+    final desktopSalesData = [
+      Sales('INTEREST', value2),
+    ];
+    final desktopSalesData2 = [
+      Sales('PRINCIPAL', value),
+    ];
+
+    return [
+      charts.Series<Sales, String>(
+        id: 'Sales',
+        domainFn: (Sales sales, _) => sales.year,
+        measureFn: (Sales sales, _) => sales.sales,
+        labelAccessorFn: (Sales sales, _) =>
+        '${sales.year}: ${sales.sales}',
+        data: desktopSalesData,
+        fillColorFn: (Sales sales, _) {
+          return charts.MaterialPalette.deepOrange.shadeDefault;
+        },
+      ),
+      charts.Series<Sales, String>(
+        id: 'Sales',
+        domainFn: (Sales sales, _) => sales.year,
+        measureFn: (Sales sales, _) => sales.sales,
+        labelAccessorFn: (Sales sales, _) =>
+        '${sales.year}: ${sales.sales}',
+        data: desktopSalesData2,
+        fillColorFn: (Sales sales, _) {
+          return charts.MaterialPalette.blue.shadeDefault.lighter;
+        },
+      ),
+    ];
+  }
+
+  barChart() {
+    return charts.BarChart(
+      seriesList,
+      animate: true,
+      vertical: true,
+      barRendererDecorator: (charts.BarLabelDecorator<String>(
+        // insideLabelStyleSpec: const charts.TextStyleSpec(fontSize: 12,color: charts.Color),
+        labelPosition: charts.BarLabelPosition.inside,
+        labelAnchor: charts.BarLabelAnchor.end,
+      )),
+      barGroupingType: charts.BarGroupingType.grouped,
+      defaultRenderer: charts.BarRendererConfig(
+        groupingType: charts.BarGroupingType.grouped,
+        strokeWidthPx: 1.0,
+      ),
+      domainAxis: const charts.OrdinalAxisSpec(
+        renderSpec: charts.NoneRenderSpec(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+     print("vasdhgascdasvcdfyas $arg");
     return WillPopScope(
       onWillPop: () {
         backButton.backbutton(context, "/EMICalculatorBarChartScreen");
@@ -102,7 +169,8 @@ class _EMICalculatorBarChartScreenState
                                           style:
                                               GoogleFonts.ibmPlexSansThaiLooped(
                                                   color: Colors.white,
-                                                  fontSize: ScreenSize.fSize_15(),
+                                                  fontSize:
+                                                      ScreenSize.fSize_15(),
                                                   fontWeight: FontWeight.w600),
                                         ),
                                       ),
@@ -114,337 +182,11 @@ class _EMICalculatorBarChartScreenState
                           ),
                         ),
                         SizedBox(height: ScreenSize.fSize_40()),
+                        Container(
+                            height: ScreenSize.horizontalBlockSize! * 80,
+                            child: barChart()),
                         // barChart(),
-                        /*       Stack(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: ScreenSize.horizontalBlockSize! * 75,
-                              ),
-                              child: Text(
-                                "98",
-                                style: GoogleFonts.ibmPlexSansThaiLooped(
-                                    fontSize: ScreenSize.fSize_17(),
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            Stack(
-                              children: [
-                                Column(
-                                  children: [
-                                    barchart(context, "100"),
-                                    barchart2(context, "90"),
-                                    barchart2(context, "80"),
-                                    barchart2(context, "70"),
-                                    barchart2(context, "60"),
-                                    barchart2(context, "50"),
-                                    barchart2(context, "40"),
-                                    barchart2(context, "30"),
-                                    barchart2(context, "20"),
-                                    barchart2(context, "10"),
-                                    barchart2(context, "  0"),
-                                  ],
-                                ),
-
-                                Positioned(
-                                  left: ScreenSize.horizontalBlockSize! * 26,
-                                  bottom: ScreenSize.fSize_15(),
-                                  child: Text(
-                                    "2",
-                                    style: GoogleFonts.ibmPlexSansThaiLooped(
-                                        fontSize: ScreenSize.fSize_17(),
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: ScreenSize
-                                  .horizontalBlockSize! * 6),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ScreenSize.fSize_80(),
-                                        top: ScreenSize.fSize_3()),
-                                    child: Container(
-                                      width: ScreenSize.fSize_50(),
-                                      height: ScreenSize.fSize_8(),
-                                      color: Color(0xFFDD8839),
-                                    ),
-                                  ),
-                                  SizedBox(width: ScreenSize.horizontalBlockSize! * 37),
-                                  Container(
-                                    width: ScreenSize.fSize_50(),
-                                    height: ScreenSize.horizontalBlockSize! *
-                                        61.3,
-                                    color: Color(0xFF5B83C4),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: ScreenSize.fSize_6(),
-                            ),
-                          ],
-                        ),*/
-                        // Row(
-                        //   children: [
-                        //     SizedBox(width: ScreenSize.fSize_70()),
-                        //     Container(
-                        //       height: ScreenSize.fSize_15(),
-                        //       width: ScreenSize.fSize_15(),
-                        //       decoration: BoxDecoration(
-                        //           color: const Color(0xFFDD8839),
-                        //           borderRadius: BorderRadius.all(
-                        //               Radius.circular(ScreenSize.fSize_2()))),
-                        //     ),
-                        //     SizedBox(width: ScreenSize.fSize_6()),
-                        //     Container(
-                        //       height: ScreenSize.fSize_15(),
-                        //       width: ScreenSize.fSize_15(),
-                        //       decoration: BoxDecoration(
-                        //           color: const Color(0xFF5B83C4),
-                        //           borderRadius: BorderRadius.all(
-                        //               Radius.circular(ScreenSize.fSize_2()))),
-                        //     ),
-                        //   ],
-                        // ),
                         SizedBox(height: ScreenSize.fSize_8()),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //   children: [
-                        //     Text(
-                        //       "INTEREST",
-                        //       style: GoogleFonts.ibmPlexSansThaiLooped(
-                        //           fontWeight: FontWeight.w600),
-                        //     ),
-                        //     Text(
-                        //       "PRINCIPAL",
-                        //       style: GoogleFonts.ibmPlexSansThaiLooped(
-                        //           fontWeight: FontWeight.w600),
-                        //     ),
-                        //   ],
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Container(
-                        //     width: double.maxFinite,
-                        //     decoration: BoxDecoration(
-                        //         color: Color(0xFF12356E),
-                        //         borderRadius: BorderRadius.all(
-                        //           Radius.circular(
-                        //             ScreenSize.fSize_15(),
-                        //           ),
-                        //         ),
-                        //         boxShadow: const [
-                        //           BoxShadow(
-                        //               color: Colors.grey,
-                        //               blurRadius: 5,
-                        //               offset: Offset(0, 3))
-                        //         ]),
-                        //     child: Column(
-                        //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //       children: [
-                        //         SizedBox(height: ScreenSize.fSize_15()),
-                        //         IntrinsicHeight(
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment
-                        //                 .spaceEvenly,
-                        //             children: [
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Loan Amount",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "2000",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //               Padding(
-                        //                 padding: EdgeInsets.only(
-                        //                     right: ScreenSize.fSize_18()),
-                        //                 child: const VerticalDivider(
-                        //                   thickness: 1,
-                        //                   color: Color(0xFF768AAB),
-                        //                 ),
-                        //               ),
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Interest",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "2.5",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         SizedBox(height: ScreenSize.fSize_10()),
-                        //         Padding(
-                        //           padding: EdgeInsets.only(
-                        //               left: ScreenSize.fSize_15(),
-                        //               right: ScreenSize.fSize_15()),
-                        //           child: const Divider(
-                        //             thickness: 1,
-                        //             color: Color(0xFF768AAB),
-                        //           ),
-                        //         ),
-                        //         SizedBox(height: ScreenSize.fSize_10()),
-                        //         IntrinsicHeight(
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment
-                        //                 .spaceAround,
-                        //             children: [
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Period (Month)",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "34",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //               VerticalDivider(
-                        //                 thickness: 1,
-                        //                 color: Color(0xFF768AAB),
-                        //               ),
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Monthly EMI",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "60.99",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         SizedBox(height: ScreenSize.fSize_10()),
-                        //         Padding(
-                        //           padding: EdgeInsets.only(
-                        //               left: ScreenSize.fSize_15(),
-                        //               right: ScreenSize.fSize_15()),
-                        //           child: const Divider(
-                        //             thickness: 1,
-                        //             color: Color(0xFF768AAB),
-                        //           ),
-                        //         ),
-                        //         IntrinsicHeight(
-                        //           child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment
-                        //                 .spaceEvenly,
-                        //             children: [
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Total Interest",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "73.78",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //               Padding(
-                        //                 padding: EdgeInsets.only(
-                        //                     left: ScreenSize.fSize_20(),
-                        //                     top: ScreenSize.fSize_4()),
-                        //                 child: const VerticalDivider(
-                        //                   thickness: 1,
-                        //                   color: Color(0xFF768AAB),
-                        //                 ),
-                        //               ),
-                        //               Column(
-                        //                 children: [
-                        //                   SizedBox(height: ScreenSize.fSize_20()),
-                        //                   Text(
-                        //                     "Total Payment",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                       fontSize: ScreenSize.fSize_15(),
-                        //                       fontWeight: FontWeight.w500,
-                        //                       color: const Color(0xFF768AAB),
-                        //                     ),
-                        //                   ),
-                        //                   Text(
-                        //                     "2073.78",
-                        //                     style: GoogleFonts
-                        //                         .ibmPlexSansThaiLooped(
-                        //                         color: Colors.white,
-                        //                         fontWeight: FontWeight.w500),
-                        //                   ),
-                        //                 ],
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         SizedBox(height: ScreenSize.fSize_20()),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -480,7 +222,8 @@ class _EMICalculatorBarChartScreenState
                                   padding: EdgeInsets.only(
                                       left: ScreenSize.fSize_10(),
                                       right: ScreenSize.fSize_10()),
-                                  child: const Divider(color: Color(0xFF768AAB)),
+                                  child:
+                                      const Divider(color: Color(0xFF768AAB)),
                                 ),
                                 SizedBox(height: ScreenSize.fSize_10()),
                                 IntrinsicHeight(
@@ -488,7 +231,8 @@ class _EMICalculatorBarChartScreenState
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      textfunction("Period (Month)", "${arg[3]}"),
+                                      textfunction(
+                                          "Period (Month)", "${arg[3]}"),
                                       rowdivider(),
                                       textfunction("Monthly EMI", "${arg[0]}"),
                                     ],
@@ -499,7 +243,8 @@ class _EMICalculatorBarChartScreenState
                                   padding: EdgeInsets.only(
                                       left: ScreenSize.fSize_10(),
                                       right: ScreenSize.fSize_10()),
-                                  child: const Divider(color: Color(0xFF768AAB)),
+                                  child:
+                                      const Divider(color: Color(0xFF768AAB)),
                                 ),
                                 SizedBox(height: ScreenSize.fSize_10()),
                                 IntrinsicHeight(
@@ -507,9 +252,11 @@ class _EMICalculatorBarChartScreenState
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      textfunction("Total Interest", "${arg[6]}"),
+                                      textfunction(
+                                          "Total Interest", "${arg[6]}"),
                                       rowdivider(),
-                                      textfunction("Total Payment", "${arg[5]}"),
+                                      textfunction(
+                                          "Total Payment", "${arg[5]}"),
                                     ],
                                   ),
                                 ),
